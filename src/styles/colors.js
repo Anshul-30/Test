@@ -1,4 +1,9 @@
 export default {
+  blueC:'#32C5FF',
+  bgColor:'#4C4C4C',
+  headertxt:'#A6A6A6',
+  text:'#9C9C9C',
+  button:'#F43738',
   themeColor: '#41A2E6',
   themeColor2: '#31BD8F',
   btnABlue: '#61A0F2',

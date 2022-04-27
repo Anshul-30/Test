@@ -1,14 +1,15 @@
 import React from 'react';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import images from '../../constants/imagePath';
-import {Text, View, Image} from 'react-native';
-import WrapperContainer from '../../Components/WrapperContainer';
+import images from '../../../constants/imagePath';
+import {Text, View, Image,TouchableOpacity} from 'react-native';
+import WrapperContainer from '../../../Components/WrapperContainer';
 import styles from './styles';
-import strings from '../../constants/lang';
-import {height, moderateScaleVertical, textScale} from '../../styles/responsiveSize';
-import colors from '../../styles/colors';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import navigationStrings from '../../navigation/navigationStrings';
+import strings from '../../../constants/lang';
+
+import colors from '../../../styles/colors';
+import navigationStrings from '../../../navigation/navigationStrings';
+import { moderateScale, moderateScaleVertical } from '../../../styles/responsiveSize';
+
 const slides = [
   {
     key: 1,
@@ -19,9 +20,7 @@ const slides = [
   {
     key: 2,
     title: strings.TEXT,
-
     text: strings.TITTLE,
-
     image: images.intro,
   },
   {
@@ -44,12 +43,17 @@ export default function TutorialScreen({navigation}) {
         <View
           style={{
             flex: 0.5,
+            // backgroundColor:'green',
             justifyContent: 'center',
-            paddingTop:moderateScaleVertical(40)
+           
+            // alignContent:'space-around',
+            // paddingTop:moderateScaleVertical(30)
           }}>
-          <View style={styles.main}>
+         <View >
+
             <Text style={styles.tittle}>{item.title}</Text>
-          </View>
+         </View>
+         
           <View style={styles.textview}>
             <Text style={styles.text}>{item.text}</Text>
           </View>
@@ -68,28 +72,39 @@ export default function TutorialScreen({navigation}) {
     return (
         <TouchableOpacity onPress={()=>navigation.navigate(navigationStrings.LOGIN)}>
 
-      <View >
+      <View style={{marginTop:moderateScaleVertical(10)}}>
         <Text style={styles.next}>{strings.GET_Started}</Text>
       </View>
         </TouchableOpacity>
     );
   };
-  const _dotStyle =()=>{
-      return(
-          <>
-        
-          </>
-      )
-  }
-  return ( 
+  // const _dotStyle =()=>{
+  //   return(
+      
+  //   )
+  // }
+    return ( 
     <WrapperContainer>
       <AppIntroSlider
         data={slides}
         renderItem={_renderItem}
-        renderNextButton={_renderNextButton}
+        // renderNextButton={_renderNextButton}
         renderDoneButton={_renderDoneButton}
-        // dotStyle={_dotStyle}
-      />
+        activeDotStyle={{
+          height: moderateScale(4),
+          width: moderateScale(42),
+          bottom: 4,
+          right: moderateScale(90),
+          backgroundColor:"red"
+        }}
+        dotStyle={{
+          width: moderateScale(21),
+          height: moderateScale(4),
+          backgroundColor: colors.white,
+          bottom: 4,
+          right: moderateScale(90),
+        }}
+        />
     </WrapperContainer>
   );
 }

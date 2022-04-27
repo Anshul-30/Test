@@ -1,5 +1,5 @@
 import React from 'react'
-import Login from '../Screens/Login/Login'
+import Login from '../Screens/Auth/Login/Login'
 import HomeStack from './HomeStack'
 import navigationStrings from './navigationStrings'
 
