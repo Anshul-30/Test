@@ -41,11 +41,13 @@ export default function Signup({navigation}) {
         <TextInputComp placeholder={strings.Email} />
         <TextInputComp placeholder={strings.Mobile} />
         <KeyboardAvoidingView>
-          {/* <View style={{marginTop: moderateScaleVertical(150)}}> */}
+          <View style={{marginTop: moderateScaleVertical(50)}}>
             <ButtonComponent title={strings.Next} />
-          {/* </View> */}
+          </View>
         </KeyboardAvoidingView>
-      </View>
+        </View>
+        
+      
     </WrapperContainer>
   );
 }

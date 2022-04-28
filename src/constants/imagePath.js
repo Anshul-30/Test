@@ -4,5 +4,6 @@ export default{
     apple:require('../assets/images/ic_apple.png'),
     facebook: require('../assets/images/ic_facebook.png'),
     google : require('../assets/images/ic_google.png'),
-    arrow :require('../assets/images/ic_back_arrow.png')
+    arrow :require('../assets/images/ic_back_arrow.png'),
+    down_arrow: require('../assets/images/ic_down.png')
 }

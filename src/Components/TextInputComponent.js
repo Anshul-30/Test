@@ -34,6 +34,7 @@ const TextInputComp = ({
         <View
           style={{
             flex: 0.8,
+            alignContent:'space-between'
           }}>
           <TextInput
             style={{...styles.textStyle, ...textStyle}}
@@ -52,7 +53,7 @@ const TextInputComp = ({
               style={{
                 color: colors.whiteOpacity50,
                 paddingTop: moderateScaleVertical(15),
-                paddingLeft:moderateScale(15)
+                paddingLeft:moderateScale(25)
               }}>
               {text}
             </Text>

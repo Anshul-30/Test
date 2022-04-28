@@ -1,7 +1,13 @@
 import React, {useState} from 'react';
-import {Text, View, ScrollView, KeyboardAvoidingView} from 'react-native';
+import {
+  Text,
+  View,
+  ScrollView,
+  KeyboardAvoidingView,
+  TouchableOpacity,
+} from 'react-native';
 import WrapperContainer from '../../../Components/WrapperContainer';
-import PhoneInput from 'react-native-phone-number-input';
+
 import HeaderComponent from '../../../Components/HeaderComponent';
 import images from '../../../constants/imagePath';
 import strings from '../../../constants/lang';
@@ -18,6 +24,8 @@ import ButtonComponent from '../../../Components/ButtonComponent';
 
 import styles from './styles';
 import actions from '../../../redux/actions';
+import navigationStrings from '../../../navigation/navigationStrings';
+import CountryCode from '../../../Components/CountryCode';
 
 export default function LoginWithPhoneNumber({navigation}) {
   const [state, setState] = useState({
@@ -46,11 +54,23 @@ export default function LoginWithPhoneNumber({navigation}) {
             />
           </View>
           <View>
-            <TextInputComp
-              placeholder={strings.Mobile}
-              onChangeText={text => updateArray({phone: text})}
-              value={phone}
-            />
+            <View
+              style={{
+                flexDirection: 'row',
+                flex: 1,
+                justifyContent: 'space-between',
+              }}>
+              <View style={{flex: 0.4}}>
+                <CountryCode />
+              </View>
+              <View style={{flex: 0.6}}>
+                <TextInputComp
+                  placeholder={strings.Mobile}
+                  onChangeText={text => updateArray({phone: text})}
+                  value={phone}
+                />
+              </View>
+            </View>
 
             <TextInputComp
               placeholder={strings.Password}
@@ -61,19 +81,21 @@ export default function LoginWithPhoneNumber({navigation}) {
             />
             <View
               style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Text style={styles.orText}>{strings.OTP}</Text>
+              <TouchableOpacity
+                onPress={() => navigation.navigate(navigationStrings.OTP)}>
+                <Text style={styles.orText}>{strings.OTP}</Text>
+              </TouchableOpacity>
+
               <Text style={styles.text}>{strings.Forget}</Text>
             </View>
           </View>
         </ScrollView>
+        <KeyboardAvoidingView enabled={true}>
+          <View style={{marginTop: moderateScaleVertical(45)}}>
+            <ButtonComponent title={strings.LOGiN} onpress={onLogin} />
+          </View>
+        </KeyboardAvoidingView>
       </View>
-     <KeyboardAvoidingView enabled={true}>
-
-        <View style={{}}>
-          <ButtonComponent title={strings.LOGiN} onpress={onLogin} />
-        </View>
-     </KeyboardAvoidingView>
-     
     </WrapperContainer>
   );
 }
