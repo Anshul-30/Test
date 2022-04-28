@@ -34,11 +34,11 @@ function CountryCode() {
         }}>
         <CountryPicker
           onSelect={onSelect}
-          visible={false}
+          // visible={false}
           countryCode={countryFlag}
           withCallingCode={true}
           withCallingCodeButton={countryCode}
-          theme={{onBackgroundTextColor: colors?.white}}
+          theme={{onBackgroundTextColor: colors?.white, backgroundColor:colors.bgColor}}
         />
         <Image
           source={images.down_arrow}

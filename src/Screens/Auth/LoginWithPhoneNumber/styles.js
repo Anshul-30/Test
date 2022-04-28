@@ -9,6 +9,11 @@ text:{
     color: colors.blueC,
     fontSize: textScale(13),
 },
+text1:{
+    fontSize: textScale(24),
+     color: colors.white,
+    // padding:moderateScale(15)
+},
 orText:{
     margin: moderateScale(15),
     color: colors.white,

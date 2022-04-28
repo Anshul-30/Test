@@ -5,6 +5,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   TouchableOpacity,
+  Platform
 } from 'react-native';
 import WrapperContainer from '../../../Components/WrapperContainer';
 
@@ -26,6 +27,7 @@ import styles from './styles';
 import actions from '../../../redux/actions';
 import navigationStrings from '../../../navigation/navigationStrings';
 import CountryCode from '../../../Components/CountryCode';
+import TextComponent from '../../../Components/TextComponent';
 
 export default function LoginWithPhoneNumber({navigation}) {
   const [state, setState] = useState({
@@ -40,25 +42,34 @@ export default function LoginWithPhoneNumber({navigation}) {
   };
   return (
     <WrapperContainer>
-      <View>
-        <ScrollView scrollEnabled={false}>
+      
+        <View>
+          <HeaderComponent
+            images={images.arrow}
+            topimage={true}
+            // title={strings.Welcome_back}
+            // title1={true}
+            // text={true}
+            onPress={() => navigation.goBack()}
+            // text1={strings.Headertxt}
+          />
+        </View>
+        <ScrollView>
+          <View style={{height:height}}>
+            
+          
+
           <View>
-            <HeaderComponent
-              images={images.arrow}
-              topimage={true}
-              title={strings.Welcome_back}
-              title1={true}
-              text={true}
-              onPress={() => navigation.goBack()}
-              text1={strings.Headertxt}
+            <TextComponent
+              text1={strings.Welcome_back}
+              styletxt={styles.text1}
             />
-          </View>
-          <View>
+            <TextComponent text1={strings.Headertxt} />
             <View
               style={{
                 flexDirection: 'row',
-                flex: 1,
-                justifyContent: 'space-between',
+                // flex: 1,
+                justifyContent: 'space-around',
               }}>
               <View style={{flex: 0.4}}>
                 <CountryCode />
@@ -89,13 +100,15 @@ export default function LoginWithPhoneNumber({navigation}) {
               <Text style={styles.text}>{strings.Forget}</Text>
             </View>
           </View>
+          </View>
         </ScrollView>
-        <KeyboardAvoidingView enabled={true}>
-          <View style={{marginTop: moderateScaleVertical(45)}}>
+        
+        <KeyboardAvoidingView enabled={true} behavior={Platform.OS==='android'?'height':'padding'}>
+          <View style={{paddingBottom:Platform.OS==='ios'?moderateScaleVertical(55):moderateScaleVertical(20)}}>
             <ButtonComponent title={strings.LOGiN} onpress={onLogin} />
           </View>
         </KeyboardAvoidingView>
-      </View>
+     
     </WrapperContainer>
   );
 }

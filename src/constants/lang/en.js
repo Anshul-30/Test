@@ -21,5 +21,8 @@ Next:'NEXT',
 Mobile:'Mobile number',
 create_a_new_Account:'Create new account',
 Forget:'Forget Password ?',
+Verify:'VERIFY',
+edit:'Edit my mobile number',
+HeaderOtp:'Enter the 4-digit code sent to you at 875 364 8947',
   Text:'By clicking “Log In”, you agree with our Terms. Learn how we process your data in our Privacy policy.'
 }

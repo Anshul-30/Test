@@ -4,5 +4,6 @@ export default{
     SCREEN:"screen",
     LoginWithPhone:'Login with phone',
     Signup:'signup',
-    OTP:'otp'
+    OTP:'otp',
+    Password:'Password'
 }

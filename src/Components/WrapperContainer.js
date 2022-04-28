@@ -8,8 +8,8 @@ import colors from '../styles/colors';
 
 const WrapperContainer = ({
   children,
-  bgColor = colors.cust,
-  statusBarColor = colors.cust,
+  bgColor = colors.themeColor,
+  statusBarColor = colors.themeColor,
   barStyle = 'light-content',
 }) => {
   return (

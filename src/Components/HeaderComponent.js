@@ -18,7 +18,8 @@ export default function HeaderComponent({
   onPress={},
   text=false,
   title1 = false,
-  text1
+  text1,
+  styletxt
 }) {
   return (
     <View >
@@ -34,7 +35,7 @@ export default function HeaderComponent({
             </TouchableOpacity>
         </View>
       )}
-      {title1 && 
+      {/* {title1 && 
         <View>
           <Text style={{...style.text}}>{title}</Text>
         </View>
@@ -42,9 +43,9 @@ export default function HeaderComponent({
       {
 
         text && <View style={{marginLeft:moderateScale(15)}}>
-          <Text style={{...style.text1}} numberOfLines={1}>{text1}</Text>
+          <Text style={{...style.text1,...styletxt}} numberOfLines={1}>{text1}</Text>
           </View>
-      }
+      } */}
     </View>
   );
 }
@@ -54,14 +55,14 @@ const style = StyleSheet.create({
     width: moderateScale(width / 25),
     resizeMode: 'contain',
   },
-  text: {
-    fontSize: textScale(20),
-    color: colors.white,
-    padding:moderateScale(15)
-    // fontFamily:fontfamily.Medium
-  },
-  text1:{
-color:colors.headertxt,
-fontSize:textScale(14)
-  }
+//   text: {
+//     fontSize: textScale(24),
+//     color: colors.white,
+//     padding:moderateScale(15)
+//     // fontFamily:fontfamily.Medium
+//   },
+//   text1:{
+// color:colors.headertxt,
+// fontSize:textScale(15)
+//   }
 });

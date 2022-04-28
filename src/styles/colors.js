@@ -4,7 +4,7 @@ export default {
   headertxt:'#A6A6A6',
   text:'#9C9C9C',
   button:'#F43738',
-  themeColor: '#41A2E6',
+  themeColor: '#2E2E2E',
   themeColor2: '#31BD8F',
   btnABlue: '#61A0F2',
   btnBBlue: '#32A3E0',
@@ -128,5 +128,5 @@ export default {
   greyD: '#9898A0',
   greyColor4: '#B0B0B0',
   lightGreen: 'rgba(68,215,182,0.17)',
-  cust:'#2E2E2E'
+ 
 };
