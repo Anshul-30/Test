@@ -1,6 +1,11 @@
-import React from 'react';
-import {ScrollView, Platform, KeyboardAvoidingView, View} from 'react-native';
-// import { KeyboardAvoidingView, ScrollView,p } from 'react-native-gesture-handler'
+import React, {useState} from 'react';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  Text,
+  View,
+} from 'react-native';
 import ButtonComponent from '../../../Components/ButtonComponent';
 import HeaderComponent from '../../../Components/HeaderComponent';
 import TextComponent from '../../../Components/TextComponent';
@@ -9,14 +14,19 @@ import WrapperContainer from '../../../Components/WrapperContainer';
 import images from '../../../constants/imagePath';
 import strings from '../../../constants/lang';
 import navigationStrings from '../../../navigation/navigationStrings';
-import {moderateScaleVertical} from '../../../styles/responsiveSize';
+import {
+  moderateScale,
+  moderateScaleVertical,
+} from '../../../styles/responsiveSize';
 import styles from './styles';
+import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
 
-export default function Otp({navigation,route}) {
-  const allData = route?.params?.data
-console.log("data",allData)
-console.log("your otp ", allData?.otp)
-// alert("otp is",allData?.otp)
+export default function Otp({navigation, route}) {
+  const allData = route?.params?.data;
+  console.log('data', allData);
+  console.log('your otp ', allData?.otp);
+  const [code, setCode] = useState();
+  // alert("otp is",allData?.otp)
   return (
     <WrapperContainer>
       <HeaderComponent
@@ -25,9 +35,12 @@ console.log("your otp ", allData?.otp)
         onPress={() => navigation.goBack()}
       />
       <ScrollView>
-        <TextComponent text1={strings.HeaderOtp} styletxt={styles.text} />
+        <Text style={styles.text}>
+          {strings.HeaderOtp}+{allData?.phone_code} {allData?.phone}
+        </Text>
+        {/* <TextComponent text1={strings.HeaderOtp} styletxt={styles.text} /> */}
         <TextComponent text1={strings.edit} styletxt={styles.text1} />
-        <View style={styles.textinput}>
+        {/* <View style={styles.textinput}>
           <View style={{flex: 0.2}}>
             <TextInputComp />
           </View>
@@ -40,6 +53,18 @@ console.log("your otp ", allData?.otp)
           <View style={{flex: 0.2}}>
             <TextInputComp />
           </View>
+        </View> */}
+        <View style={{marginHorizontal:moderateScale(15),marginVertical:moderateScaleVertical(25)}}>
+
+        <SmoothPinCodeInput
+          value={code}
+          onTextChange={code => setCode(code)}
+          cellStyle={{
+            borderWidth: moderateScaleVertical(1),
+            borderRadius: moderateScale(5),
+            
+          }}
+        />
         </View>
       </ScrollView>
       <KeyboardAvoidingView
@@ -54,7 +79,9 @@ console.log("your otp ", allData?.otp)
           }}>
           <ButtonComponent
             title={strings.Verify}
-            onpress={() => navigation.navigate(navigationStrings.LoginWithPhone)}
+            onpress={() =>
+              navigation.navigate(navigationStrings.LoginWithPhone)
+            }
           />
         </View>
       </KeyboardAvoidingView>

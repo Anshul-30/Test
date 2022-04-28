@@ -7,6 +7,7 @@ export default styles = StyleSheet.create({
 text:{
     fontSize: textScale(24),
      color: colors.white,
+     marginHorizontal:moderateScale(15)
 },
 text1:{
     paddingTop:moderateScaleVertical(10),

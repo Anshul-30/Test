@@ -26,6 +26,6 @@ SetPassword:'Set password',
 passwordtxt:'Create secure and unique password.',
 code:'Resend code in 0:14',
 edit:'Edit my mobile number',
-HeaderOtp:'Enter the 4-digit code sent to you at 875 364 8947',
+HeaderOtp:'Enter the 4-digit code sent to you at ',
   Text:'By clicking “Log In”, you agree with our Terms. Learn how we process your data in our Privacy policy.'
 }
