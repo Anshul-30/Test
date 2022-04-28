@@ -14,38 +14,21 @@ export default function HeaderComponent({
   images,
   topimage = false,
   stylebtn = {},
-  title,
-  onPress={},
-  text=false,
-  title1 = false,
-  text1,
-  styletxt
+  onPress = {},
 }) {
   return (
-    <View >
+    <View>
       {topimage && (
         <View
           style={{
-            marginLeft:moderateScale(15),
+            marginLeft: moderateScale(15),
             marginTop: moderateScaleVertical(10),
           }}>
-            <TouchableOpacity onPress={onPress}>
-
-          <Image source={images} style={{...style.image, ...stylebtn}} />
-            </TouchableOpacity>
+          <TouchableOpacity onPress={onPress}>
+            <Image source={images} style={{...style.image, ...stylebtn}} />
+          </TouchableOpacity>
         </View>
       )}
-      {/* {title1 && 
-        <View>
-          <Text style={{...style.text}}>{title}</Text>
-        </View>
-      }
-      {
-
-        text && <View style={{marginLeft:moderateScale(15)}}>
-          <Text style={{...style.text1,...styletxt}} numberOfLines={1}>{text1}</Text>
-          </View>
-      } */}
     </View>
   );
 }
@@ -55,14 +38,4 @@ const style = StyleSheet.create({
     width: moderateScale(width / 25),
     resizeMode: 'contain',
   },
-//   text: {
-//     fontSize: textScale(24),
-//     color: colors.white,
-//     padding:moderateScale(15)
-//     // fontFamily:fontfamily.Medium
-//   },
-//   text1:{
-// color:colors.headertxt,
-// fontSize:textScale(15)
-//   }
 });

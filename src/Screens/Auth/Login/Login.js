@@ -15,43 +15,39 @@ import {
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
 
 import styles from './styles';
+import actions from '../../../redux/actions';
 
 
 export default function Login({navigation}) {
 
-//   useEffect(() => {
-//     GoogleSignin.configure()
-// }, [])
+  useEffect(() => {
+    GoogleSignin.configure()
+}, [])
 
-// const googleLogin = async () => {
-//     try {
-//         await GoogleSignin.hasPlayServices();
-//         const userInfo = await GoogleSignin.signIn();
-//         console.log("userInfo", userInfo)
-//         // const email = userInfo.user.email;
-//         // const userId = userInfo.user.id;
-//         // const data = { email, userId }
-//         // actions.login(data)
-
-//         const data = userInfo?.user
-//         // dispatch(Login1(data))
-//         // this.setState({ userInfo });
-//     } catch (error) {
-//         if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-//             // user cancelled the login flow
-//             console.log("error", error)
-//         } else if (error.code === statusCodes.IN_PROGRESS) {
-//             // operation (e.g. sign in) is in progress already
-//             console.log("error", error)
-//         } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-//             // play services not available or outdated
-//             console.log("error", error)
-//         } else {
-//             // some other error happened
-//             console.log("error", error)
-//         }
-//     }
-// };
+const googleLogin = async () => {
+    try {
+        await GoogleSignin.hasPlayServices();
+        const userInfo = await GoogleSignin.signIn();
+        console.log("userInfo", userInfo)
+        
+      actions.Login(userInfo)
+        
+    } catch (error) {
+        if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+            // user cancelled the login flow
+            console.log("error", error)
+        } else if (error.code === statusCodes.IN_PROGRESS) {
+            // operation (e.g. sign in) is in progress already
+            console.log("error", error)
+        } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+            // play services not available or outdated
+            console.log("error", error)
+        } else {
+            // some other error happened
+            console.log("error", error)
+        }
+    }
+};
 
   return (
     <WrapperContainer>
@@ -81,7 +77,8 @@ export default function Login({navigation}) {
           textstyle={styles.text}
           leftimage={true}
           image={images.google}
-          // onpress={googleLogin}
+          onpress={googleLogin}
+          
         />
         <ButtonComponent
           stylbtn={styles.btn}

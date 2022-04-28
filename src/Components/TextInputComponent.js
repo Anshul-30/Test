@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Platform, StyleSheet, Text, TextInput} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import colors from '../styles/colors';
 // import fontFamily from "../styles/fontFamily";
 import {
@@ -20,6 +21,8 @@ const TextInputComp = ({
   header = false,
   righttxt = false,
   text,
+  secureTextEntry=false,
+  onRightPress,
   ...props
 }) => {
   return (
@@ -29,18 +32,18 @@ const TextInputComp = ({
           {headerText}
         </Text>
       )}
-      <View
-        style={{...styles.main }}>
+      <View style={{...styles.main}}>
         <View
           style={{
-            flex: 0.8,
-            alignContent:'space-between'
+            flex: .95,
+            alignContent: 'space-between',
           }}>
           <TextInput
             style={{...styles.textStyle, ...textStyle}}
             value={value}
             placeholder={placeholder}
             onChangeText={onChangeText}
+            secureTextEntry={secureTextEntry}
             placeholderTextColor={colors.whiteOpacity50}
             // returnKeyType="done"
             {...props}
@@ -48,16 +51,18 @@ const TextInputComp = ({
           />
         </View>
         {righttxt && (
-          <View style={{flex: 0.2}}>
-            <Text
-              style={{
-                color: colors.whiteOpacity50,
-                paddingTop: moderateScaleVertical(15),
-                paddingLeft:moderateScale(25)
-              }}>
-              {text}
-            </Text>
-          </View>
+          <TouchableOpacity onPress={onRightPress}>
+            {/* <View style={{flex: 0.01}}> */}
+              <Text
+                style={{
+                  color: colors.whiteOpacity50,
+                  paddingTop: moderateScaleVertical(15),
+                  paddingLeft: moderateScale(25),
+                }}>
+                {text}
+              </Text>
+            {/* </View>s */}
+          </TouchableOpacity>
         )}
       </View>
     </>
@@ -84,14 +89,14 @@ const styles = StyleSheet.create({
     // lineHeight: moderateScale(16),
     // marginBottom: moderateScaleVertical(3),
   },
-  main:{
+  main: {
     flexDirection: 'row',
     backgroundColor: colors.bgColor,
     borderRadius: moderateScale(8),
     minHeight: moderateScale(48),
     marginHorizontal: moderateScale(15),
-    marginVertical:moderateScale(10)
-  }
+    marginVertical: moderateScale(10),
+  },
 });
 
 export default TextInputComp;

@@ -9,10 +9,12 @@ import { getItem } from './src/utils/utils'
 
 
 export default function App() {
+
   useEffect(() => {
     getItem('login').then((res)=>{
       if(!!res){
-        actions.Login(res)
+        console.log("res",res)
+        actions.saveUserData(res)
       }
     })
   

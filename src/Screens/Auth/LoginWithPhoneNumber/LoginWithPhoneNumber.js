@@ -5,7 +5,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   TouchableOpacity,
-  Platform
+  Platform,
 } from 'react-native';
 import WrapperContainer from '../../../Components/WrapperContainer';
 
@@ -36,29 +36,51 @@ export default function LoginWithPhoneNumber({navigation}) {
   });
   const {phone, pass} = state;
   const updateArray = data => setState(state => ({...state, ...data}));
-
+  const [isVisible, setIsVisble] = useState(false);
   const onLogin = () => {
-    actions.Login(state);
+    let apiData = {
+      phone: phone,
+      phone_code: '91',
+      device_token: 'KDKFJDKFDFKDFDF',
+      device_type: Platform.OS == 'ios' ? 'IOS' : 'ANDROID',
+      loginType:'admin',
+      password: pass,
+    };    
+    
+    actions.login(apiData).then(res => {
+            console.log('singnup api res_+++++', res);
+            alert('User signup successfully....!!!');
+          })
+          .catch(err => {
+            console.log(err,"err");
+            alert(err?.message);
+          });
+  //         try
+  //    {
+  //    const res = await actions.login(apiData)
+  //    console.log('singnup api res_+++++', res);
+  //     alert('User signup successfully....!!!');
+  //  }
+  //   catch (error) {
+  //    console.log('error raised', error);
+  //     alert(error?.message);
+  //   }
   };
   return (
     <WrapperContainer>
-      
-        <View>
-          <HeaderComponent
-            images={images.arrow}
-            topimage={true}
-            // title={strings.Welcome_back}
-            // title1={true}
-            // text={true}
-            onPress={() => navigation.goBack()}
-            // text1={strings.Headertxt}
-          />
-        </View>
-        <ScrollView>
-          <View style={{height:height}}>
-            
-          
-
+      <View>
+        <HeaderComponent
+          images={images.arrow}
+          topimage={true}
+          // title={strings.Welcome_back}
+          // title1={true}
+          // text={true}
+          onPress={() => navigation.goBack()}
+          // text1={strings.Headertxt}
+        />
+      </View>
+      <ScrollView>
+        <View style={{height: height}}>
           <View>
             <TextComponent
               text1={strings.Welcome_back}
@@ -86,7 +108,9 @@ export default function LoginWithPhoneNumber({navigation}) {
             <TextInputComp
               placeholder={strings.Password}
               righttxt={true}
-              text={strings.Show}
+              secureTextEntry={isVisible}
+              onRightPress={() => setIsVisble(!isVisible)}
+              text={isVisible ? 'Show' : 'Hide'}
               onChangeText={text => updateArray({pass: text})}
               value={pass}
             />
@@ -100,15 +124,22 @@ export default function LoginWithPhoneNumber({navigation}) {
               <Text style={styles.text}>{strings.Forget}</Text>
             </View>
           </View>
-          </View>
-        </ScrollView>
-        
-        <KeyboardAvoidingView enabled={true} behavior={Platform.OS==='android'?'height':'padding'}>
-          <View style={{paddingBottom:Platform.OS==='ios'?moderateScaleVertical(55):moderateScaleVertical(20)}}>
-            <ButtonComponent title={strings.LOGiN} onpress={onLogin} />
-          </View>
-        </KeyboardAvoidingView>
-     
+        </View>
+      </ScrollView>
+
+      <KeyboardAvoidingView
+        enabled={true}
+        behavior={Platform.OS === 'android' ? 'height' : 'padding'}>
+        <View
+          style={{
+            paddingBottom:
+              Platform.OS === 'ios'
+                ? moderateScaleVertical(55)
+                : moderateScaleVertical(20),
+          }}>
+          <ButtonComponent title={strings.LOGiN} onpress={onLogin} />
+        </View>
+      </KeyboardAvoidingView>
     </WrapperContainer>
   );
 }

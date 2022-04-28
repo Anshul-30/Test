@@ -1,4 +1,5 @@
 export default{
     LOGIN:'Login',
-    SIGNUP:'Signup'
+    SIGNUP:'Signup',
+    LOGOUT:"Logout"
 }
