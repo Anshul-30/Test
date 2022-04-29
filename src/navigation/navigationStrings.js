@@ -5,5 +5,9 @@ export default{
     LoginWithPhone:'Login with phone',
     Signup:'signup',
     OTP:'otp',
-    Password:'Password'
+    Password:'Password',
+    Profile:'Profile',
+    Search:'Search',
+    Post:'Post',
+    Notification:'notification'
 }

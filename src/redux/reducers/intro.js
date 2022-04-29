@@ -2,14 +2,18 @@ import {setItem} from '../../utils/utils';
 import types from '../types';
 
 const initialState = {
-  appintrodata:true
+  appintrodata: true,
 };
 
 export default Intro = (state = initialState, action) => {
   switch (action.type) {
     case types.INTRO: {
-      setItem('intro', state);
-      return (state = false);
+      const data = action.payload;
+      setItem('intro', data);
+      return {
+        ...state,
+        appintrodata: data,
+      };
     }
     default:
       return state;

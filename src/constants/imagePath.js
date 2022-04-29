@@ -5,5 +5,6 @@ export default{
     facebook: require('../assets/images/ic_facebook.png'),
     google : require('../assets/images/ic_google.png'),
     arrow :require('../assets/images/ic_back_arrow.png'),
-    down_arrow: require('../assets/images/ic_down.png')
+    down_arrow: require('../assets/images/ic_down.png'),
+    Home:require('../assets/images/ic_home.png')
 }

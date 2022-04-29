@@ -3,8 +3,8 @@ import React from 'react';
 import {Text, SafeAreaView, TouchableOpacity} from 'react-native';
 
 import {useSelector} from 'react-redux';
-import WrapperContainer from '../../Components/WrapperContainer';
-import actions from '../../redux/actions';
+import WrapperContainer from '../../../Components/WrapperContainer';
+import actions from '../../../redux/actions';
 
 export default function Home() {
   const data = useSelector(state => state.userLogin.userData);

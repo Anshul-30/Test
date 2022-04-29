@@ -2,7 +2,7 @@ import React from 'react'
 import Login from '../Screens/Auth/Login/Login'
 import navigationStrings from './navigationStrings'
 import { createStackNavigator } from '@react-navigation/stack'
-import Home from '../Screens/Home/Home'
+import Home from '../Screens/Main/Home/Home'
 import BottomTab from './BottomTabNavigation'
 const Stack = createStackNavigator()
 
