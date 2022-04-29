@@ -27,10 +27,10 @@ export default function Login({navigation}) {
 const googleLogin = async () => {
     try {
         await GoogleSignin.hasPlayServices();
-        const userInfo = await GoogleSignin.signIn();
-        console.log("userInfo", userInfo)
-        
-      actions.Login(userInfo)
+        const userInfo1 = await GoogleSignin.signIn();
+        console.log("userInfo", userInfo1)
+        const userInfo = userInfo1?.user
+      actions.saveUserData(userInfo)
         
     } catch (error) {
         if (error.code === statusCodes.SIGN_IN_CANCELLED) {

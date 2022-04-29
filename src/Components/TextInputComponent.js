@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     // marginBottom: moderateScaleVertical(16),
     fontSize: textScale(14),
     // fontFamily: fontFamily.regular,
-    // color: '#000000'
+    color: colors.white,
     // borderColor:colors.blackOpacity20,
     // opacity: 0.12,
     // borderWidth:0.5,

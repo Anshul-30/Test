@@ -79,11 +79,7 @@ export default function TutorialScreen({navigation}) {
         </TouchableOpacity>
     );
   };
-  // const _dotStyle =()=>{
-  //   return(
-      
-  //   )
-  // }
+  
     return ( 
     <WrapperContainer>
       <AppIntroSlider

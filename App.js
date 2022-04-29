@@ -13,7 +13,8 @@ export default function App() {
   useEffect(() => {
     getItem('intro').then((res)=>{
       if(!!res){
-        actions.Intro(res)
+        console.log("fguf",res)
+        actions.Intro()
       }
     })
     getItem('login').then((res)=>{

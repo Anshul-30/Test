@@ -1,17 +1,17 @@
-import { setItem } from "../../utils/utils"
-import types from "../types"
+import {setItem} from '../../utils/utils';
+import types from '../types';
 
+const initialState = {
+  appintrodata:true
+};
 
-const initialState = true
-
-export default Intro =(state = initialState , action)=>{
-    switch(action.type){
-        case types.INTRO:{
-            setItem('intro',state)
-            return state = false}
-            default: return state
+export default Intro = (state = initialState, action) => {
+  switch (action.type) {
+    case types.INTRO: {
+      setItem('intro', state);
+      return (state = false);
     }
-    
-
-}
-
+    default:
+      return state;
+  }
+};

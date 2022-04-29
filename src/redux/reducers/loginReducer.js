@@ -2,7 +2,7 @@ import { removeItem, setItem } from '../../utils/utils';
 import types from '../types';
 
 const initialState = {
-  userData: {},
+  userData:null
 };
 
  const userLogin= (state = initialState, action) => {

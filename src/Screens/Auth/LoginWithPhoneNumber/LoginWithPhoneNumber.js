@@ -49,7 +49,7 @@ export default function LoginWithPhoneNumber({navigation}) {
     
     actions.login(apiData).then(res => {
             console.log('singnup api res_+++++', res);
-            alert('User signup successfully....!!!');
+            alert('Login Successfully');
           })
           .catch(err => {
             console.log(err,"err");

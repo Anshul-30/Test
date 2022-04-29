@@ -50,6 +50,6 @@ export function signUp(data) {
   export const Intro =()=>{
 dispatch({
   type:types.INTRO,
-  
+ 
 })
   }

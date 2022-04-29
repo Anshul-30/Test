@@ -17,9 +17,12 @@ import navigationStrings from '../../../navigation/navigationStrings';
 import {
   moderateScale,
   moderateScaleVertical,
+  textScale,
 } from '../../../styles/responsiveSize';
 import styles from './styles';
 import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
+import actions from '../../../redux/actions';
+import colors from '../../../styles/colors';
 
 export default function Otp({navigation, route}) {
   const allData = route?.params?.data;
@@ -27,6 +30,15 @@ export default function Otp({navigation, route}) {
   console.log('your otp ', allData?.otp);
   const [code, setCode] = useState();
   // alert("otp is",allData?.otp)
+const otp = allData?.otp
+  const otpValidation =()=>{
+    if(otp == code){
+      actions.saveUserData(allData)
+    }
+    else{
+      alert("Wrong Otp")
+    }
+  }
   return (
     <WrapperContainer>
       <HeaderComponent
@@ -40,18 +52,21 @@ export default function Otp({navigation, route}) {
         </Text>
         {/* <TextComponent text1={strings.HeaderOtp} styletxt={styles.text} /> */}
         <TextComponent text1={strings.edit} styletxt={styles.text1} />
+        <Text style={{color:colors.white,margin:moderateScale(15),fontSize:textScale(15)}}>Your otp is :{otp}</Text>
 
         <View
           style={{
-            marginHorizontal: moderateScale(15),
+            marginHorizontal: moderateScale(25),
             marginVertical: moderateScaleVertical(25),
           }}>
           <SmoothPinCodeInput
             value={code}
             onTextChange={code => setCode(code)}
             cellStyle={{
-              borderWidth: moderateScaleVertical(1),
+              // borderWidth: moderateScaleVertical(1),
               borderRadius: moderateScale(5),
+              marginLeft:moderateScale(15),
+              backgroundColor:colors.bgColor
             }}
           />
         </View>
@@ -68,8 +83,8 @@ export default function Otp({navigation, route}) {
           }}>
           <ButtonComponent
             title={strings.Verify}
-            onpress={() =>
-              navigation.navigate(navigationStrings.LoginWithPhone)
+            onpress={otpValidation
+              // navigation.navigate(navigationStrings.LoginWithPhone)
             }
           />
         </View>
