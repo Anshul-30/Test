@@ -40,31 +40,20 @@ export default function Otp({navigation, route}) {
         </Text>
         {/* <TextComponent text1={strings.HeaderOtp} styletxt={styles.text} /> */}
         <TextComponent text1={strings.edit} styletxt={styles.text1} />
-        {/* <View style={styles.textinput}>
-          <View style={{flex: 0.2}}>
-            <TextInputComp />
-          </View>
-          <View style={{flex: 0.2}}>
-            <TextInputComp />
-          </View>
-          <View style={{flex: 0.2}}>
-            <TextInputComp />
-          </View>
-          <View style={{flex: 0.2}}>
-            <TextInputComp />
-          </View>
-        </View> */}
-        <View style={{marginHorizontal:moderateScale(15),marginVertical:moderateScaleVertical(25)}}>
 
-        <SmoothPinCodeInput
-          value={code}
-          onTextChange={code => setCode(code)}
-          cellStyle={{
-            borderWidth: moderateScaleVertical(1),
-            borderRadius: moderateScale(5),
-            
-          }}
-        />
+        <View
+          style={{
+            marginHorizontal: moderateScale(15),
+            marginVertical: moderateScaleVertical(25),
+          }}>
+          <SmoothPinCodeInput
+            value={code}
+            onTextChange={code => setCode(code)}
+            cellStyle={{
+              borderWidth: moderateScaleVertical(1),
+              borderRadius: moderateScale(5),
+            }}
+          />
         </View>
       </ScrollView>
       <KeyboardAvoidingView

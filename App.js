@@ -11,6 +11,11 @@ import { getItem } from './src/utils/utils'
 export default function App() {
 
   useEffect(() => {
+    getItem('intro').then((res)=>{
+      if(!!res){
+        actions.Intro(res)
+      }
+    })
     getItem('login').then((res)=>{
       if(!!res){
         console.log("res",res)

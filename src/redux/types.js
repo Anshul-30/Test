@@ -1,5 +1,6 @@
 export default{
     LOGIN:'Login',
     SIGNUP:'Signup',
-    LOGOUT:"Logout"
+    LOGOUT:"Logout",
+    INTRO:'intro'
 }

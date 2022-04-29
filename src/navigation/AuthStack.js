@@ -12,7 +12,7 @@ import navigationStrings from './navigationStrings'
 export default AuthStack =(Stack)=>{
     return(
         <>
-        <Stack.Screen name={navigationStrings.SCREEN} component={TutorialScreen}/>
+        {/* <Stack.Screen name={navigationStrings.SCREEN} component={TutorialScreen}/> */}
         <Stack.Screen name={navigationStrings.LOGIN} component={Login}/>
         <Stack.Screen name={navigationStrings.LoginWithPhone} component={LoginWithPhoneNumber}/>
         <Stack.Screen name={navigationStrings.Signup} component={Signup}/>

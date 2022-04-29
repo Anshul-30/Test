@@ -12,12 +12,7 @@ export const saveUserData =(data)=>{
       payload:data
     })
   }
-export const Login = (data) => {
-    dispatch({
-        type:types.LOGIN,
-        payload:data
-    })
-};
+
 
 export const Logout =()=>{
     dispatch({
@@ -50,3 +45,11 @@ export function signUp(data) {
         });
     });
   };
+
+
+  export const Intro =()=>{
+dispatch({
+  type:types.INTRO,
+  
+})
+  }

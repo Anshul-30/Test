@@ -9,6 +9,7 @@ import strings from '../../../constants/lang';
 import colors from '../../../styles/colors';
 import navigationStrings from '../../../navigation/navigationStrings';
 import { moderateScale, moderateScaleVertical } from '../../../styles/responsiveSize';
+import actions from '../../../redux/actions';
 
 const slides = [
   {
@@ -70,7 +71,7 @@ export default function TutorialScreen({navigation}) {
   };
   const _renderDoneButton = () => {
     return (
-        <TouchableOpacity onPress={()=>navigation.navigate(navigationStrings.LOGIN)}>
+        <TouchableOpacity onPress={actions.Intro()}>
 
       <View style={{marginTop:moderateScaleVertical(10)}}>
         <Text style={styles.next}>{strings.GET_Started}</Text>
