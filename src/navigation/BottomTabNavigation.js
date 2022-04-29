@@ -5,14 +5,14 @@ import navigationStrings from './navigationStrings';
 
 import {Home, Notification, Post, Profile, Search} from '../Screens/Main';
 import images from '../constants/imagePath';
-import { moderateScale, width } from '../styles/responsiveSize';
+import { moderateScale, moderateScaleVertical, width } from '../styles/responsiveSize';
 import colors from '../styles/colors';
 
 const Tab = createBottomTabNavigator();
 
 export default BottomTab = () => {
   return (
-    <Tab.Navigator screenOptions={{headerShown: false, tabBarShowLabel: false }}>
+    <Tab.Navigator screenOptions={{headerShown: false, tabBarShowLabel: false ,tabBarStyle:{backgroundColor:colors.bgColor,borderTopWidth:moderateScaleVertical(0)}}}>
       <Tab.Screen
         name={navigationStrings.HOME}
         component={Home}
@@ -25,7 +25,7 @@ export default BottomTab = () => {
                 width: moderateScale(width / 20),
                 resizeMode: 'contain',
                 marginTop:moderateScale(10),
-                tintColor: focused ? 'red' : 'grey',
+                tintColor: focused ? 'red' : 'white',
               }}
             />
           ),
@@ -42,7 +42,7 @@ export default BottomTab = () => {
               width: moderateScale(width / 20),
               resizeMode: 'contain',
               marginTop:moderateScale(10),
-              tintColor: focused ? 'red' : 'grey',
+              tintColor: focused ? 'red' : 'white',
             }}
           />
         ),
@@ -58,7 +58,7 @@ export default BottomTab = () => {
               width: moderateScale(width / 20),
               resizeMode: 'contain',
               marginTop:moderateScale(10),
-              tintColor: focused ? 'red' : 'grey',
+              tintColor: focused ? 'red' : 'white',
             }}
           />
         ),
@@ -76,7 +76,7 @@ export default BottomTab = () => {
                 width: moderateScale(width / 20),
                 resizeMode: 'contain',
                 marginTop:moderateScale(10),
-                tintColor: focused ? 'red' : 'grey',
+                tintColor: focused ? 'red' : 'white',
               }}
             />
           ),
@@ -94,7 +94,7 @@ export default BottomTab = () => {
               width: moderateScale(width / 20),
               resizeMode: 'contain',
               marginTop:moderateScale(10),
-              tintColor: focused ? 'red' : 'grey',
+              tintColor: focused ? 'red' : 'white',
             }}
           />
         ),
