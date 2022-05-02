@@ -122,21 +122,21 @@ export default function Signup({navigation}) {
         <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
           <View style={{width: width / 2}}>
             <TextInputComp
-              placeholder={strings.FirstName}
+              placeholder={strings.FIRSTNAME}
               onChangeText={text => updateArray({fName: text})}
               value={fName}
             />
           </View>
           <View style={{width: width / 2}}>
             <TextInputComp
-              placeholder={strings.LastName}
+              placeholder={strings.LASTNAME}
               onChangeText={text => updateArray({lName: text})}
               value={lName}
             />
           </View>
         </View>
         <TextInputComp
-          placeholder={strings.Email}
+          placeholder={strings.EMAIL}
           onChangeText={text => updateArray({email: text})}
           value={email}
         />
@@ -150,7 +150,7 @@ export default function Signup({navigation}) {
             </View>
             <View style={{flex: 0.6}}>
               <TextInputComp
-                placeholder={strings.Mobile}
+                placeholder={strings.MOBILE}
                 onChangeText={text => updateArray({phone: text})}
                 value={phone}
                 keyboardInputType='numeric'
@@ -158,7 +158,7 @@ export default function Signup({navigation}) {
             </View>
           </View>
           <TextInputComp
-            placeholder={strings.Password}
+            placeholder={strings.PASSWORD}
             righttxt={true}
             onChangeText={text => updateArray({pass: text})}
             value={pass}
@@ -167,7 +167,7 @@ export default function Signup({navigation}) {
             text={isVisible ? 'Show' : 'Hide'}
           />
           <TextInputComp
-            placeholder={strings.Password}
+            placeholder={strings.CONFIRM_PASSWORD}
             righttxt={true}
             secureTextEntry={isCVisible}
             onChangeText={text => updateArray({cPass: text})}

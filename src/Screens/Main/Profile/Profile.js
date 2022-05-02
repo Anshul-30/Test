@@ -1,11 +1,20 @@
-import { StyleSheet, Text, View,TouchableOpacity } from 'react-native'
-import React from 'react'
-import WrapperContainer from '../../../Components/WrapperContainer'
+import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import React from 'react';
+import WrapperContainer from '../../../Components/WrapperContainer';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {useSelector} from 'react-redux';
 import actions from '../../../redux/actions';
+import strings from '../../../constants/lang';
+import colors from '../../../styles/colors';
+import {
+  moderateScale,
+  moderateScaleVertical,
+  textScale,
+} from '../../../styles/responsiveSize';
+import imagePath from '../../../constants/imagePath';
+import navigationStrings from '../../../navigation/navigationStrings';
 
-export default function Profile() {
+export default function Profile({navigation, route}) {
   const data = useSelector(state => state.userLogin.userData);
   const User = data?.pass;
   const user = data?.email;
@@ -21,15 +30,69 @@ export default function Profile() {
   return (
     <>
       <WrapperContainer>
-        <Text style={{color: 'white'}}>Home</Text>
-        <Text>{User}</Text>
-        <Text style={{color: 'white'}}>{user}</Text>
-        <TouchableOpacity onPress={signOut}>
-          <Text style={{color: 'white'}}>LOGOUT</Text>
-        </TouchableOpacity>
+        <View style={styles.container}>
+          <Text style={styles.headerTxt}>{strings.Profile}</Text>
+          <View style={{marginVertical: moderateScaleVertical(25)}}>
+            <View style={styles.mainView}>
+              <View style={{flex: 0.15}}>
+                <Image source={imagePath.profile} />
+              </View>
+              <View style={{flex: 0.5}}>
+                <TouchableOpacity onPress={()=>navigation.navigate(navigationStrings.EDIT_PROFILE)}>
+
+                <Text style={[styles.headerTxt, {fontSize: textScale(14)}]}>
+                  Edit Profile
+                </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View style={styles.mainView}>
+              <View style={{flex: 0.15}}>
+                <Image source={imagePath.ChangePassword} />
+              </View>
+              <View style={{flex: 0.5}}>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate(navigationStrings.CHANGE_PASSWORD)
+                  }>
+                  <Text style={[styles.headerTxt, {fontSize: textScale(14)}]}>
+                    Change Password
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View style={styles.mainView}>
+              <View style={{flex: 0.15}}>
+                <Image source={imagePath.SignOut} />
+              </View>
+              <View style={{flex: 0.3}}>
+                <TouchableOpacity onPress={signOut}>
+                  <Text style={[styles.headerTxt, {fontSize: textScale(14)}]}>
+                    Signout
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </View>
       </WrapperContainer>
     </>
   );
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  headerTxt: {
+    textAlign: 'left',
+    color: colors.white,
+    fontSize: textScale(15),
+  },
+  container: {
+    marginHorizontal: moderateScale(15),
+    marginTop: moderateScaleVertical(24),
+  },
+  mainView: {
+    flexDirection: 'row',
+    padding: moderateScale(10),
+    // justifyContent:'space-between'
+  },
+});

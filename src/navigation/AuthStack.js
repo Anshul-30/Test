@@ -10,10 +10,10 @@ export default AuthStack =(Stack)=>{
         <>
         {/* <Stack.Screen name={navigationStrings.SCREEN} component={TutorialScreen}/> */}
         <Stack.Screen name={navigationStrings.LOGIN} component={Login}/>
-        <Stack.Screen name={navigationStrings.LoginWithPhone} component={LoginWithPhoneNumber}/>
-        <Stack.Screen name={navigationStrings.Signup} component={Signup}/>
+        <Stack.Screen name={navigationStrings.LOGIN_WITH_PHONE} component={LoginWithPhoneNumber}/>
+        <Stack.Screen name={navigationStrings.SIGNUP} component={Signup}/>
         <Stack.Screen name={navigationStrings.OTP} component={Otp}/>
-        {/* <Stack.Screen name={navigationStrings.Password} component={Password}/> */}
+        
         </>
     )
 }

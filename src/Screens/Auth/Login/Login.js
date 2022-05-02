@@ -117,12 +117,12 @@ const googleLogin = async () => {
       </View>
       <ButtonComponent
         title={strings.LOGIN}
-       onpress={()=>navigation.navigate(navigationStrings.LoginWithPhone)}
+       onpress={()=>navigation.navigate(navigationStrings.LOGIN_WITH_PHONE)}
       />
 
       <View style={{flex: 0.6}}>
         <View>
-          <Text style={styles.ortext}>or</Text>
+          <Text style={styles.ortext}>{strings.OR}</Text>
         </View>
         <ButtonComponent
           stylbtn={styles.btn}
@@ -144,7 +144,7 @@ const googleLogin = async () => {
 
         <ButtonComponent
           stylbtn={styles.btn}
-          title={strings.Apple}
+          title={strings.APPLE}
           textstyle={styles.text}
           leftimage={true}
           image={images.apple}
@@ -156,12 +156,12 @@ const googleLogin = async () => {
             margin: moderateScale(10),
           }}>
           <Text style={{color: colors.white, fontSize: textScale(14)}}>
-            {strings.New_Here}
+            {strings.NEW_HERE}
           </Text>
-          <TouchableOpacity onPress={()=>navigation.navigate(navigationStrings.Signup)} >
+          <TouchableOpacity onPress={()=>navigation.navigate(navigationStrings.SIGNUP)} >
 
           <Text style={{color: '#41CCFF', fontSize: textScale(14)}}>
-            {strings.Sign_up}
+            {strings.SIGN_UP}
           </Text>
           </TouchableOpacity>
         </View>

@@ -21,7 +21,7 @@ export default function Card({
   likes,
 }) {
   return (
-    <View style={styles.flatlistContainer}>
+    <View style={styles.mainContainer}>
       <View>
           {/* Header */}
         <View style={[styles.header, {flexWrap: 'wrap'}]}>
@@ -44,8 +44,11 @@ export default function Card({
           </TouchableOpacity>
         </View>
         {/* Main Container */}
-        <View style={styles.postContainer}>
-          <Image source={postImage} style={styles.postImage} />
+        <View >
+          
+
+          <Image source={postImage} style={styles.postImage} resizeMode={'contain'}/>
+        
           <Text style={{color: colors.white}}>{caption}</Text>
           <Text
             style={{
@@ -85,7 +88,7 @@ export default function Card({
 
 const styles = StyleSheet.create({
  
-  flatlistContainer: {
+  mainContainer: {
     backgroundColor: colors.bgColor,
     marginBottom: moderateScaleVertical(28),
     paddingHorizontal: moderateScale(8),
@@ -105,16 +108,17 @@ const styles = StyleSheet.create({
     marginHorizontal: moderateScale(8),
   },
   postImage: {
-    width: moderateScale(width - width / 5.4),
-    height: moderateScale(height - height / 1.7),
+    width: moderateScale(width-68),
+    height: moderateScale(width-68),
     // resizeMode: 'contain',
     marginVertical: moderateScaleVertical(16),
     alignSelf: 'center',
   },
   shareIcon: {
-    width: moderateScale(width - width / 1.07),
+    width: moderateScale(width / 15),
     resizeMode: 'contain',
     marginRight: moderateScale(10),
-    height: moderateScale(height - height / 1.03),
+    height: moderateScale(height / 15),
   },
+  
 });

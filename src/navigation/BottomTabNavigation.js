@@ -32,7 +32,7 @@ export default BottomTab = () => {
           // tabBarItemStyle: {height: 40},
         }}
       />
-      <Tab.Screen name={navigationStrings.Search} component={Search} 
+      <Tab.Screen name={navigationStrings.SEARCH} component={Search} 
        options={{
         tabBarIcon: ({focused}) => (
           <Image
@@ -48,7 +48,7 @@ export default BottomTab = () => {
         ),
         // tabBarItemStyle: {height: 40},
       }}/>
-      <Tab.Screen name={navigationStrings.Post} component={Post}
+      <Tab.Screen name={navigationStrings.POST} component={Post}
        options={{
         tabBarIcon: ({focused}) => (
           <Image
@@ -65,7 +65,7 @@ export default BottomTab = () => {
         // tabBarItemStyle: {height: 40},
       }} />
       <Tab.Screen
-        name={navigationStrings.Notification}
+        name={navigationStrings.NOTIFICATION}
         component={Notification}
         options={{
           tabBarIcon: ({focused}) => (
@@ -84,7 +84,7 @@ export default BottomTab = () => {
         }}
       />
 
-      <Tab.Screen name={navigationStrings.Profile} component={Profile} 
+      <Tab.Screen name={navigationStrings.PROFILE} component={Profile} 
        options={{
         tabBarIcon: ({focused}) => (
           <Image

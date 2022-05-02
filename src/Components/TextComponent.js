@@ -20,7 +20,7 @@ const style = StyleSheet.create({
     
     text1:{
   color:colors.headertxt,
-  fontSize:textScale(15)
+  fontSize:textScale(14)
     }
   });
   

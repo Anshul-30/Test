@@ -15,35 +15,45 @@ export default function HeaderComponent({
   leftimage = false,
   stylebtn = {},
   onPress = {},
-  rightimage =  false,
+  rightimage = false,
   rigthImage,
-  stylebtnl
+  stylebtnl,
+  text = false,
+  headerTxt,
 }) {
   return (
-    <View style={{justifyContent:'space-between',flexDirection:'row'}}>
+    <View
+      style={{
+        flexDirection: 'row',
+        marginLeft: moderateScale(15),
+        marginTop: moderateScaleVertical(10),
+        alignItems:'center'
+      }}>
       {leftimage && (
         <View
           style={{
-            marginLeft: moderateScale(15),
-            marginTop: moderateScaleVertical(10),
+            flex: 0.1,
           }}>
           <TouchableOpacity onPress={onPress}>
             <Image source={images} style={{...style.image, ...stylebtn}} />
           </TouchableOpacity>
         </View>
       )}
-      {
-        rightimage &&  <View
-        style={{
-          marginRight: moderateScale(15),
-          marginTop: moderateScaleVertical(10),
-        }}>
-        <TouchableOpacity onPress={onPress}>
-          <Image source={rigthImage} style={{...style.image, ...stylebtnl}} />
-        </TouchableOpacity>
-      </View>
-    
-      }
+      {text && (
+        <View style={{flex: 0.7}}>
+          <Text style={{color:colors.white,fontSize:textScale(14)}}>{headerTxt}</Text>
+        </View>
+      )}
+      {rightimage && (
+        <View
+          style={{
+            flex: 0.2,
+          }}>
+          <TouchableOpacity onPress={onPress}>
+            <Image source={rigthImage} style={{...style.image, ...stylebtnl}} />
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
 }

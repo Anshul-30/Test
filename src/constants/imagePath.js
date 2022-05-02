@@ -17,5 +17,7 @@ export default{
     Profile:require('../assets/images/images(1).jpeg'),
     dot:require('../assets/images/ic_dots.png'),
     post1:require('../assets/images/download.jpeg'),
-    ForwardImage:require('../assets/images/ic_direction.png')
+    ForwardImage:require('../assets/images/ic_direction.png'),
+    SignOut:require('../assets/images/ic_logout.png'),
+    ChangePassword:require('../assets/images/ic_key.png')
 }

@@ -54,7 +54,7 @@ export default function LoginWithPhoneNumber({navigation}) {
       
       actions.login(apiData).then(res => {
               console.log('singnup api res_+++++', res);
-              alert('Login Successfully');
+             
             })
             .catch(err => {
               console.log(err,"err");
@@ -101,7 +101,7 @@ export default function LoginWithPhoneNumber({navigation}) {
               </View>
               <View style={{flex: 0.6}}>
                 <TextInputComp
-                  placeholder={strings.Mobile}
+                  placeholder={strings.MOBILE}
                   onChangeText={text => updateArray({phone: text})}
                   value={phone}
                 />
@@ -109,7 +109,7 @@ export default function LoginWithPhoneNumber({navigation}) {
             </View>
 
             <TextInputComp
-              placeholder={strings.Password}
+              placeholder={strings.PASSWORD}
               righttxt={true}
               secureTextEntry={isVisible}
               onRightPress={() => setIsVisble(!isVisible)}

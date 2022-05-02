@@ -12,4 +12,7 @@ export default styles = StyleSheet.create({
         paddingTop:moderateScaleVertical(10),
         
     },
+    main:{
+        marginTop:moderateScaleVertical(25)
+    }
 })
