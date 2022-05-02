@@ -65,7 +65,7 @@ export default function TutorialScreen({navigation}) {
 
   const _renderDoneButton = () => {
     return (
-      <TouchableOpacity onPress={() => actions.Intro(false)}>
+      <TouchableOpacity onPress={() => actions.intro(false)}>
         <View style={{marginTop: moderateScaleVertical(10)}}>
           <Text style={styles.next}>{strings.GET_Started}</Text>
         </View>

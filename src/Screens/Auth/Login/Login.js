@@ -7,6 +7,8 @@ import images from '../../../constants/imagePath';
 import strings from '../../../constants/lang';
 import navigationStrings from '../../../navigation/navigationStrings';
 import colors from '../../../styles/colors';
+import { LoginManager, GraphRequest, GraphRequestManager } from "react-native-fbsdk";
+
 import {
   moderateScale,
   moderateScaleVertical,
@@ -23,6 +25,57 @@ export default function Login({navigation}) {
   useEffect(() => {
     GoogleSignin.configure()
 }, [])
+
+
+
+const fbLogIn = (resCallBack) => {
+  LoginManager.logOut();
+  return LoginManager.logInWithPermissions(['email', 'public_profile']).then(
+    result => {
+      console.log("fb result ****************", result);
+      if (result.declinedPermissions && result.declinedPermissions.includes("email")) {
+        resCallBack({ message: "Email is required" })
+      }
+      if (result.isCancelled) {
+        console.log("dxcfgvbhjn")
+      } else {
+        const infoRequest = new GraphRequest(
+          'me?fields= email,name, picture',
+          null,
+          resCallBack
+        );
+        new GraphRequestManager().addRequest(infoRequest).start()
+      }
+    },
+    function (errror) {
+      console.log("login failed", errror)
+    }
+  )
+}
+
+const _resInfoCallback = async (error, result) => {
+  if (error) {
+    console.log("error raised at response", error)
+    return;
+  }
+  else {
+    const userData = result
+    console.log("id", userData)
+   actions.saveUserData(userData)
+
+  }
+}
+const onFBlogIn = async () => {
+  try {
+    await fbLogIn(_resInfoCallback)
+    console.log("hii")
+  } catch (error) {
+    console.log("error", error)
+  }
+}
+
+
+
 
 const googleLogin = async () => {
     try {
@@ -86,6 +139,7 @@ const googleLogin = async () => {
           textstyle={styles.text}
           leftimage={true}
           image={images.facebook}
+          onpress={onFBlogIn}
         />
 
         <ButtonComponent

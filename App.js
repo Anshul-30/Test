@@ -15,7 +15,9 @@ export default function App() {
   useEffect(() => {
     getItem('intro').then((res)=>{
       console.log(res,"getItem>>>res");
-      actions.intro(res)
+      if (res != null) {
+        actions.intro(res);
+      }
     })
 
     

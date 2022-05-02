@@ -52,7 +52,7 @@ export default BottomTab = () => {
        options={{
         tabBarIcon: ({focused}) => (
           <Image
-            source={images.post}
+            source={images.redPlus}
             style={{
               height: moderateScale(width / 20),
               width: moderateScale(width / 20),

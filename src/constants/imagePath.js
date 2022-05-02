@@ -10,5 +10,6 @@ export default{
     Notify:require('../assets/images/ic_notify.png'),
     search:require('../assets/images/ic_srch.png'),
     post:require('../assets/images/ic_plus.png'),
-    profile:require('../assets/images/ic_user.png')
+    profile:require('../assets/images/ic_user.png'),
+    redPlus:require('../assets/images/ic_red_add.png')
 }
