@@ -1,5 +1,7 @@
 export default {
   blueC:'#32C5FF',
+  time:'#BFBFBF',
+  textMediumGray:'#AEAEAE',
   bgColor:'#4C4C4C',
   headertxt:'#A6A6A6',
   text:'#9C9C9C',

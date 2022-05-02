@@ -11,5 +11,11 @@ export default{
     search:require('../assets/images/ic_srch.png'),
     post:require('../assets/images/ic_plus.png'),
     profile:require('../assets/images/ic_user.png'),
-    redPlus:require('../assets/images/ic_red_add.png')
+    redPlus:require('../assets/images/ic_red_add.png'),
+    loc:require('../assets/images/ic_loc.png'),
+    logo:require('../assets/images/ic_home_icon.png'),
+    Profile:require('../assets/images/images(1).jpeg'),
+    dot:require('../assets/images/ic_dots.png'),
+    post1:require('../assets/images/download.jpeg'),
+    ForwardImage:require('../assets/images/ic_direction.png')
 }

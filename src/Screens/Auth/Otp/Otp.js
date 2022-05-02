@@ -42,7 +42,7 @@ const otp = allData?.otp
   return (
     <WrapperContainer>
       <HeaderComponent
-        topimage={true}
+        leftimage={true}
         images={images.arrow}
         onPress={() => navigation.goBack()}
       />

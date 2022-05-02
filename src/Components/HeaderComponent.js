@@ -12,13 +12,16 @@ import {
 
 export default function HeaderComponent({
   images,
-  topimage = false,
+  leftimage = false,
   stylebtn = {},
   onPress = {},
+  rightimage =  false,
+  rigthImage,
+  stylebtnl
 }) {
   return (
-    <View>
-      {topimage && (
+    <View style={{justifyContent:'space-between',flexDirection:'row'}}>
+      {leftimage && (
         <View
           style={{
             marginLeft: moderateScale(15),
@@ -29,6 +32,18 @@ export default function HeaderComponent({
           </TouchableOpacity>
         </View>
       )}
+      {
+        rightimage &&  <View
+        style={{
+          marginRight: moderateScale(15),
+          marginTop: moderateScaleVertical(10),
+        }}>
+        <TouchableOpacity onPress={onPress}>
+          <Image source={rigthImage} style={{...style.image, ...stylebtnl}} />
+        </TouchableOpacity>
+      </View>
+    
+      }
     </View>
   );
 }

@@ -35,43 +35,46 @@ export default function LoginWithPhoneNumber({navigation}) {
     pass: '',
   });
   const {phone, pass} = state;
+  const phoneRegex = /^[0-9]{10}$/;
+  const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%\^&\*])(?=.{8,})");
   const updateArray = data => setState(state => ({...state, ...data}));
   const [isVisible, setIsVisble] = useState(false);
   const onLogin = () => {
-    let apiData = {
-      phone: phone,
-      phone_code: '91',
-      device_token: 'KDKFJDKFDFKDFDF',
-      device_type: Platform.OS == 'ios' ? 'IOS' : 'ANDROID',
-      loginType:'admin',
-      password: pass,
-    };    
-    
-    actions.login(apiData).then(res => {
-            console.log('singnup api res_+++++', res);
-            alert('Login Successfully');
-          })
-          .catch(err => {
-            console.log(err,"err");
-            alert(err?.message);
-          });
-  //         try
-  //    {
-  //    const res = await actions.login(apiData)
-  //    console.log('singnup api res_+++++', res);
-  //     alert('User signup successfully....!!!');
-  //  }
-  //   catch (error) {
-  //    console.log('error raised', error);
-  //     alert(error?.message);
-  //   }
+  if(phoneRegex.test(phone)){
+    if(strongRegex.test(pass)){
+
+      let apiData = {
+        phone: phone,
+        phone_code: '91',
+        device_token: 'KDKFJDKFDFKDFDF',
+        device_type: Platform.OS == 'ios' ? 'IOS' : 'ANDROID',
+        loginType:'admin',
+        password: pass,
+      };    
+      
+      actions.login(apiData).then(res => {
+              console.log('singnup api res_+++++', res);
+              alert('Login Successfully');
+            })
+            .catch(err => {
+              console.log(err,"err");
+              alert(err?.message);
+            });
+          }
+          else{
+            alert('Enter Correct Password')
+          }
+    }
+        else{
+          alert("Enter valid number")
+        }
   };
   return (
     <WrapperContainer>
       <View>
         <HeaderComponent
           images={images.arrow}
-          topimage={true}
+          leftimage={true}
           // title={strings.Welcome_back}
           // title1={true}
           // text={true}
