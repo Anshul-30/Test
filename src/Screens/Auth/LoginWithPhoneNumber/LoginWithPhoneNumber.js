@@ -36,38 +36,38 @@ export default function LoginWithPhoneNumber({navigation}) {
   });
   const {phone, pass} = state;
   const phoneRegex = /^[0-9]{10}$/;
-  const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%\^&\*])(?=.{8,})");
+  const strongRegex = new RegExp(
+    '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})',
+  );
   const updateArray = data => setState(state => ({...state, ...data}));
   const [isVisible, setIsVisble] = useState(false);
   const onLogin = () => {
-  if(phoneRegex.test(phone)){
-    if(strongRegex.test(pass)){
+    if (phoneRegex.test(phone)) {
+      if (strongRegex.test(pass)) {
+        let apiData = {
+          phone: phone,
+          phone_code: '91',
+          device_token: 'KDKFJDKFDFKDFDF',
+          device_type: Platform.OS == 'ios' ? 'IOS' : 'ANDROID',
+          loginType: 'admin',
+          password: pass,
+        };
 
-      let apiData = {
-        phone: phone,
-        phone_code: '91',
-        device_token: 'KDKFJDKFDFKDFDF',
-        device_type: Platform.OS == 'ios' ? 'IOS' : 'ANDROID',
-        loginType:'admin',
-        password: pass,
-      };    
-      
-      actions.login(apiData).then(res => {
-              console.log('singnup api res_+++++', res);
-             
-            })
-            .catch(err => {
-              console.log(err,"err");
-              alert(err?.message);
-            });
-          }
-          else{
-            alert('Enter Correct Password')
-          }
+        actions
+          .login(apiData)
+          .then(res => {
+            console.log('singnup api res_+++++', res);
+          })
+          .catch(err => {
+            console.log(err, 'err');
+            alert(err?.message);
+          });
+      } else {
+        alert('Enter Correct Password');
+      }
+    } else {
+      alert('Enter valid number');
     }
-        else{
-          alert("Enter valid number")
-        }
   };
   return (
     <WrapperContainer>
@@ -90,41 +90,44 @@ export default function LoginWithPhoneNumber({navigation}) {
               styletxt={styles.text1}
             />
             <TextComponent text1={strings.Headertxt} />
-            <View
-              style={{
-                flexDirection: 'row',
-                // flex: 1,
-                justifyContent: 'space-around',
-              }}>
-              <View style={{flex: 0.4}}>
-                <CountryCode />
-              </View>
-              <View style={{flex: 0.6}}>
-                <TextInputComp
-                  placeholder={strings.MOBILE}
-                  onChangeText={text => updateArray({phone: text})}
-                  value={phone}
-                />
+            <View style={{marginTop: moderateScale(35)}}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  // flex: 1,
+                  justifyContent: 'space-around',
+                }}>
+                <View style={{flex: 0.4}}>
+                  <CountryCode />
+                </View>
+                <View style={{flex: 0.6}}>
+                  <TextInputComp
+                    placeholder={strings.MOBILE}
+                    onChangeText={text => updateArray({phone: text})}
+                    value={phone}
+                  />
+                </View>
               </View>
             </View>
+            <View>
+              <TextInputComp
+                placeholder={strings.PASSWORD}
+                righttxt={true}
+                secureTextEntry={isVisible}
+                onRightPress={() => setIsVisble(!isVisible)}
+                text={isVisible ? 'Show' : 'Hide'}
+                onChangeText={text => updateArray({pass: text})}
+                value={pass}
+              />
+              <View
+                style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate(navigationStrings.OTP)}>
+                  <Text style={styles.orText}>{strings.OTP}</Text>
+                </TouchableOpacity>
 
-            <TextInputComp
-              placeholder={strings.PASSWORD}
-              righttxt={true}
-              secureTextEntry={isVisible}
-              onRightPress={() => setIsVisble(!isVisible)}
-              text={isVisible ? 'Show' : 'Hide'}
-              onChangeText={text => updateArray({pass: text})}
-              value={pass}
-            />
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <TouchableOpacity
-                onPress={() => navigation.navigate(navigationStrings.OTP)}>
-                <Text style={styles.orText}>{strings.OTP}</Text>
-              </TouchableOpacity>
-
-              <Text style={styles.text}>{strings.Forget}</Text>
+                <Text style={styles.text}>{strings.Forget}</Text>
+              </View>
             </View>
           </View>
         </View>

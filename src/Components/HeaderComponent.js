@@ -41,7 +41,7 @@ export default function HeaderComponent({
       )}
       {text && (
         <View style={{flex: 0.7}}>
-          <Text style={{color:colors.white,fontSize:textScale(14)}}>{headerTxt}</Text>
+          <Text style={{color:colors.white,fontSize:textScale(15)}}>{headerTxt}</Text>
         </View>
       )}
       {rightimage && (

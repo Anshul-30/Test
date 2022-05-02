@@ -119,6 +119,9 @@ export default function Signup({navigation}) {
         <TextComponent text1={strings.Headertxt} />
       </View>
       <ScrollView>
+
+        <View style={{marginTop:moderateScaleVertical(25)}}>
+
         <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
           <View style={{width: width / 2}}>
             <TextInputComp
@@ -175,6 +178,7 @@ export default function Signup({navigation}) {
             onRightPress={() => setIsCVisible(!isCVisible)}
             text={isCVisible ? 'Show' : 'Hide'}
           />
+        </View>
         </View>
       </ScrollView>
 
