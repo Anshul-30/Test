@@ -29,7 +29,7 @@ export default function Notification({navigation, route}) {
           }}>
           <View style={{flex: 0.2}}>
             <Image
-              source={imagePath.Profile}
+              source={imagePath.profile}
               style={{
                 height: moderateScale(width / 8),
                 width: moderateScale(width / 8),

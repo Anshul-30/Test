@@ -35,7 +35,7 @@ export default function Profile({navigation, route}) {
           <View style={{marginVertical: moderateScaleVertical(25)}}>
             <View style={styles.mainView}>
               <View style={{flex: 0.15}}>
-                <Image source={imagePath.profile} />
+                <Image source={imagePath.profileBottom} />
               </View>
               <View style={{flex: 0.5}}>
                 <TouchableOpacity onPress={()=>navigation.navigate(navigationStrings.EDIT_PROFILE)}>

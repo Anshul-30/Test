@@ -88,7 +88,7 @@ export default BottomTab = () => {
        options={{
         tabBarIcon: ({focused}) => (
           <Image
-            source={images.profile}
+            source={images.profileBottom}
             style={{
               height: moderateScale(width / 20),
               width: moderateScale(width / 20),
