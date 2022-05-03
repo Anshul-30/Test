@@ -9,9 +9,14 @@ import {
   moderateScaleVertical,
   width,
 } from '../styles/responsiveSize';
-function CountryCode({}) {
-  const [countryCode, setCountryCode] = useState('91');
-  const [countryFlag, setCountryFlag] = useState('IN');
+function CountryCode({
+  setCountryCode,
+  setCountryFlag,
+  countryFlag,
+  countryCode
+}) {
+  // const [countryCode, setCountryCode] = useState('91');
+  // const [countryFlag, setCountryFlag] = useState('IN');
 
   const onSelect = country => {
     setCountryFlag(country.cca2);

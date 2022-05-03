@@ -46,9 +46,12 @@ export default function Signup({navigation}) {
   });
   const [isVisible, setIsVisible] = useState();
   const [isCVisible, setIsCVisible] = useState();
-
+  const [countryCode, setCountryCode] = useState('91');
+  const [countryFlag, setCountryFlag] = useState('IN');
   const {fName, lName, email, phone, pass, cPass} = state;
   const updateArray = data => setState(state => ({...state, ...data}));
+
+  
   const signUp = () => {
     if (nameRegex.test(fName)) {
       if (nameRegex.test(lName)) {
@@ -61,8 +64,8 @@ export default function Signup({navigation}) {
                   last_name: lName,
                   email: email,
                   phone: phone,
-                  phone_code: '91',
-                  country_code: 'IN',
+                  phone_code: countryCode,
+                  country_code: countryFlag,
                   device_token: 'KDKFJDKFDFKDFDF',
                   device_type: Platform.OS == 'ios' ? 'IOS' : 'ANDROID',
                   password: pass,
@@ -149,7 +152,12 @@ export default function Signup({navigation}) {
           }}>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <View style={{flex: 0.4}}>
-              <CountryCode />
+              <CountryCode 
+              countryCode={countryCode}
+              countryFlag={countryFlag}
+              setCountryCode={setCountryCode}
+              setCountryFlag={setCountryFlag}
+              />
             </View>
             <View style={{flex: 0.6}}>
               <TextInputComp

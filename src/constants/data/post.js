@@ -1,50 +1,27 @@
-import imagePath from '../imagePath';
-import strings from '../lang';
-const Data = [
-  {
-    key: '1',
-    title: strings.userName,
-    time: strings.Time,
-    text: strings.loc,
-    comment: strings.CommentCount,
-    profile: imagePath.post1,
-    image: imagePath.Profile,
-    likes: strings.LikeCount,
-    caption: strings.Caption,
-  },
-  {
-    key: '4',
-    title: strings.userName,
-    time: strings.Time,
-    text: strings.loc,
-    comment: strings.CommentCount,
-    profile: imagePath.post1,
-    image: imagePath.Profile,
-    likes: strings.LikeCount,
-    caption: strings.Caption,
-  },
-  {
-    key: '2',
-    title: strings.userName,
-    time: strings.Time,
-    text: strings.loc,
-    comment: strings.CommentCount,
-    profile: imagePath.post1,
-    image: imagePath.Profile,
-    likes: strings.LikeCount,
-    caption: strings.Caption,
-  },
-  {
-    key: '3',
-    title: strings.userName,
-    time: strings.Time,
-    text: strings.loc,
-    comment: strings.CommentCount,
-    profile: imagePath.post1,
-    image: imagePath.Profile,
-    likes: strings.LikeCount,
-    caption: strings.Caption,
-  },
-];
+// import imagePath from '../imagePath';
+// import strings from '../lang';
+// const Data = [
+//   {
+//     key:'1',
+//     title:'Russel Gordon',
+//     time:'20 min ago',
+//     add:'added a new post',
+//     profile:imagePath.profile
+//   },
+//   {
+//     key:'2',
+//     title:'Sara',
+//     time:'20 min ago',
+//     add:'added new post',
+//     profile:imagePath.profile
+//   },
+//   {
+//     key:'3',
+//     title:'Raphl',
+//     time:'20 min ago',
+//     add:'added a new post',
+//     profile:imagePath.profile
+//   },
+// ];
 
-export default Data;
+// export default Data;

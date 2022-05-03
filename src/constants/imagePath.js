@@ -19,5 +19,6 @@ export default{
     post1:require('../assets/images/download.jpeg'),
     ForwardImage:require('../assets/images/ic_direction.png'),
     SignOut:require('../assets/images/ic_logout.png'),
-    ChangePassword:require('../assets/images/ic_key.png')
+    ChangePassword:require('../assets/images/ic_key.png'),
+    Edit:require('../assets/images/ic_edit.png')
 }

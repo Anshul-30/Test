@@ -22,7 +22,7 @@ import {
 } from '../../../styles/responsiveSize';
 import TextInputComp from '../../../Components/TextInputComponent';
 import ButtonComponent from '../../../Components/ButtonComponent';
-
+import DeviceInfo from 'react-native-device-info'
 import styles from './styles';
 import actions from '../../../redux/actions';
 import navigationStrings from '../../../navigation/navigationStrings';
@@ -41,13 +41,16 @@ export default function LoginWithPhoneNumber({navigation}) {
   );
   const updateArray = data => setState(state => ({...state, ...data}));
   const [isVisible, setIsVisble] = useState(false);
+  const [countryCode, setCountryCode] = useState('91');
+  const [countryFlag, setCountryFlag] = useState('IN');
+  console.log("device token", DeviceInfo.getUniqueId())
   const onLogin = () => {
     if (phoneRegex.test(phone)) {
       if (strongRegex.test(pass)) {
         let apiData = {
           phone: phone,
-          phone_code: '91',
-          device_token: 'KDKFJDKFDFKDFDF',
+          phone_code: countryCode,
+          device_token: DeviceInfo.getUniqueId(),
           device_type: Platform.OS == 'ios' ? 'IOS' : 'ANDROID',
           loginType: 'admin',
           password: pass,
@@ -98,7 +101,12 @@ export default function LoginWithPhoneNumber({navigation}) {
                   justifyContent: 'space-around',
                 }}>
                 <View style={{flex: 0.4}}>
-                  <CountryCode />
+                  <CountryCode
+                    countryCode={countryCode}
+                    countryFlag={countryFlag}
+                    setCountryCode={setCountryCode}
+                    setCountryFlag={setCountryFlag}
+                  />
                 </View>
                 <View style={{flex: 0.6}}>
                   <TextInputComp

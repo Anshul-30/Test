@@ -424,6 +424,8 @@ PODS:
     - React-Core
   - RNCAsyncStorage (1.17.3):
     - React-Core
+  - RNDeviceInfo (8.7.1):
+    - React-Core
   - RNFBApp (14.9.0):
     - Firebase/CoreOnly (= 8.15.0)
     - React-Core
@@ -526,6 +528,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - ReactNativeLocalization (from `../node_modules/react-native-localization`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - "RNGoogleSignin (from `../node_modules/@react-native-google-signin/google-signin`)"
@@ -634,6 +637,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-localization"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-async-storage/async-storage"
+  RNDeviceInfo:
+    :path: "../node_modules/react-native-device-info"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
   RNGestureHandler:
@@ -709,6 +714,7 @@ SPEC CHECKSUMS:
   ReactCommon: bf2888a826ceedf54b99ad1b6182d1bc4a8a3984
   ReactNativeLocalization: be60e3a0e6e8db88d9f8190719ffb75e1cdab22a
   RNCAsyncStorage: bef53cb70c06b8eff11bab4a848de86ad4488c39
+  RNDeviceInfo: af47a7d1a09d64c8cbb8b0c883db9bca422a9813
   RNFBApp: d3a0f69a3cc67c609f962acf67f483a841ffc49f
   RNGestureHandler: 4f4986408310a43f1606c391f38f76e0d6e790d5
   RNGoogleSignin: 7580e6618798be9d090524bb31538378f92ce746
