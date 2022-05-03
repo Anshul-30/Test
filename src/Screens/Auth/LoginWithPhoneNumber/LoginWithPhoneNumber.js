@@ -35,10 +35,7 @@ export default function LoginWithPhoneNumber({navigation,route}) {
     pass: '',
   });
   const {phone, pass} = state;
-  const phoneRegex = /^[0-9]{10}$/;
-  const strongRegex = new RegExp(
-    '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})',
-  );
+  
   const updateArray = data => setState(state => ({...state, ...data}));
   const [isVisible, setIsVisble] = useState(false);
   const [countryCode, setCountryCode] = useState('91');
@@ -83,10 +80,10 @@ export default function LoginWithPhoneNumber({navigation,route}) {
         <View style={{height: height}}>
           <View>
             <TextComponent
-              text1={strings.Welcome_back}
+              text1={strings.WELCOME_BACK}
               styletxt={styles.text1}
             />
-            <TextComponent text1={strings.Headertxt} />
+            <TextComponent text1={strings.HEADERTXT} />
             <View style={{marginTop: moderateScale(35)}}>
               <View
                 style={{
@@ -117,7 +114,7 @@ export default function LoginWithPhoneNumber({navigation,route}) {
                 righttxt={true}
                 secureTextEntry={isVisible}
                 onRightPress={() => setIsVisble(!isVisible)}
-                text={isVisible ? 'Show' : 'Hide'}
+                text={isVisible ? strings.SHOW : strings.HIDE}
                 onChangeText={text => updateArray({pass: text})}
                 value={pass}
               />
@@ -128,7 +125,7 @@ export default function LoginWithPhoneNumber({navigation,route}) {
                   <Text style={styles.orText}>{strings.OTP}</Text>
                 </TouchableOpacity>
 
-                <Text style={styles.text}>{strings.Forget}</Text>
+                <Text style={styles.text}>{strings.FORGET}</Text>
               </View>
             </View>
           </View>
@@ -145,7 +142,7 @@ export default function LoginWithPhoneNumber({navigation,route}) {
                 ? moderateScaleVertical(55)
                 : moderateScaleVertical(20),
           }}>
-          <ButtonComponent title={strings.LOGiN} onpress={onLogin} />
+          <ButtonComponent title={strings.LOGIN_WITH_PHONE} onpress={onLogin} />
         </View>
       </KeyboardAvoidingView>
     </WrapperContainer>

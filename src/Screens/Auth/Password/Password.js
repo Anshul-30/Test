@@ -26,9 +26,7 @@ export default function Password({navigation,route}) {
   const updateArray = data => setState(state => ({...state, ...data}));
   const data = useSelector(state => state.userLogin?.userData);
   // console.log('data>>>>>>>>', data);
-  const strongRegex = new RegExp(
-    '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})',
-  );
+  
 
   const isValidData = () => {
     const error = validator({pass, newPass});
@@ -68,7 +66,7 @@ export default function Password({navigation,route}) {
       <HeaderComponent
         leftimage={true}
         text={true}
-        headerTxt={'Change Password'}
+        headerTxt={strings.CHANGE_PASSWORD}
         images={images.arrow}
         onPress={() => navigation.goBack()}
       />
@@ -81,7 +79,7 @@ export default function Password({navigation,route}) {
             value={pass}
             onChangeText={text => updateArray({pass: text})}
             onRightPress={() => setIsVisible(!isVisible)}
-            text={isVisible ? 'Show' : 'Hide'}
+            text={isVisible ? strings.SHOW : strings.HIDE}
           />
           <TextInputComp
             placeholder={strings.CONFIRM_PASSWORD}
@@ -90,7 +88,7 @@ export default function Password({navigation,route}) {
             onChangeText={text => updateArray({newPass: text})}
             secureTextEntry={isCVisible}
             onRightPress={() => setIsCVisible(!isCVisible)}
-            text={isCVisible ? 'Show' : 'Hide'}
+            text={isCVisible ? strings.SHOW : strings.HIDE}
           />
         </View>
       </ScrollView>
@@ -103,7 +101,7 @@ export default function Password({navigation,route}) {
                 ? moderateScaleVertical(50)
                 : moderateScaleVertical(20),
           }}>
-          <ButtonComponent title="Password" onpress={passwordChange} />
+          <ButtonComponent title={strings.PASSWORD} onpress={passwordChange} />
         </View>
       </KeyboardAvoidingView>
     </WrapperContainer>

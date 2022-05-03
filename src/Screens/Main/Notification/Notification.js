@@ -42,10 +42,10 @@ export default function Notification({navigation, route}) {
             <View style={{flexDirection: 'row'}}>
               <Text style={{color: colors.button, fontSize: textScale(13)}}>
                 {strings.USERNAME}
-                <Text style={{color: colors.white}}>{'added a new post.'}</Text>
+                <Text style={{color: colors.white}}>{strings.ADDED_NEW_POST}</Text>
               </Text>
             </View>
-            <Text style={{color: '#B5B0B0'}}>{'20 min ago'}</Text>
+            <Text style={{color: '#B5B0B0'}}>{strings.POST_TIME}</Text>
           </View>
         </View>
         <Divider style={{marginLeft: moderateScale(100)}} />
@@ -54,7 +54,7 @@ export default function Notification({navigation, route}) {
   };
   return (
     <WrapperContainer>
-      <HeaderComponent text={true} headerTxt={'Notification'} />
+      <HeaderComponent text={true} headerTxt={strings.NOTIFICATION} />
       <FlatList data={[1, 2, 3, 4]} renderItem={_renderItem} />
     </WrapperContainer>
   );

@@ -65,33 +65,17 @@ export default function Edit_Profile({navigation, route}) {
       <ScrollView>
         <View>
           <View
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginVertical: moderateScaleVertical(30),
-              flexDirection:'row'
-            }}>
+            style={styles.mainContainer}>
             
               <Image
-                source={imagePath.Profile}
-                style={{
-                  height: moderateScale(width / 3.5),
-                  width: moderateScale(width / 3.5),
-                  borderRadius: moderateScale(width / 7),
-                }}
+                source={imagePath.profile}
+                style={styles.profile}
               />
           
             
               <Image
-                source={imagePath.Edit}
-                style={{
-                  height: moderateScale(width / 15),
-                  width: moderateScale(width / 15),
-                  alignSelf:'flex-end',
-                  marginTop:moderateScaleVertical(-30),
-                  marginLeft:moderateScale(-30)
-                  
-                }}
+                source={imagePath.edit}
+                style={styles.edit}
               />
            
           </View>
@@ -134,7 +118,7 @@ export default function Edit_Profile({navigation, route}) {
       <KeyboardAvoidingView
         behavior={Platform.OS === 'android' ? 'height' : 'padding'}>
         <ButtonComponent
-          title={'Save Changes'}
+          title={strings.SAVE_CHNGES}
           // onpress={()=>actions.login(all_data)}
         />
       </KeyboardAvoidingView>
@@ -142,4 +126,24 @@ export default function Edit_Profile({navigation, route}) {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+edit:{
+  height: moderateScale(width / 15),
+  width: moderateScale(width / 15),
+  alignSelf:'flex-end',
+  marginTop:moderateScaleVertical(-30),
+  marginLeft:moderateScale(-30)
+  
+},
+profile:{
+  height: moderateScale(width / 3.5),
+  width: moderateScale(width / 3.5),
+  borderRadius: moderateScale(width / 7),
+},
+mainContainer:{
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginVertical: moderateScaleVertical(30),
+  flexDirection:'row'
+}
+});

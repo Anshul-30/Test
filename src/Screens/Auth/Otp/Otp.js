@@ -50,10 +50,10 @@ const otp = allData?.otp
       />
       <ScrollView>
         <Text style={styles.text}>
-          {strings.HeaderOtp}+{allData?.phone_code} {allData?.phone}
+          {strings.HEADER_OTP}+{allData?.phone_code} {allData?.phone}
         </Text>
         {/* <TextComponent text1={strings.HeaderOtp} styletxt={styles.text} /> */}
-        <TextComponent text1={strings.edit} styletxt={styles.text1} />
+        <TextComponent text1={strings.EDIT} styletxt={styles.text1} />
         <Text style={{color:colors.white,margin:moderateScale(15),fontSize:textScale(15)}}>Your otp is :{otp}</Text>
 
         <View
@@ -75,7 +75,7 @@ const otp = allData?.otp
       </ScrollView>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'android' ? 'height' : 'padding'}>
-        <TextComponent text1={strings.code} styletxt={styles.resend} />
+        <TextComponent text1={strings.CODE} styletxt={styles.resend} />
         <View
           style={{
             paddingBottom:
@@ -84,10 +84,8 @@ const otp = allData?.otp
                 : moderateScaleVertical(20),
           }}>
           <ButtonComponent
-            title={strings.Verify}
-            onpress={otpValidation
-              // navigation.navigate(navigationStrings.LoginWithPhone)
-            }
+            title={strings.VERIFY}
+            onpress={otpValidation}
           />
         </View>
       </KeyboardAvoidingView>

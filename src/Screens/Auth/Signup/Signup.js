@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native';
+import deviceInfo from 'react-native-device-info';
 import ButtonComponent from '../../../Components/ButtonComponent';
 import CountryCode from '../../../Components/CountryCode';
 import HeaderComponent from '../../../Components/HeaderComponent';
@@ -20,12 +21,7 @@ import {showError} from '../../../utils/helperFunction';
 import validator from '../../../utils/validations';
 
 export default function Signup({navigation, route}) {
-  const phoneRegex = /^[0-9]{10}$/;
-  const strongRegex = new RegExp(
-    '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})',
-  );
-  const nameRegex = /^[a-zA-Z]{3,12}$/;
-  const emailRegex = /^[\w-\.\_\$]+@([\w]{3,5}\.)[\w]{2,4}$/;
+  
 
   const [state, setState] = useState({
     fName: '',
@@ -64,7 +60,7 @@ export default function Signup({navigation, route}) {
       phone: phone,
       phone_code: countryCode,
       country_code: countryFlag,
-      device_token: 'KDKFJDKFDFKDFDF',
+      device_token: deviceInfo.getUniqueId(),
       device_type: Platform.OS == 'ios' ? 'IOS' : 'ANDROID',
       password: pass,
     };
@@ -96,12 +92,12 @@ export default function Signup({navigation, route}) {
           leftimage={true}
           onPress={() => navigation.goBack()}
         />
-        <ScrollView></ScrollView>
+      
         <TextComponent
-          text1={strings.create_a_new_Account}
+          text1={strings.CREATE_A_NEW_ACCOUNT}
           styletxt={{fontSize: textScale(24), color: colors.white}}
         />
-        <TextComponent text1={strings.Headertxt} />
+        <TextComponent text1={strings.HEADERTXT} />
       </View>
       <ScrollView>
         <View style={{marginTop: moderateScaleVertical(25)}}>
@@ -156,7 +152,7 @@ export default function Signup({navigation, route}) {
               value={pass}
               secureTextEntry={isVisible}
               onRightPress={() => setIsVisible(!isVisible)}
-              text={isVisible ? 'Show' : 'Hide'}
+              text={isVisible ? strings.SHOW : strings.HIDE}
             />
             <TextInputComp
               placeholder={strings.CONFIRM_PASSWORD}
@@ -165,7 +161,7 @@ export default function Signup({navigation, route}) {
               onChangeText={text => updateArray({cPass: text})}
               value={cPass}
               onRightPress={() => setIsCVisible(!isCVisible)}
-              text={isCVisible ? 'Show' : 'Hide'}
+              text={isCVisible ? strings.SHOW : strings.HIDE}
             />
           </View>
         </View>
@@ -180,7 +176,7 @@ export default function Signup({navigation, route}) {
                 ? moderateScaleVertical(55)
                 : moderateScaleVertical(20),
           }}>
-          <ButtonComponent title={strings.Next} onpress={signUp} />
+          <ButtonComponent title={strings.NEXT} onpress={signUp} />
         </View>
       </KeyboardAvoidingView>
     </WrapperContainer>

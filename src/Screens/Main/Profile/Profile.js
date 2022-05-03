@@ -31,7 +31,7 @@ export default function Profile({navigation, route}) {
     <>
       <WrapperContainer>
         <View style={styles.container}>
-          <Text style={styles.headerTxt}>{strings.Profile}</Text>
+          <Text style={styles.headerTxt}>{strings.PROFILE}</Text>
           <View style={{marginVertical: moderateScaleVertical(25)}}>
             <View style={styles.mainView}>
               <View style={{flex: 0.15}}>
@@ -41,7 +41,7 @@ export default function Profile({navigation, route}) {
                 <TouchableOpacity onPress={()=>navigation.navigate(navigationStrings.EDIT_PROFILE)}>
 
                 <Text style={[styles.headerTxt, {fontSize: textScale(14)}]}>
-                  Edit Profile
+                  {strings.EDIT_PROFILE}
                 </Text>
                 </TouchableOpacity>
               </View>
@@ -56,7 +56,7 @@ export default function Profile({navigation, route}) {
                     navigation.navigate(navigationStrings.CHANGE_PASSWORD)
                   }>
                   <Text style={[styles.headerTxt, {fontSize: textScale(14)}]}>
-                    Change Password
+                   {strings.CHANGE_PASSWORD}
                   </Text>
                 </TouchableOpacity>
               </View>
@@ -68,7 +68,7 @@ export default function Profile({navigation, route}) {
               <View style={{flex: 0.3}}>
                 <TouchableOpacity onPress={signOut}>
                   <Text style={[styles.headerTxt, {fontSize: textScale(14)}]}>
-                    Signout
+                    {strings.SIGNOUT}
                   </Text>
                 </TouchableOpacity>
               </View>

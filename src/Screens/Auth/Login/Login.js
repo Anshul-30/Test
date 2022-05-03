@@ -73,7 +73,7 @@ export default function Login({navigation,route}) {
   const onFBlogIn = async () => {
     try {
       await fbLogIn(_resInfoCallback);
-      console.log('hii');
+    
     } catch (error) {
       console.log('error', error);
     }
@@ -115,7 +115,7 @@ export default function Login({navigation,route}) {
               marginHorizontal: moderateScale(10),
               // paddingTop: moderateScale(5),
             }}>
-            <Text style={styles.text1}>{strings.Text}</Text>
+            <Text style={styles.text1}>{strings.PRIVACY_POLICY}</Text>
           </View>
         </View>
         <View style={{marginTop: moderateScaleVertical(15)}}>
