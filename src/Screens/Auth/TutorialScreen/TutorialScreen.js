@@ -35,7 +35,7 @@ const slides = [
   },
 ];
 
-export default function TutorialScreen({navigation}) {
+export default function TutorialScreen({navigation,route}) {
   const _renderItem = ({item}) => {
     return (
       <View style={styles.container}>

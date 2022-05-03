@@ -23,11 +23,12 @@ import styles from './styles';
 import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
 import actions from '../../../redux/actions';
 import colors from '../../../styles/colors';
+import { showError } from '../../../utils/helperFunction';
 
 export default function Otp({navigation, route}) {
   const allData = route?.params?.data;
   console.log('data', allData);
-  console.log('your otp ', allData?.otp);
+  // console.log('your otp ', allData?.otp);
   const [code, setCode] = useState();
   // alert("otp is",allData?.otp)
 const otp = allData?.otp
@@ -36,7 +37,8 @@ const otp = allData?.otp
       actions.saveUserData(allData)
     }
     else{
-      alert("Wrong Otp")
+      
+      showError("Wrong Otp")
     }
   }
   return (

@@ -48,7 +48,7 @@ export default function Profile({navigation, route}) {
             </View>
             <View style={styles.mainView}>
               <View style={{flex: 0.15}}>
-                <Image source={imagePath.ChangePassword} />
+                <Image source={imagePath.changePassword} />
               </View>
               <View style={{flex: 0.5}}>
                 <TouchableOpacity
@@ -63,7 +63,7 @@ export default function Profile({navigation, route}) {
             </View>
             <View style={styles.mainView}>
               <View style={{flex: 0.15}}>
-                <Image source={imagePath.SignOut} />
+                <Image source={imagePath.signOut} />
               </View>
               <View style={{flex: 0.3}}>
                 <TouchableOpacity onPress={signOut}>

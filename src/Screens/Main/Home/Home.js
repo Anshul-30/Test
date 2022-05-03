@@ -13,14 +13,14 @@ const Home = ({navigation,route}) => {
   const _renderCardComponent = ({item, index}) => {
     return (
       <Card
-        userName={strings.userName}
-        userImg={imagePath.Profile}
-        place={strings.loc}
-        likes={strings.LikeCount}
-        comments={strings.CommentCount}
-        caption={strings.Caption}
+        userName={strings.USERNAME}
+        userImg={imagePath.profile}
+        place={strings.LOC}
+        likes={strings.LIKECOUNT}
+        comments={strings.COMMENTCOUNT}
+        caption={strings.CAPTION}
         postImage={imagePath.post1}
-        postTime={strings.Time}
+        postTime={strings.TIME}
       />
     );
   };

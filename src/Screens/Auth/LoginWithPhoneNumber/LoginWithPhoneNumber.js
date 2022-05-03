@@ -29,7 +29,7 @@ import navigationStrings from '../../../navigation/navigationStrings';
 import CountryCode from '../../../Components/CountryCode';
 import TextComponent from '../../../Components/TextComponent';
 
-export default function LoginWithPhoneNumber({navigation}) {
+export default function LoginWithPhoneNumber({navigation,route}) {
   const [state, setState] = useState({
     phone: '',
     pass: '',
@@ -45,8 +45,7 @@ export default function LoginWithPhoneNumber({navigation}) {
   const [countryFlag, setCountryFlag] = useState('IN');
   console.log("device token", DeviceInfo.getUniqueId())
   const onLogin = () => {
-    if (phoneRegex.test(phone)) {
-      if (strongRegex.test(pass)) {
+
         let apiData = {
           phone: phone,
           phone_code: countryCode,
@@ -65,13 +64,8 @@ export default function LoginWithPhoneNumber({navigation}) {
             console.log(err, 'err');
             alert(err?.message);
           });
-      } else {
-        alert('Enter Correct Password');
-      }
-    } else {
-      alert('Enter valid number');
-    }
-  };
+      } 
+  
   return (
     <WrapperContainer>
       <View>

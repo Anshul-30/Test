@@ -78,7 +78,7 @@ export default function Card({
             </Text>
           </View>
           <TouchableOpacity>
-            <Image source={imagePath.ForwardImage} style={styles.shareIcon} />
+            <Image source={imagePath.forwardImage} style={styles.shareIcon} />
           </TouchableOpacity>
         </View>
       </View>

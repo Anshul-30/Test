@@ -19,7 +19,7 @@ export default BottomTab = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <Image
-              source={images.Home}
+              source={images.home}
               style={{
                 height: moderateScale(width / 20),
                 width: moderateScale(width / 20),
@@ -70,7 +70,7 @@ export default BottomTab = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <Image
-              source={images?.Notify}
+              source={images?.notify}
               style={{
                 height: moderateScale(width / 20),
                 width: moderateScale(width / 20),

@@ -12,17 +12,17 @@ import images from '../../../constants/imagePath';
 import strings from '../../../constants/lang';
 import {moderateScaleVertical} from '../../../styles/responsiveSize';
 import {apiPost} from '../../../utils/utils';
-import validations from '../../../utils/validations';
+import validator from '../../../utils/validations';
 import styles from './styles';
 
-export default function Password({navigation}) {
+export default function Password({navigation,route}) {
   const [isVisible, setIsVisible] = useState();
   const [isCVisible, setIsCVisible] = useState();
   const [state, setState] = useState({
-    oldPass: '',
+    pass: '',
     newPass: '',
   });
-  const {oldPass, newPass} = state;
+  const {pass, newPass} = state;
   const updateArray = data => setState(state => ({...state, ...data}));
   const data = useSelector(state => state.userLogin?.userData);
   // console.log('data>>>>>>>>', data);
@@ -30,14 +30,25 @@ export default function Password({navigation}) {
     '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})',
   );
 
-  
+  const isValidData = () => {
+    const error = validator({pass, newPass});
+    if (error) {
+      
+    showError(error);
+    return;
+    }
+    return true;
+    };
 
   const passwordChange = () => {
-    
+    const checkValid = isValidData();
+    if (!checkValid) {
+      return;
+    }
         let apiData = {
           user_id: data.id,
           password: newPass,
-          current_password: oldPass,
+          current_password: pass,
         };
         console.log(apiData);
         apiPost(CHANGE_PASSWORD, apiData)
@@ -67,8 +78,8 @@ export default function Password({navigation}) {
             placeholder={strings.PASSWORD}
             righttxt={true}
             secureTextEntry={isVisible}
-            value={oldPass}
-            onChangeText={text => updateArray({oldPass: text})}
+            value={pass}
+            onChangeText={text => updateArray({pass: text})}
             onRightPress={() => setIsVisible(!isVisible)}
             text={isVisible ? 'Show' : 'Hide'}
           />

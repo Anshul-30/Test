@@ -14,6 +14,7 @@ import {
 import colors from '../../../styles/colors';
 import HeaderComponent from '../../../Components/HeaderComponent';
 import Divider from 'react-native-elements/dist/divider/Divider';
+import strings from '../../../constants/lang';
 export default function Notification({navigation, route}) {
   const _renderItem = ({element, index}) => {
     return (
@@ -40,7 +41,7 @@ export default function Notification({navigation, route}) {
           <View style={{flex: 0.8, marginHorizontal: moderateScale(5)}}>
             <View style={{flexDirection: 'row'}}>
               <Text style={{color: colors.button, fontSize: textScale(13)}}>
-                {'Russel Gordon '}
+                {strings.USERNAME}
                 <Text style={{color: colors.white}}>{'added a new post.'}</Text>
               </Text>
             </View>

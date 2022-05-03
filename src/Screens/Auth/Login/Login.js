@@ -27,7 +27,7 @@ import {
 import styles from './styles';
 import actions from '../../../redux/actions';
 
-export default function Login({navigation}) {
+export default function Login({navigation,route}) {
   useEffect(() => {
     GoogleSignin.configure();
   }, []);

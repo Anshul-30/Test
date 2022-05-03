@@ -1,5 +1,6 @@
 import React,{useEffect} from 'react'
 import {Text,View} from 'react-native'
+import FlashMessage from 'react-native-flash-message'
 import { Provider } from 'react-redux'
 import Routes from './src/navigation/Routes'
 import actions from './src/redux/actions'
@@ -32,11 +33,13 @@ export default function App() {
    
   }, [])
   
-  return (
+  return (<>
+  <FlashMessage position='top'/>
     <Provider store={store}>
 
       <Routes/>
     </Provider>
+  </>
     
   )
 }

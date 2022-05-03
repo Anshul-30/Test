@@ -1,15 +1,5 @@
 import React, {useState} from 'react';
-import {
-  Text,
-  View,
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  Keyboard,
-  Platform,
-  SafeAreaView,
-} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
-
+import {KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native';
 import ButtonComponent from '../../../Components/ButtonComponent';
 import CountryCode from '../../../Components/CountryCode';
 import HeaderComponent from '../../../Components/HeaderComponent';
@@ -22,13 +12,14 @@ import navigationStrings from '../../../navigation/navigationStrings';
 import actions from '../../../redux/actions';
 import colors from '../../../styles/colors';
 import {
-  moderateScale,
   moderateScaleVertical,
   textScale,
   width,
 } from '../../../styles/responsiveSize';
+import {showError} from '../../../utils/helperFunction';
+import validator from '../../../utils/validations';
 
-export default function Signup({navigation}) {
+export default function Signup({navigation, route}) {
   const phoneRegex = /^[0-9]{10}$/;
   const strongRegex = new RegExp(
     '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})',
@@ -51,61 +42,51 @@ export default function Signup({navigation}) {
   const {fName, lName, email, phone, pass, cPass} = state;
   const updateArray = data => setState(state => ({...state, ...data}));
 
-  
-  const signUp = () => {
-    if (nameRegex.test(fName)) {
-      if (nameRegex.test(lName)) {
-        if (emailRegex.test(email)) {
-          if (phoneRegex.test(phone)) {
-            if (strongRegex.test(pass)) {
-              if (pass === cPass) {
-                let apiData = {
-                  first_name: fName,
-                  last_name: lName,
-                  email: email,
-                  phone: phone,
-                  phone_code: countryCode,
-                  country_code: countryFlag,
-                  device_token: 'KDKFJDKFDFKDFDF',
-                  device_type: Platform.OS == 'ios' ? 'IOS' : 'ANDROID',
-                  password: pass,
-                };
-
-                actions
-                  .signUp(apiData)
-
-                  .then(res => {
-                    console.log('singnup api res_+++++', res);
-                    alert('User signup successfully....!!!');
-                    navigation.navigate(navigationStrings.OTP, {
-                      data: res.data,
-                    });
-                    console.log('apidata', res);
-                    console.log('dfata', data);
-                  })
-                  .catch(err => {
-                    console.log(err, 'err');
-                    alert(err?.message);
-                  });
-              } else {
-                alert('password must match');
-              }
-            } else {
-              alert('Enter Strong Password');
-            }
-          } else {
-            alert('Enter Valid Number');
-          }
-        } else {
-          alert('Enter valid Email');
-        }
-      } else {
-        alert('Enter last name');
-      }
-    } else {
-      alert('Enter First Name');
+  const isValidData = () => {
+    const error = validator({fName, lName, email, phone, pass});
+    if (error) {
+      // alert(error)
+      showError(error);
+      return;
     }
+    return true;
   };
+
+  const signUp = () => {
+    const checkValid = isValidData();
+    if (!checkValid) {
+      return;
+    }
+    let apiData = {
+      first_name: fName,
+      last_name: lName,
+      email: email,
+      phone: phone,
+      phone_code: countryCode,
+      country_code: countryFlag,
+      device_token: 'KDKFJDKFDFKDFDF',
+      device_type: Platform.OS == 'ios' ? 'IOS' : 'ANDROID',
+      password: pass,
+    };
+
+    actions
+      .signUp(apiData)
+
+      .then(res => {
+        console.log('singnup api res_+++++', res);
+        alert('User signup successfully....!!!');
+        navigation.navigate(navigationStrings.OTP, {
+          data: res?.data,
+        });
+        // console.log('apidata', res);
+        // console.log('dfata', data);
+      })
+      .catch(err => {
+        console.log(err, 'err');
+        alert(err?.message);
+      });
+  };
+
   return (
     <WrapperContainer>
       <View>
@@ -122,71 +103,70 @@ export default function Signup({navigation}) {
         <TextComponent text1={strings.Headertxt} />
       </View>
       <ScrollView>
-
-        <View style={{marginTop:moderateScaleVertical(25)}}>
-
-        <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-          <View style={{width: width / 2}}>
-            <TextInputComp
-              placeholder={strings.FIRSTNAME}
-              onChangeText={text => updateArray({fName: text})}
-              value={fName}
-            />
-          </View>
-          <View style={{width: width / 2}}>
-            <TextInputComp
-              placeholder={strings.LASTNAME}
-              onChangeText={text => updateArray({lName: text})}
-              value={lName}
-            />
-          </View>
-        </View>
-        <TextInputComp
-          placeholder={strings.EMAIL}
-          onChangeText={text => updateArray({email: text})}
-          value={email}
-        />
-        <View
-          style={{
-            flex: 1,
-          }}>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <View style={{flex: 0.4}}>
-              <CountryCode 
-              countryCode={countryCode}
-              countryFlag={countryFlag}
-              setCountryCode={setCountryCode}
-              setCountryFlag={setCountryFlag}
-              />
-            </View>
-            <View style={{flex: 0.6}}>
+        <View style={{marginTop: moderateScaleVertical(25)}}>
+          <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+            <View style={{width: width / 2}}>
               <TextInputComp
-                placeholder={strings.MOBILE}
-                onChangeText={text => updateArray({phone: text})}
-                value={phone}
-                keyboardInputType='numeric'
+                placeholder={strings.FIRSTNAME}
+                onChangeText={text => updateArray({fName: text})}
+                value={fName}
+              />
+            </View>
+            <View style={{width: width / 2}}>
+              <TextInputComp
+                placeholder={strings.LASTNAME}
+                onChangeText={text => updateArray({lName: text})}
+                value={lName}
               />
             </View>
           </View>
           <TextInputComp
-            placeholder={strings.PASSWORD}
-            righttxt={true}
-            onChangeText={text => updateArray({pass: text})}
-            value={pass}
-            secureTextEntry={isVisible}
-            onRightPress={() => setIsVisible(!isVisible)}
-            text={isVisible ? 'Show' : 'Hide'}
+            placeholder={strings.EMAIL}
+            onChangeText={text => updateArray({email: text})}
+            value={email}
           />
-          <TextInputComp
-            placeholder={strings.CONFIRM_PASSWORD}
-            righttxt={true}
-            secureTextEntry={isCVisible}
-            onChangeText={text => updateArray({cPass: text})}
-            value={cPass}
-            onRightPress={() => setIsCVisible(!isCVisible)}
-            text={isCVisible ? 'Show' : 'Hide'}
-          />
-        </View>
+          <View
+            style={{
+              flex: 1,
+            }}>
+            <View
+              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              <View style={{flex: 0.4}}>
+                <CountryCode
+                  countryCode={countryCode}
+                  countryFlag={countryFlag}
+                  setCountryCode={setCountryCode}
+                  setCountryFlag={setCountryFlag}
+                />
+              </View>
+              <View style={{flex: 0.6}}>
+                <TextInputComp
+                  placeholder={strings.MOBILE}
+                  onChangeText={text => updateArray({phone: text})}
+                  value={phone}
+                  keyboardInputType="numeric"
+                />
+              </View>
+            </View>
+            <TextInputComp
+              placeholder={strings.PASSWORD}
+              righttxt={true}
+              onChangeText={text => updateArray({pass: text})}
+              value={pass}
+              secureTextEntry={isVisible}
+              onRightPress={() => setIsVisible(!isVisible)}
+              text={isVisible ? 'Show' : 'Hide'}
+            />
+            <TextInputComp
+              placeholder={strings.CONFIRM_PASSWORD}
+              righttxt={true}
+              secureTextEntry={isCVisible}
+              onChangeText={text => updateArray({cPass: text})}
+              value={cPass}
+              onRightPress={() => setIsCVisible(!isCVisible)}
+              text={isCVisible ? 'Show' : 'Hide'}
+            />
+          </View>
         </View>
       </ScrollView>
 
