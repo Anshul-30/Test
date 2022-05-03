@@ -74,7 +74,7 @@ export default function Signup({navigation, route}) {
 
       .then(res => {
         console.log('singnup api res_+++++', res);
-        alert('User signup successfully....!!!');
+        // alert('User signup successfully....!!!');
         navigation.navigate(navigationStrings.OTP, {
           data: res?.data,
         });
@@ -83,7 +83,8 @@ export default function Signup({navigation, route}) {
       })
       .catch(err => {
         console.log(err, 'err');
-        alert(err?.message);
+        // alert(err?.message);
+        showError(err?.message)
       });
   };
 
