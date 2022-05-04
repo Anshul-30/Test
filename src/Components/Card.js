@@ -47,7 +47,7 @@ export default function Card({
       <Image
         source={postImage}
         style={styles.postImage}
-        resizeMode={'contain'}
+        // resizeMode={'contain'}
       />
       <View>
         <Text style={{color: colors.white}}>{caption}</Text>
@@ -88,7 +88,7 @@ export default function Card({
 
 const styles = StyleSheet.create({
   mainContainer: {
-    width: moderateScale(width-68),
+    width: moderateScale(width-48),
     alignSelf:'center',
     backgroundColor: colors.bgColor,
     marginBottom: moderateScaleVertical(28),

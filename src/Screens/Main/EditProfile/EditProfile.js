@@ -28,84 +28,74 @@ import ImagePicker from 'react-native-image-crop-picker';
 
 export default function EditProfile({navigation, route}) {
   const data = useSelector(state => state.userLogin.userData);
-
+  console.log('userdata', data);
   const [countryCode, setCountryCode] = useState('91');
   const [countryFlag, setCountryFlag] = useState('IN');
 
   const [state, setState] = useState({
-    profileImage:'',
+    profileImage: null,
     firstName: '',
     lastName: '',
     email: '',
     phoneNumber: '',
-    imgeType:null
+    imgeType: null,
   });
 
   useEffect(() => {
     if (data) {
       setState({
-        firstName: data.first_name,
-        lastName: data.last_name,
-        email: data.email,
-        phoneNumber: data.phone,
+        firstName: data?.first_name,
+        lastName: data?.last_name,
+        email: data?.email,
+        phoneNumber: data?.phone,
+        profileImage: data?.profile,
       });
       setCountryCode(data.phone_code);
       setCountryFlag(data.country_code);
     }
   }, [data]);
 
-  const {profileImage,firstName, lastName, email, phoneNumber} = state;
+  const {profileImage, firstName, lastName, email, phoneNumber, imgeType} =
+    state;
 
   const updateState = data => setState(state => ({...state, ...data}));
 
-  const isValidData = () => {
-    const error = validator({firstName, lastName, email, phoneNumber});
-    if (error) {
-      showError(error);
-      return;
-    }
-    return true;
-  };
-
   const _submitEditProfileData = () => {
-    const checkValid = isValidData();
-    if (!checkValid) {
-      return;
-    }
 
-    // let formaData = new FormData();
-    // formaData.append('first_name', firstName);
-    // formaData.append('last_name', lastName);
-    // formaData.append('email', email);
-    // formaData.append('image', {
-    //   uri: '',
+    let data = new FormData();
+    data.append('first_name', 'dasdadasd');
+    data.append('last_name', 'dasdasd');
+    data.append('email', email);
+    // data.append('image', {
+    //   uri: profileImage,
     //   name: `${(Math.random() + 1).toString(36).substring(7)}.jpg`,
-    //   type: 'image/jpeg',
+    //   type: imgeType,
     // });
-    // console.log(formaData, 'formaData');
+    console.log(data, 'data');
 
-    // actions
-    //   .editProfile(formaData, {'Content-Type': 'multipart/form-data'})
-    //   .then(res => {
-    //     console.log('editProfile api res_+++++', res);
-    //   })
-    //   .catch(err => {
-    //     console.log(err, 'err');
-    //     alert(err?.message);
-    //   });
+    actions
+      .editProfile(data, {'Content-Type': 'multipart/form-data'})
+      .then(res => {
+        console.log('editProfile api res_+++++', res);
+        alert('edit');
+      })
+      .catch(err => {
+        console.log(err, 'err');
+        alert(err?.message);
+      });
   };
 
   const _imagePicker = () => {
     ImagePicker.openPicker({
       width: 300,
       height: 400,
-      cropping: true
+      cropping: true,
     }).then(res => {
-      console.log("duyeuf",res);
+      console.log('duyeuf', res);
       updateState({
-        profileImage:res?.sourceURL || res?.path,
-        imageType:res?.mime
-      })
+        profileImage: res?.sourceURL || res?.path,
+        imgeType: res?.mime,
+      });
     });
   };
   return (
@@ -120,7 +110,10 @@ export default function EditProfile({navigation, route}) {
       <ScrollView>
         <View>
           <View style={styles.mainContainer}>
-            <Image source={profileImage?{ uri: profileImage}:imagePath.profile} style={styles.profile} />
+            <Image
+              source={profileImage ? {uri: profileImage} : imagePath.profile}
+              style={styles.profile}
+            />
             <TouchableOpacity onPress={_imagePicker}>
               <Image source={imagePath.edit} style={styles.edit} />
             </TouchableOpacity>
@@ -163,10 +156,18 @@ export default function EditProfile({navigation, route}) {
       </ScrollView>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'android' ? 'height' : 'padding'}>
-        <ButtonComponent
-          title={strings.SAVE_CHNGES}
-          onpress={_submitEditProfileData}
-        />
+        <View
+          style={{
+            paddingBottom:
+              Platform.OS === 'ios'
+                ? moderateScaleVertical(50)
+                : moderateScaleVertical(24),
+          }}>
+          <ButtonComponent
+            title={strings.SAVE_CHNGES}
+            onpress={_submitEditProfileData}
+          />
+        </View>
       </KeyboardAvoidingView>
     </WrapperContainer>
   );

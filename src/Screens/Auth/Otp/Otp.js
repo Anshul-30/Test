@@ -48,7 +48,7 @@ const otp = allData?.otp
         images={images.arrow}
         onPress={() => navigation.goBack()}
       />
-      <ScrollView>
+      <ScrollView bounces={false}>
         <Text style={styles.text}>
           {strings.HEADER_OTP}+{allData?.phone_code} {allData?.phone}
         </Text>

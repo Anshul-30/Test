@@ -55,7 +55,7 @@ export default function Notification({navigation, route}) {
   return (
     <WrapperContainer>
       <HeaderComponent text={true} headerTxt={strings.NOTIFICATION} />
-      <FlatList data={[1, 2, 3, 4]} renderItem={_renderItem} />
+      <FlatList data={[1, 2, 3, 4]} renderItem={_renderItem} bounces={false}/>
     </WrapperContainer>
   );
 }

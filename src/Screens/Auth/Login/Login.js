@@ -28,9 +28,49 @@ import styles from './styles';
 import actions from '../../../redux/actions';
 
 export default function Login({navigation,route}) {
+  
+  
   useEffect(() => {
     GoogleSignin.configure();
   }, []);
+
+
+
+// -------------------------Google Login ---------------------------
+
+  const googleLogin = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo1 = await GoogleSignin.signIn();
+      console.log('userInfo', userInfo1);
+      const userInfo = userInfo1?.user
+      // const email = userInfo1?.user?.email;
+      // const userId = userInfo1?.user?.id;
+      // const firstName= userInfo1?.user?.givenName
+      // let userInfo={
+      //   email , userId ,firstName
+      // }
+  
+      actions.saveUserData(userInfo);
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+        console.log('error', error);
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        // operation (e.g. sign in) is in progress already
+        console.log('error', error);
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+        console.log('error', error);
+      } else {
+        // some other error happened
+        console.log('error', error);
+      }
+    }
+  };
+
+// ----------------------Facebook Login-------------------------
+
 
   const fbLogIn = resCallBack => {
     LoginManager.logOut();
@@ -79,39 +119,11 @@ export default function Login({navigation,route}) {
     }
   };
 
-  const googleLogin = async () => {
-    try {
-      await GoogleSignin.hasPlayServices();
-      const userInfo1 = await GoogleSignin.signIn();
-      console.log('userInfo', userInfo1);
-      const email = userInfo1?.user?.email;
-      const userId = userInfo1?.user?.id;
-      let userInfo={
-        email , userId
-      }
-
-      actions.saveUserData(userInfo);
-    } catch (error) {
-      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        // user cancelled the login flow
-        console.log('error', error);
-      } else if (error.code === statusCodes.IN_PROGRESS) {
-        // operation (e.g. sign in) is in progress already
-        console.log('error', error);
-      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        // play services not available or outdated
-        console.log('error', error);
-      } else {
-        // some other error happened
-        console.log('error', error);
-      }
-    }
-  };
   
 
   return (
     <WrapperContainer>
-      <ScrollView>
+      <ScrollView bounces={false}>
         <View
           style={{flex: 0.8, justifyContent: 'center', alignItems: 'center'}}>
           <Image source={images.login} style={styles.images} />

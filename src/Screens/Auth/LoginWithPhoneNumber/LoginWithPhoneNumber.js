@@ -92,7 +92,7 @@ export default function LoginWithPhoneNumber({navigation,route}) {
           // text1={strings.Headertxt}
         />
       </View>
-      <ScrollView>
+      <ScrollView bounces={false}>
         <View style={{height: height}}>
           <View>
             <TextComponent

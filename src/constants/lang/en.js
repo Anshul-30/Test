@@ -30,7 +30,7 @@ export default {
   CREATE_A_NEW_ACCOUNT: 'Create new account',
   FORGET: 'Forget Password ?',
   VERIFY: 'VERIFY',
-
+ENTER_LOCATION_MANUALLY:'Enter location manually',
   CODE: 'Resend code in',
   EDIT: 'Edit my mobile number',
   SIGNOUT: 'Signout',

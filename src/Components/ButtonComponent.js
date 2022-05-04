@@ -16,7 +16,7 @@ export default function ButtonComponent({
   image = '',
 }) {
   return (
-    <TouchableOpacity onPress={onpress}>
+    <TouchableOpacity onPress={onpress}activeOpacity={.7} >
       <View style={{...style.btnstyle, ...stylbtn}}>
        
           <View

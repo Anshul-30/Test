@@ -6,12 +6,12 @@ import types from '../redux/types';
 const {dispatch, getState} = store;
 
 export async function getHeaders() {
-  let loginUser = await AsyncStorage.getItem('loginUser');
+  let loginUser = await AsyncStorage.getItem('login');
+  console.log(loginUser, 'loginUser');
   if (loginUser) {
     loginUser = JSON.parse(loginUser);
-
     return {
-      authorization: `${loginUser?.access_token}`,
+      authorization: `Bearer ${loginUser?.access_token}`,
     };
   }
   return {};
@@ -41,10 +41,10 @@ export async function apiReq(
         headers,
       };
     }
-
+    console.log('header', headers);
     axios[method](endPoint, data, {headers})
       .then(result => {
-		  console.log(result,"api");
+        console.log(result, 'api');
         const {data} = result;
 
         if (data.status === false) {
@@ -104,9 +104,8 @@ export function apiPut(endPoint, data, headers = {}) {
 
 export function setItem(key, data) {
   data = JSON.stringify(data);
-  console.log("data set locally",data)
+  console.log('data set locally', data);
   return AsyncStorage.setItem(key, data);
-  
 }
 
 export function getItem(key) {

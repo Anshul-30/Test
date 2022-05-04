@@ -98,7 +98,7 @@ export default function Signup({navigation, route}) {
         />
         <TextComponent text1={strings.HEADERTXT} />
       </View>
-      <ScrollView>
+      <ScrollView bounces={false}>
         <View style={{marginTop: moderateScaleVertical(25)}}>
           <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
             <View style={{width: width / 2}}>

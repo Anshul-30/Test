@@ -70,7 +70,7 @@ export default function Password({navigation,route}) {
         images={images.arrow}
         onPress={() => navigation.goBack()}
       />
-      <ScrollView>
+      <ScrollView bounces={false}>
         <View style={styles.main}>
           <TextInputComp
             placeholder={strings.PASSWORD}
@@ -94,13 +94,7 @@ export default function Password({navigation,route}) {
       </ScrollView>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'android' ? 'height' : 'padding'}>
-        <View
-          style={{
-            paddingBottom:
-              Platform.OS === 'ios'
-                ? moderateScaleVertical(50)
-                : moderateScaleVertical(20),
-          }}>
+        <View>
           <ButtonComponent title={strings.CHANGE_PASSWORD} onpress={_onChangePassword} />
         </View>
       </KeyboardAvoidingView>

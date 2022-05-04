@@ -15,9 +15,9 @@ import imagePath from '../../../constants/imagePath';
 import navigationStrings from '../../../navigation/navigationStrings';
 
 export default function Profile({navigation, route}) {
+  
   const data = useSelector(state => state.userLogin.userData);
-  const User = data?.pass;
-  const user = data?.email;
+  
   const signOut = async () => {
     try {
       await GoogleSignin.signOut();
@@ -33,6 +33,8 @@ export default function Profile({navigation, route}) {
         <View style={styles.container}>
           <Text style={styles.headerTxt}>{strings.PROFILE}</Text>
           <View style={{marginVertical: moderateScaleVertical(25)}}>
+        
+        
             <View style={styles.mainView}>
               <View style={{flex: 0.15}}>
                 <Image source={imagePath.profileBottom} />
@@ -46,6 +48,7 @@ export default function Profile({navigation, route}) {
                 </TouchableOpacity>
               </View>
             </View>
+          
             <View style={styles.mainView}>
               <View style={{flex: 0.15}}>
                 <Image source={imagePath.changePassword} />
@@ -61,6 +64,8 @@ export default function Profile({navigation, route}) {
                 </TouchableOpacity>
               </View>
             </View>
+        
+        
             <View style={styles.mainView}>
               <View style={{flex: 0.15}}>
                 <Image source={imagePath.signOut} />

@@ -13,12 +13,15 @@ export const saveUserData = data => {
   });
 };
 
+//logout
+
 export const logout = () => {
   dispatch({
     type: types.LOGOUT,
   });
 };
 
+// signup
 export function signUp(data) {
   console.log('fher', data);
   return new Promise((resolve, reject) => {
@@ -31,6 +34,8 @@ export function signUp(data) {
       });
   });
 }
+
+// login
 export const login = (data, header = {}) => {
   console.log(data, 'the given data');
   return new Promise((resolve, reject) => {
@@ -45,13 +50,13 @@ export const login = (data, header = {}) => {
   });
 };
 
-
 ///Edit profile
 export const editProfile = (data, header = {}) => {
   console.log(data, 'the given data');
   return new Promise((resolve, reject) => {
-    apiPost(EDIT_PROFILE, data)
+    apiPost(EDIT_PROFILE, data, header)
       .then(res => {
+        // saveUserData(res.data);
         resolve(res);
       })
       .catch(error => {
@@ -59,6 +64,8 @@ export const editProfile = (data, header = {}) => {
       });
   });
 };
+
+//app intro slider
 
 export const intro = data => {
   dispatch({

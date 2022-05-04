@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{createRef}from 'react';
 import {View, Platform, StyleSheet, Text, TextInput} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import colors from '../styles/colors';
@@ -39,6 +39,7 @@ const TextInputComp = ({
             alignContent: 'space-between',
           }}>
           <TextInput
+          // ref={}
             style={{...styles.textStyle, ...textStyle}}
             value={value}
             placeholder={placeholder}
@@ -52,7 +53,7 @@ const TextInputComp = ({
         </View>
         {righttxt && (
           <TouchableOpacity onPress={onRightPress}>
-            {/* <View style={{flex: 0.01}}> */}
+            {/* <View style={{flex: 0.6}}> */}
               <Text
                 style={{
                   color: colors.whiteOpacity50,
@@ -61,7 +62,7 @@ const TextInputComp = ({
                 }}>
                 {text}
               </Text>
-            {/* </View>s */}
+            {/* </View> */}
           </TouchableOpacity>
         )}
       </View>
