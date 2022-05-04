@@ -1,29 +1,29 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
   Text,
-  View,
+  View
 } from 'react-native';
+import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
 import ButtonComponent from '../../../Components/ButtonComponent';
 import HeaderComponent from '../../../Components/HeaderComponent';
 import TextComponent from '../../../Components/TextComponent';
-import TextInputComp from '../../../Components/TextInputComponent';
 import WrapperContainer from '../../../Components/WrapperContainer';
 import images from '../../../constants/imagePath';
 import strings from '../../../constants/lang';
-import navigationStrings from '../../../navigation/navigationStrings';
+import actions from '../../../redux/actions';
+import colors from '../../../styles/colors';
 import {
   moderateScale,
   moderateScaleVertical,
-  textScale,
+  textScale
 } from '../../../styles/responsiveSize';
-import styles from './styles';
-import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
-import actions from '../../../redux/actions';
-import colors from '../../../styles/colors';
 import { showError } from '../../../utils/helperFunction';
+import styles from './styles';
+import CountDown from 'react-native-countdown-component'
+
 
 export default function Otp({navigation, route}) {
   const allData = route?.params?.data;
@@ -75,7 +75,19 @@ const otp = allData?.otp
       </ScrollView>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'android' ? 'height' : 'padding'}>
+          <View style={{flexDirection:'row',justifyContent:'flex-start'}}>
+
         <TextComponent text1={strings.CODE} styletxt={styles.resend} />
+        <CountDown
+          timeToShow={'S'} 
+          digitStyle={{backgroundColor: colors?.them}}
+          until={45}
+          timeLabels={'S'}
+          digitTxtStyle={{color: colors.white,fontSize:13}}
+    
+       
+          />
+          </View>
         <View
           style={{
             paddingBottom:

@@ -84,7 +84,12 @@ export default function Login({navigation,route}) {
       await GoogleSignin.hasPlayServices();
       const userInfo1 = await GoogleSignin.signIn();
       console.log('userInfo', userInfo1);
-      const userInfo = userInfo1?.user;
+      const email = userInfo1?.user?.email;
+      const userId = userInfo1?.user?.id;
+      let userInfo={
+        email , userId
+      }
+
       actions.saveUserData(userInfo);
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -102,6 +107,7 @@ export default function Login({navigation,route}) {
       }
     }
   };
+  
 
   return (
     <WrapperContainer>

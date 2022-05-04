@@ -28,28 +28,44 @@ import actions from '../../../redux/actions';
 import navigationStrings from '../../../navigation/navigationStrings';
 import CountryCode from '../../../Components/CountryCode';
 import TextComponent from '../../../Components/TextComponent';
+import validator from '../../../utils/validations';
 
 export default function LoginWithPhoneNumber({navigation,route}) {
   const [state, setState] = useState({
-    phone: '',
-    pass: '',
+    phoneNumber: '',
+    password: '',
   });
-  const {phone, pass} = state;
+  const {phoneNumber, password} = state;
   
-  const updateArray = data => setState(state => ({...state, ...data}));
+  const updateState = data => setState(state => ({...state, ...data}));
   const [isVisible, setIsVisble] = useState(false);
   const [countryCode, setCountryCode] = useState('91');
   const [countryFlag, setCountryFlag] = useState('IN');
   console.log("device token", DeviceInfo.getUniqueId())
-  const onLogin = () => {
 
+
+  const isValidData = () => {
+    const error = validator({ phoneNumber, password});
+    if (error) {
+      // alert(error)
+      showError(error);
+      return;
+    }
+    return true;
+  };
+
+  const onLogin = () => {
+ const checkValid = isValidData();
+    if (!checkValid) {
+      return;
+    }
         let apiData = {
-          phone: phone,
+          phone: phoneNumber,
           phone_code: countryCode,
           device_token: DeviceInfo.getUniqueId(),
           device_type: Platform.OS == 'ios' ? 'IOS' : 'ANDROID',
           loginType: 'admin',
-          password: pass,
+          password: password,
         };
 
         actions
@@ -102,8 +118,8 @@ export default function LoginWithPhoneNumber({navigation,route}) {
                 <View style={{flex: 0.6}}>
                   <TextInputComp
                     placeholder={strings.MOBILE}
-                    onChangeText={text => updateArray({phone: text})}
-                    value={phone}
+                    onChangeText={text => updateState({phoneNumber: text})}
+                    value={phoneNumber}
                   />
                 </View>
               </View>
@@ -115,8 +131,8 @@ export default function LoginWithPhoneNumber({navigation,route}) {
                 secureTextEntry={isVisible}
                 onRightPress={() => setIsVisble(!isVisible)}
                 text={isVisible ? strings.SHOW : strings.HIDE}
-                onChangeText={text => updateArray({pass: text})}
-                value={pass}
+                onChangeText={text => updateState({password: text})}
+                value={password}
               />
               <View
                 style={{flexDirection: 'row', justifyContent: 'space-between'}}>

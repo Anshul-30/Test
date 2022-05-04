@@ -19,23 +19,23 @@ const checkMinLength = (val, minLength, key) => {
 export default function (data) {
   let error = "";
   const {
-    fName,
-    lName,
+    firstName,
+    lastName,
     email,
-    phone,
-    pass,
-    newPass,
+    phoneNumber,
+    password,
+    newPassword,
     // emailMobile,
     confirmPassword,
   } = data;
 
-  if (fName !== undefined) {
-    let emptyValidationText = checkEmpty(fName, "name");
+  if (firstName !== undefined) {
+    let emptyValidationText = checkEmpty(firstName, "name");
 
     if (emptyValidationText !== "") {
       return emptyValidationText;
     } else {
-      let minLengthValidation = checkMinLength(fName, 3, "name");
+      let minLengthValidation = checkMinLength(firstName, 3, "name");
 
       if (minLengthValidation !== "") {
         return minLengthValidation;
@@ -43,12 +43,12 @@ export default function (data) {
     }
   }
 
-  if (lName !== undefined) {
-   let emptyValidationText = checkEmpty(lName, 'last name');
+  if (lastName !== undefined) {
+   let emptyValidationText = checkEmpty(lastName, 'last name');
    if (emptyValidationText !== '') {
      return emptyValidationText;
    } else {
-     let minLengthValidation = checkMinLength(lName, 3, 'Last name');
+     let minLengthValidation = checkMinLength(lastName, 3, 'Last name');
      if (minLengthValidation !== '') {
        return minLengthValidation;
      }
@@ -78,21 +78,21 @@ export default function (data) {
   //  }
   // }
 
-  if (phone !== undefined) {
-   let emptyValidationText = checkEmpty(phone, 'phone number');
+  if (phoneNumber !== undefined) {
+   let emptyValidationText = checkEmpty(phoneNumber, 'phone number');
    if (emptyValidationText !== '') {
      return emptyValidationText;
    }
-   if (!/^[0][1-9]$|^[1-9]\d{8,14}$/.test(phone)) {
+   if (!/^[0][1-9]$|^[1-9]\d{8,14}$/.test(phoneNumber)) {
      return 'Please enter valid mobile number';
    }
   }
-  if (pass !== undefined) {
-    let emptyValidationText = checkEmpty(pass, "password");
+  if (password !== undefined) {
+    let emptyValidationText = checkEmpty(password, "password");
     if (emptyValidationText !== "") {
       return emptyValidationText;
     } else {
-      let minLengthValidation = checkMinLength(pass, 6, "password");
+      let minLengthValidation = checkMinLength(password, 6, "password");
       if (minLengthValidation !== "") {
         if (confirmPassword != undefined) {
           return "Password requires minimum 6 characters";
@@ -101,12 +101,12 @@ export default function (data) {
       }
     }
   }
-  if (newPass !== undefined) {
-    let emptyValidationText = checkEmpty(newPass, "password");
+  if (newPassword !== undefined) {
+    let emptyValidationText = checkEmpty(newPassword, "password");
     if (emptyValidationText !== "") {
       return emptyValidationText;
     } else {
-      let minLengthValidation = checkMinLength(newPass, 6, "password");
+      let minLengthValidation = checkMinLength(newPassword, 6, "password");
       if (minLengthValidation !== "") {
         if (confirmPassword != undefined) {
           return "Password requires minimum 6 characters";

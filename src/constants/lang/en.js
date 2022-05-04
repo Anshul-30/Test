@@ -31,7 +31,7 @@ export default {
   FORGET: 'Forget Password ?',
   VERIFY: 'VERIFY',
 
-  CODE: 'Resend code in 0:14',
+  CODE: 'Resend code in',
   EDIT: 'Edit my mobile number',
   SIGNOUT: 'Signout',
   SAVE_CHNGES: 'Save Changes',

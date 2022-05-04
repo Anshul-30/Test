@@ -26,7 +26,7 @@ const Home = ({navigation,route}) => {
   };
   return (
     <WrapperContainer>
-      <View style={{marginHorizontal: moderateScale(24)}}>
+      <View >
         <View style={styles.headerStyle}>
           <Image source={imagePath.logo} />
           <Image source={imagePath.loc} />
@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginVertical: moderateScaleVertical(24),
+    marginHorizontal:moderateScale(24)
   },
 });
 

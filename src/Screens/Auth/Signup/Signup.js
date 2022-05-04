@@ -24,22 +24,22 @@ export default function Signup({navigation, route}) {
   
 
   const [state, setState] = useState({
-    fName: '',
-    lName: '',
+    firstName: '',
+    lastName: '',
     email: '',
-    phone: '',
-    pass: '',
-    cPass: '',
+    phoneNumber: '',
+    password: '',
+    confirmPassword: '',
   });
   const [isVisible, setIsVisible] = useState();
   const [isCVisible, setIsCVisible] = useState();
   const [countryCode, setCountryCode] = useState('91');
   const [countryFlag, setCountryFlag] = useState('IN');
-  const {fName, lName, email, phone, pass, cPass} = state;
-  const updateArray = data => setState(state => ({...state, ...data}));
+  const {firstName, lastName, email, phoneNumber, password, confirmPassword} = state;
+  const updateState = data => setState(state => ({...state, ...data}));
 
   const isValidData = () => {
-    const error = validator({fName, lName, email, phone, pass});
+    const error = validator({firstName, lastName, email, phoneNumber, password});
     if (error) {
       // alert(error)
       showError(error);
@@ -54,15 +54,15 @@ export default function Signup({navigation, route}) {
       return;
     }
     let apiData = {
-      first_name: fName,
-      last_name: lName,
+      first_name: firstName,
+      last_name: lastName,
       email: email,
-      phone: phone,
+      phone: phoneNumber,
       phone_code: countryCode,
       country_code: countryFlag,
       device_token: deviceInfo.getUniqueId(),
       device_type: Platform.OS == 'ios' ? 'IOS' : 'ANDROID',
-      password: pass,
+      password: password,
     };
 
     actions
@@ -70,16 +70,15 @@ export default function Signup({navigation, route}) {
 
       .then(res => {
         console.log('singnup api res_+++++', res);
-        // alert('User signup successfully....!!!');
+        
         navigation.navigate(navigationStrings.OTP, {
           data: res?.data,
         });
-        // console.log('apidata', res);
-        // console.log('dfata', data);
+     
       })
       .catch(err => {
         console.log(err, 'err');
-        // alert(err?.message);
+       
         showError(err?.message)
       });
   };
@@ -105,21 +104,21 @@ export default function Signup({navigation, route}) {
             <View style={{width: width / 2}}>
               <TextInputComp
                 placeholder={strings.FIRSTNAME}
-                onChangeText={text => updateArray({fName: text})}
-                value={fName}
+                onChangeText={text => updateState({firstName: text})}
+                value={firstName}
               />
             </View>
             <View style={{width: width / 2}}>
               <TextInputComp
                 placeholder={strings.LASTNAME}
-                onChangeText={text => updateArray({lName: text})}
-                value={lName}
+                onChangeText={text => updateState({lastName: text})}
+                value={lastName}
               />
             </View>
           </View>
           <TextInputComp
             placeholder={strings.EMAIL}
-            onChangeText={text => updateArray({email: text})}
+            onChangeText={text => updateState({email: text})}
             value={email}
           />
           <View
@@ -139,8 +138,8 @@ export default function Signup({navigation, route}) {
               <View style={{flex: 0.6}}>
                 <TextInputComp
                   placeholder={strings.MOBILE}
-                  onChangeText={text => updateArray({phone: text})}
-                  value={phone}
+                  onChangeText={text => updateState({phoneNumber: text})}
+                  value={phoneNumber}
                   keyboardInputType="numeric"
                 />
               </View>
@@ -148,8 +147,8 @@ export default function Signup({navigation, route}) {
             <TextInputComp
               placeholder={strings.PASSWORD}
               righttxt={true}
-              onChangeText={text => updateArray({pass: text})}
-              value={pass}
+              onChangeText={text => updateState({password: text})}
+              value={password}
               secureTextEntry={isVisible}
               onRightPress={() => setIsVisible(!isVisible)}
               text={isVisible ? strings.SHOW : strings.HIDE}
@@ -158,8 +157,8 @@ export default function Signup({navigation, route}) {
               placeholder={strings.CONFIRM_PASSWORD}
               righttxt={true}
               secureTextEntry={isCVisible}
-              onChangeText={text => updateArray({cPass: text})}
-              value={cPass}
+              onChangeText={text => updateState({confirmPassword: text})}
+              value={confirmPassword}
               onRightPress={() => setIsCVisible(!isCVisible)}
               text={isCVisible ? strings.SHOW : strings.HIDE}
             />

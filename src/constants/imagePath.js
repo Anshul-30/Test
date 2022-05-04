@@ -16,7 +16,13 @@ export default{
     logo:require('../assets/images/ic_home_icon.png'),
     profile:require('../assets/images/images(1).jpeg'),
     dot:require('../assets/images/ic_dots.png'),
+
+
     post1:require('../assets/images/download.jpeg'),
+    post2:require('../assets/images/image5.jpg'),
+
+
+
     forwardImage:require('../assets/images/ic_direction.png'),
     signOut:require('../assets/images/ic_logout.png'),
     changePassword:require('../assets/images/ic_key.png'),

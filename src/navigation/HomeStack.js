@@ -1,11 +1,10 @@
+import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import Login from '../Screens/Auth/Login/Login';
-import navigationStrings from './navigationStrings';
-import {createStackNavigator} from '@react-navigation/stack';
-import Home from '../Screens/Main/Home/Home';
-import BottomTab from './BottomTabNavigation';
 import Password from '../Screens/Auth/Password/Password';
-import Edit_Profile from '../Screens/Main/Edit_Profile/Edit_Profile';
+import { EditProfile } from '../Screens/Main';
+import BottomTab from './BottomTabNavigation';
+import navigationStrings from './navigationStrings';
+
 
 const Stack = createStackNavigator();
 
@@ -24,7 +23,7 @@ export default HomeStack = () => {
       />
       <Stack.Screen
         name={navigationStrings.EDIT_PROFILE}
-        component={Edit_Profile}
+        component={EditProfile}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

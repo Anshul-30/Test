@@ -1,11 +1,9 @@
-import React,{useEffect} from 'react'
-import {Text,View} from 'react-native'
+import React, { useEffect } from 'react'
 import FlashMessage from 'react-native-flash-message'
 import { Provider } from 'react-redux'
 import Routes from './src/navigation/Routes'
 import actions from './src/redux/actions'
 import store from './src/redux/store'
-import types from './src/redux/types'
 import { getItem } from './src/utils/utils'
 
 

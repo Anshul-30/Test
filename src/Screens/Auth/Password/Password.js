@@ -19,17 +19,17 @@ export default function Password({navigation,route}) {
   const [isVisible, setIsVisible] = useState();
   const [isCVisible, setIsCVisible] = useState();
   const [state, setState] = useState({
-    pass: '',
-    newPass: '',
+    password: '',
+    newPassword: '',
   });
-  const {pass, newPass} = state;
-  const updateArray = data => setState(state => ({...state, ...data}));
+  const {password, newPassword} = state;
+  const updateState = data => setState(state => ({...state, ...data}));
   const data = useSelector(state => state.userLogin?.userData);
   // console.log('data>>>>>>>>', data);
   
 
   const isValidData = () => {
-    const error = validator({pass, newPass});
+    const error = validator({password, newPassword});
     if (error) {
       
     showError(error);
@@ -38,15 +38,15 @@ export default function Password({navigation,route}) {
     return true;
     };
 
-  const passwordChange = () => {
+  const _onChangePassword = () => {
     const checkValid = isValidData();
     if (!checkValid) {
       return;
     }
         let apiData = {
           user_id: data.id,
-          password: newPass,
-          current_password: pass,
+          password: newPassword,
+          current_password: password,
         };
         console.log(apiData);
         apiPost(CHANGE_PASSWORD, apiData)
@@ -76,16 +76,16 @@ export default function Password({navigation,route}) {
             placeholder={strings.PASSWORD}
             righttxt={true}
             secureTextEntry={isVisible}
-            value={pass}
-            onChangeText={text => updateArray({pass: text})}
+            value={password}
+            onChangeText={text => updateState({password: text})}
             onRightPress={() => setIsVisible(!isVisible)}
             text={isVisible ? strings.SHOW : strings.HIDE}
           />
           <TextInputComp
             placeholder={strings.CONFIRM_PASSWORD}
             righttxt={true}
-            value={newPass}
-            onChangeText={text => updateArray({newPass: text})}
+            value={newPassword}
+            onChangeText={text => updateState({newPassword: text})}
             secureTextEntry={isCVisible}
             onRightPress={() => setIsCVisible(!isCVisible)}
             text={isCVisible ? strings.SHOW : strings.HIDE}
@@ -101,7 +101,7 @@ export default function Password({navigation,route}) {
                 ? moderateScaleVertical(50)
                 : moderateScaleVertical(20),
           }}>
-          <ButtonComponent title={strings.PASSWORD} onpress={passwordChange} />
+          <ButtonComponent title={strings.CHANGE_PASSWORD} onpress={_onChangePassword} />
         </View>
       </KeyboardAvoidingView>
     </WrapperContainer>

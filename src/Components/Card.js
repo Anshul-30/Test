@@ -88,6 +88,8 @@ export default function Card({
 
 const styles = StyleSheet.create({
   mainContainer: {
+    width: moderateScale(width-68),
+    alignSelf:'center',
     backgroundColor: colors.bgColor,
     marginBottom: moderateScaleVertical(28),
     paddingHorizontal: moderateScale(8),
@@ -107,9 +109,8 @@ const styles = StyleSheet.create({
     marginHorizontal: moderateScale(8),
   },
   postImage: {
-    width: moderateScale(width-68),
-    height: moderateScale(height-500),
-    // resizeMode: 'contain',
+    width: moderateScale(width-88),
+    height: moderateScale(width-40),
     marginVertical: moderateScaleVertical(16),
     alignSelf: 'center',
   },

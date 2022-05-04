@@ -8,7 +8,7 @@ export const LOGIN = getApiUrl("/userlogin");
 export const USER_LOGIN = getApiUrl("/verify_otp");
 export const CHANGE_PASSWORD = getApiUrl("/change_password")
 export const SOCIAL_LOGIN= getApiUrl('/check_social_id')
-
+export const EDIT_PROFILE= getApiUrl('/edit_profile')
 
 
 
