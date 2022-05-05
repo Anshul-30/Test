@@ -76,7 +76,7 @@ export default function ForgetPassword({navigation}) {
             <View style={{flex: 0.6}}>
               <TextInputComp
                 placeholder={strings.MOBILE}
-                // returnKeyType={'done'}
+                returnKeyType={'done'}
                 // keyboardInputType={'phone-pad'}
                 onChangeText={phoneNumber => setPhoneNumber(phoneNumber)}
                 value={phoneNumber}
