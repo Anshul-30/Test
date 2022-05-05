@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
   Text,
-  View
+  View,
 } from 'react-native';
 import CountDown from 'react-native-countdown-component';
 import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
@@ -18,30 +18,27 @@ import navigationStrings from '../../../navigation/navigationStrings';
 import colors from '../../../styles/colors';
 import {
   moderateScale,
-  moderateScaleVertical
+  moderateScaleVertical,
 } from '../../../styles/responsiveSize';
-import { showError } from '../../../utils/helperFunction';
+import {showError} from '../../../utils/helperFunction';
 import styles from './styles';
 
 export default function Otp({navigation, route}) {
-  
   const allData = route?.params?.data1;
   const number = route?.params?.data;
 
-  console.log(number, 'number');
+  console.log(number.otp, 'number');
   console.log('data', allData);
 
-  
   const [code, setCode] = useState();
 
   const otp = allData?.otp;
 
   const otpValidation = () => {
-    if (number ? number.otp:otp == code) {
+    if ((number ? number?.otp : otp) == code) {
       number
         ? navigation.navigate(navigationStrings.SET_PASSWORD, {numer: number})
         : navigation.navigate(navigationStrings.LOGIN_WITH_PHONE);
-    
     } else {
       showError('Wrong Otp');
     }
@@ -60,13 +57,12 @@ export default function Otp({navigation, route}) {
         </Text>
         {/* <TextComponent text1={strings.HeaderOtp} styletxt={styles.text} /> */}
         <TextComponent text1={strings.EDIT} styletxt={styles.text1} />
-        <Text style={styles.otpText}>Your otp is :{number? number.otp:otp}</Text>
+        <Text style={styles.otpText}>
+          Your otp is :{number ? number.otp : otp}
+        </Text>
 
         <View
-          style={{
-            marginHorizontal: moderateScale(25),
-            marginVertical: moderateScaleVertical(25),
-          }}>
+          style={styles.otpView}>
           <SmoothPinCodeInput
             value={code}
             onTextChange={code => setCode(code)}

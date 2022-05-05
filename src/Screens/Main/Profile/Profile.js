@@ -36,10 +36,10 @@ export default function Profile({navigation, route}) {
         
         
             <View style={styles.mainView}>
-              <View style={{flex: 0.15}}>
+              <View style={{flex: 0.1}}>
                 <Image source={imagePath.profileBottom} />
               </View>
-              <View style={{flex: 0.5}}>
+              <View style={{flex: 0.9}}>
                 <TouchableOpacity onPress={()=>navigation.navigate(navigationStrings.EDIT_PROFILE)}>
 
                 <Text style={[styles.headerTxt, {fontSize: textScale(14)}]}>
@@ -50,10 +50,10 @@ export default function Profile({navigation, route}) {
             </View>
           
             <View style={styles.mainView}>
-              <View style={{flex: 0.15}}>
+              <View style={{flex: 0.1}}>
                 <Image source={imagePath.changePassword} />
               </View>
-              <View style={{flex: 0.85}}>
+              <View style={{flex: 0.9}}>
                 <TouchableOpacity
                   onPress={() =>
                     navigation.navigate(navigationStrings.CHANGE_PASSWORD)
@@ -67,10 +67,10 @@ export default function Profile({navigation, route}) {
         
         
             <View style={styles.mainView}>
-              <View style={{flex: 0.15}}>
+              <View style={{flex: 0.1}}>
                 <Image source={imagePath.signOut} />
               </View>
-              <View style={{flex: 0.3}}>
+              <View style={{flex: 0.9}}>
                 <TouchableOpacity onPress={signOut}>
                   <Text style={[styles.headerTxt, {fontSize: textScale(14)}]}>
                     {strings.SIGNOUT}

@@ -8,6 +8,7 @@ import WrapperContainer from '../../../Components/WrapperContainer';
 import { CHANGE_PASSWORD } from '../../../config/urls';
 import images from '../../../constants/imagePath';
 import strings from '../../../constants/lang';
+import actions from '../../../redux/actions';
 import { showError } from '../../../utils/helperFunction';
 import { apiPost } from '../../../utils/utils';
 import validator from '../../../utils/validations';
@@ -45,7 +46,7 @@ export default function Password({navigation, route}) {
       current_password: password,
     };
     console.log(apiData);
-    apiPost(CHANGE_PASSWORD, apiData)
+    actions.changePassword(apiData)
       .then(res => {
         console.log(res);
         navigation.goBack();

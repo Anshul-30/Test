@@ -19,6 +19,11 @@ orText:{
     color: colors.white,
     fontSize: textScale(13),
 },
+otpText:{flexDirection: 'row', justifyContent: 'space-between'},
+countryCodeView:{
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  }
 
 })
 

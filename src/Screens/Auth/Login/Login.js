@@ -123,11 +123,7 @@ const _signUp=()=>{
         <View style={styles.container}>
           <Image source={images.login} style={styles.images} />
           <View
-            style={{
-              marginTop: moderateScaleVertical(20),
-              marginHorizontal: moderateScale(10),
-              // paddingTop: moderateScale(5),
-            }}>
+            style={styles.privacyView}>
             <Text style={styles.text1}>{strings.PRIVACY_POLICY}</Text>
           </View>
         </View>

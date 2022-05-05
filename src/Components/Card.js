@@ -5,6 +5,7 @@ import {
   height,
   moderateScale,
   moderateScaleVertical,
+  textScale,
   width,
 } from '../styles/responsiveSize';
 import imagePath from '../constants/imagePath';
@@ -32,8 +33,8 @@ export default function Card({
             <Image source={userImg} style={styles.userImage} />
           </View>
           <View style={{flex: 0.6}}>
-            <Text style={{color: colors.white}}>{userName}</Text>
-            <Text style={{color: colors.textMediumGray}}>{place}</Text>
+            <Text style={{color: colors.white,fontSize:textScale(14)}}>{userName}</Text>
+            <Text style={{color: colors.textMediumGray, fontSize:textScale(13)}}>{place}</Text>
           </View>
         </View>
         <TouchableOpacity style={styles.dotStyle}>
@@ -50,30 +51,41 @@ export default function Card({
         />
       </TouchableOpacity>
       <View>
-        <Text style={{color: colors.white}}>{caption}</Text>
+        <Text style={{color: colors.white,fontSize:textScale(12)}}>{caption}</Text>
         <Text
           style={{
             color: colors.time,
             marginVertical: moderateScaleVertical(8),
+            fontSize:textScale(13)
           }}>
           {postTime}
         </Text>
         <View style={styles.bottomView}>
           <View style={{flexDirection: 'row'}}>
-            <Text style={{color: colors.white}}>
+            <View style={{flex:.4}}>
+
+            <Text style={{color: colors.white,fontSize:textScale(13)}}>
               {strings.COMMENTS} {comments}
             </Text>
+            </View>
+            <View style={{flex:.5}}>
+
             <Text
               style={{
                 color: colors.white,
                 marginHorizontal: moderateScale(24),
+                fontSize:textScale(13)
               }}>
               {strings.LIKES} {likes}
             </Text>
-          </View>
+            </View>
+            <View style={{flex:.1}}>
+
           <TouchableOpacity>
             <Image source={imagePath.forwardImage} style={styles.shareIcon} />
           </TouchableOpacity>
+            </View>
+          </View>
         </View>
       </View>
     </View>
@@ -109,10 +121,10 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   shareIcon: {
-    width: moderateScale(width / 15),
+    width: moderateScale(width / 20),
     resizeMode: 'contain',
     marginRight: moderateScale(10),
-    height: moderateScale(height / 15),
+    height: moderateScale(width / 20),
   },
   dotStyle: {
     justifyContent: 'flex-end',

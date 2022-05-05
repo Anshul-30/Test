@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, View,StyleSheet } from 'react-native';
 import deviceInfo from 'react-native-device-info';
 import ButtonComponent from '../../../Components/ButtonComponent';
 import CountryCode from '../../../Components/CountryCode';
@@ -105,7 +105,7 @@ export default function Signup({navigation, route}) {
 
         <TextComponent
           text1={strings.CREATE_A_NEW_ACCOUNT}
-          styletxt={{fontSize: textScale(24), color: colors.white}}
+          styletxt={styles.headerTxt}
         />
         <TextComponent text1={strings.HEADERTXT} />
       </View>
@@ -137,7 +137,7 @@ export default function Signup({navigation, route}) {
               flex: 1,
             }}>
             <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              style={styles.countryView}>
               <View style={{flex: 0.4}}>
                 <CountryCode
                   countryCode={countryCode}
@@ -192,3 +192,7 @@ export default function Signup({navigation, route}) {
     </WrapperContainer>
   );
 }
+const styles = StyleSheet.create({
+  headerTxt:{fontSize: textScale(24), color: colors.white},
+  countryView:{flexDirection: 'row', justifyContent: 'space-between'}
+})

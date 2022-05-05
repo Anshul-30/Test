@@ -16,13 +16,14 @@ import {FORGOT_PASSWORD} from '../../../config/urls';
 import imagePath from '../../../constants/imagePath';
 import strings from '../../../constants/lang';
 import navigationStrings from '../../../navigation/navigationStrings';
+import actions from '../../../redux/actions';
 import colors from '../../../styles/colors';
 import {
   moderateScale,
   moderateScaleVertical,
   textScale,
 } from '../../../styles/responsiveSize';
-import {apiPost} from '../../../utils/utils';
+
 
 export default function ForgetPassword({navigation}) {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -38,10 +39,11 @@ export default function ForgetPassword({navigation}) {
       phone_code: countryCode,
     };
     console.log('apidata', apiData);
-    apiPost(FORGOT_PASSWORD, apiData)
+    
+   actions.forgotPassword(apiData)
       .then(res => {
         console.log(res, 'res');
-        // alert('res')
+      
         navigation.navigate(navigationStrings.OTP, {data: res?.data});
       })
       .catch(err => {
@@ -61,10 +63,7 @@ export default function ForgetPassword({navigation}) {
             <Text style={styles.headerTxt}>{strings.FORGET_PASSWORD}</Text>
           </View>
           <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-            }}>
+            style={styles.countryView}>
             <View style={{flex: 0.4}}>
               <CountryCode
                 countryCode={countryCode}
@@ -106,4 +105,8 @@ export default function ForgetPassword({navigation}) {
 
 const styles = StyleSheet.create({
   headerTxt: {fontSize: textScale(24), color: colors.white},
+  countryView:{
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  }
 });

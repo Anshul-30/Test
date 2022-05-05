@@ -1,7 +1,7 @@
 import types from '../types';
 import store from '../store';
 import {apiPost, setItem} from '../../utils/utils';
-import {EDIT_PROFILE, LOGIN, SIGNUP} from '../../config/urls';
+import {CHANGE_PASSWORD, EDIT_PROFILE, FORGOT_PASSWORD, LOGIN, SIGNUP} from '../../config/urls';
 
 const {dispatch} = store;
 
@@ -74,3 +74,17 @@ export const intro = data => {
     payload: data,
   });
 };
+
+// forgot password
+
+export const forgotPassword =(data)=>{
+return apiPost(FORGOT_PASSWORD,data)
+}
+
+
+// change password
+
+
+export const changePassword=(data)=>{
+  return apiPost(CHANGE_PASSWORD,data)
+}

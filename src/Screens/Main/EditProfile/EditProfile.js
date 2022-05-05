@@ -70,7 +70,8 @@ export default function EditProfile({navigation, route}) {
     let apiData = {
       first_name: firstName,
       last_name: lastName,
-      email: email
+      email: email,
+      phone:phoneNumber
     
     }
     

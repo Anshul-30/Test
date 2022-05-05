@@ -86,11 +86,7 @@ const _forgetPassword=()=>{
         <HeaderComponent
           images={images.arrow}
           leftimage={true}
-          // title={strings.Welcome_back}
-          // title1={true}
-          // text={true}
           onPress={() => navigation.goBack()}
-          // text1={strings.Headertxt}
         />
       </View>
       <ScrollView bounces={false}>
@@ -103,11 +99,7 @@ const _forgetPassword=()=>{
             <TextComponent text1={strings.HEADERTXT} />
             <View style={{marginTop: moderateScale(35)}}>
               <View
-                style={{
-                  flexDirection: 'row',
-
-                  justifyContent: 'space-around',
-                }}>
+                style={styles.countryCodeView}>
                 <View style={{flex: 0.4}}>
                   <CountryCode
                     countryCode={countryCode}
@@ -136,7 +128,7 @@ const _forgetPassword=()=>{
                 value={password}
               />
               <View
-                style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                style={styles.otpText}>
                 <TouchableOpacity
                   onPress={() => navigation.navigate(navigationStrings.OTP)}>
                   <Text style={styles.orText}>{strings.OTP}</Text>
