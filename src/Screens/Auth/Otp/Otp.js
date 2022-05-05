@@ -14,7 +14,7 @@ import TextComponent from '../../../Components/TextComponent';
 import WrapperContainer from '../../../Components/WrapperContainer';
 import images from '../../../constants/imagePath';
 import strings from '../../../constants/lang';
-import actions from '../../../redux/actions';
+import navigationStrings from '../../../navigation/navigationStrings';
 import colors from '../../../styles/colors';
 import {
   moderateScale,
@@ -24,19 +24,29 @@ import { showError } from '../../../utils/helperFunction';
 import styles from './styles';
 
 export default function Otp({navigation, route}) {
-  const allData = route?.params?.data;
+  
+  const allData = route?.params?.data1;
+  const number = route?.params?.data;
+
+  console.log(number, 'number');
   console.log('data', allData);
-  // console.log('your otp ', allData?.otp);
+
+  
   const [code, setCode] = useState();
-  // alert("otp is",allData?.otp)
+
   const otp = allData?.otp;
+
   const otpValidation = () => {
-    if (otp == code) {
-      actions.saveUserData(allData);
+    if (number ? number.otp:otp == code) {
+      number
+        ? navigation.navigate(navigationStrings.SET_PASSWORD, {numer: number})
+        : navigation.navigate(navigationStrings.LOGIN_WITH_PHONE);
+    
     } else {
       showError('Wrong Otp');
     }
   };
+
   return (
     <WrapperContainer>
       <HeaderComponent
@@ -50,7 +60,7 @@ export default function Otp({navigation, route}) {
         </Text>
         {/* <TextComponent text1={strings.HeaderOtp} styletxt={styles.text} /> */}
         <TextComponent text1={strings.EDIT} styletxt={styles.text1} />
-        <Text style={styles.otpText}>Your otp is :{otp}</Text>
+        <Text style={styles.otpText}>Your otp is :{number? number.otp:otp}</Text>
 
         <View
           style={{

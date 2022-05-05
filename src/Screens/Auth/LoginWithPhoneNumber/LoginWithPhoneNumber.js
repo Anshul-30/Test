@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
   Text,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import ButtonComponent from '../../../Components/ButtonComponent';
@@ -21,8 +21,9 @@ import actions from '../../../redux/actions';
 import {
   height,
   moderateScale,
-  moderateScaleVertical,
+  moderateScaleVertical
 } from '../../../styles/responsiveSize';
+import { showError } from '../../../utils/helperFunction';
 import validator from '../../../utils/validations';
 import styles from './styles';
 
@@ -70,9 +71,14 @@ export default function LoginWithPhoneNumber({navigation, route}) {
       })
       .catch(err => {
         console.log(err, 'err');
+        // showError(err?.meassage)
         alert(err?.message);
       });
   };
+
+const _forgetPassword=()=>{
+  navigation.navigate(navigationStrings.FORGET_PASSWORD)
+}
 
   return (
     <WrapperContainer>
@@ -136,7 +142,9 @@ export default function LoginWithPhoneNumber({navigation, route}) {
                   <Text style={styles.orText}>{strings.OTP}</Text>
                 </TouchableOpacity>
 
-                <Text style={styles.text}>{strings.FORGET}</Text>
+                <TouchableOpacity onPress={_forgetPassword}>
+                  <Text style={styles.text}>{strings.FORGET}</Text>
+                </TouchableOpacity>
               </View>
             </View>
           </View>

@@ -1,20 +1,18 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import Divider from 'react-native-elements/dist/divider/Divider';
+import { FlatList } from 'react-native-gesture-handler';
+import HeaderComponent from '../../../Components/HeaderComponent';
 import WrapperContainer from '../../../Components/WrapperContainer';
-import {FlatList} from 'react-native-gesture-handler';
-import Data from '../../../constants/data/post';
 import imagePath from '../../../constants/imagePath';
+import strings from '../../../constants/lang';
+import colors from '../../../styles/colors';
 import {
-  height,
   moderateScale,
   moderateScaleVertical,
   textScale,
-  width,
+  width
 } from '../../../styles/responsiveSize';
-import colors from '../../../styles/colors';
-import HeaderComponent from '../../../Components/HeaderComponent';
-import Divider from 'react-native-elements/dist/divider/Divider';
-import strings from '../../../constants/lang';
 
 
 

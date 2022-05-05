@@ -1,18 +1,17 @@
 import React from 'react';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import images from '../../../constants/imagePath';
-import {Text, View, Image, TouchableOpacity} from 'react-native';
 import WrapperContainer from '../../../Components/WrapperContainer';
-import styles from './styles';
+import images from '../../../constants/imagePath';
 import strings from '../../../constants/lang';
-
+import actions from '../../../redux/actions';
 import colors from '../../../styles/colors';
-import navigationStrings from '../../../navigation/navigationStrings';
 import {
   moderateScale,
-  moderateScaleVertical,
+  moderateScaleVertical
 } from '../../../styles/responsiveSize';
-import actions from '../../../redux/actions';
+import styles from './styles';
+
 
 const slides = [
   {

@@ -1,18 +1,18 @@
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import React from 'react';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useSelector } from 'react-redux';
 import WrapperContainer from '../../../Components/WrapperContainer';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {useSelector} from 'react-redux';
-import actions from '../../../redux/actions';
+import imagePath from '../../../constants/imagePath';
 import strings from '../../../constants/lang';
+import navigationStrings from '../../../navigation/navigationStrings';
+import actions from '../../../redux/actions';
 import colors from '../../../styles/colors';
 import {
   moderateScale,
   moderateScaleVertical,
-  textScale,
+  textScale
 } from '../../../styles/responsiveSize';
-import imagePath from '../../../constants/imagePath';
-import navigationStrings from '../../../navigation/navigationStrings';
 
 export default function Profile({navigation, route}) {
   
@@ -53,7 +53,7 @@ export default function Profile({navigation, route}) {
               <View style={{flex: 0.15}}>
                 <Image source={imagePath.changePassword} />
               </View>
-              <View style={{flex: 0.5}}>
+              <View style={{flex: 0.85}}>
                 <TouchableOpacity
                   onPress={() =>
                     navigation.navigate(navigationStrings.CHANGE_PASSWORD)

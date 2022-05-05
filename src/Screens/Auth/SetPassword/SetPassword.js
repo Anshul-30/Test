@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import ButtonComponent from '../../../Components/ButtonComponent';
 import HeaderComponent from '../../../Components/HeaderComponent';
@@ -8,23 +8,30 @@ import WrapperContainer from '../../../Components/WrapperContainer';
 import { CHANGE_PASSWORD } from '../../../config/urls';
 import images from '../../../constants/imagePath';
 import strings from '../../../constants/lang';
-import { showError } from '../../../utils/helperFunction';
+import navigationStrings from '../../../navigation/navigationStrings';
+import colors from "../../../styles/colors";
+import { moderateScaleVertical, textScale } from "../../../styles/responsiveSize";
 import { apiPost } from '../../../utils/utils';
 import validator from '../../../utils/validations';
-import styles from './styles';
 
-export default function Password({navigation, route}) {
+
+export default function SetPassword({navigation, route}) {
   const [isVisible, setIsVisible] = useState();
   const [isCVisible, setIsCVisible] = useState();
+
+  
   const [state, setState] = useState({
     password: '',
     newPassword: '',
   });
+
+
   const {password, newPassword} = state;
   const updateState = data => setState(state => ({...state, ...data}));
   const data = useSelector(state => state.userLogin?.userData);
   // console.log('data>>>>>>>>', data);
-
+const number = route?.params?.numer
+console.log('number',number)
   const isValidData = () => {
     const error = validator({password, newPassword});
     if (error) {
@@ -40,7 +47,7 @@ export default function Password({navigation, route}) {
       return;
     }
     let apiData = {
-      user_id: data.id,
+      user_id: number.user_id,
       password: newPassword,
       current_password: password,
     };
@@ -48,10 +55,11 @@ export default function Password({navigation, route}) {
     apiPost(CHANGE_PASSWORD, apiData)
       .then(res => {
         console.log(res);
-        navigation.goBack();
+        // navigation.goBack();
+        navigation.navigate(navigationStrings.LOGIN_WITH_PHONE)
       })
       .catch(e => {
-        alert(e);
+        // alert(e);
       });
   };
   return (
@@ -87,7 +95,9 @@ export default function Password({navigation, route}) {
       </ScrollView>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'android' ? 'height' : 'padding'}>
-        <View>
+        <View style={{
+          paddingBottom:Platform.OS==='ios'? moderateScaleVertical(50):moderateScaleVertical(25)
+        }}>
           <ButtonComponent
             title={strings.CHANGE_PASSWORD}
             onpress={_onChangePassword}
@@ -97,3 +107,17 @@ export default function Password({navigation, route}) {
     </WrapperContainer>
   );
 }
+
+const styles = StyleSheet.create({
+    text:{
+        fontSize: textScale(24),
+        color: colors.white,
+    },
+    text1:{
+        paddingTop:moderateScaleVertical(10),
+        
+    },
+    main:{
+        marginTop:moderateScaleVertical(25)
+    }
+})

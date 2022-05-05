@@ -1,15 +1,15 @@
 import {
   GoogleSignin,
-  statusCodes,
+  statusCodes
 } from '@react-native-google-signin/google-signin';
-import React, {useEffect} from 'react';
-import {Image, Text, View} from 'react-native';
+import React, { useEffect } from 'react';
+import { Image, Text, View } from 'react-native';
 import {
   GraphRequest,
   GraphRequestManager,
-  LoginManager,
+  LoginManager
 } from 'react-native-fbsdk';
-import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import ButtonComponent from '../../../Components/ButtonComponent';
 import WrapperContainer from '../../../Components/WrapperContainer';
 import images from '../../../constants/imagePath';
@@ -18,7 +18,7 @@ import navigationStrings from '../../../navigation/navigationStrings';
 import actions from '../../../redux/actions';
 import {
   moderateScale,
-  moderateScaleVertical,
+  moderateScaleVertical
 } from '../../../styles/responsiveSize';
 import styles from './styles';
 

@@ -3,3 +3,4 @@ export {default as LoginWithPhoneNumber} from './LoginWithPhoneNumber/LoginWithP
 export {default as Otp} from './Otp/Otp'
 export {default as Signup} from './Signup/Signup'
 export {default as Password} from './Password/Password'
+export {default as ForgetPassword} from './ForgetPassword/ForgetPassword'

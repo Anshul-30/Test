@@ -12,7 +12,7 @@ import {
 } from '../../../styles/responsiveSize';
 
 const Home = ({navigation, route}) => {
-  const onPostDetail = (element) => {
+  const onPostDetail = element => {
     navigation.navigate(navigationStrings.POST_DETAIL, {
       item: element,
     });

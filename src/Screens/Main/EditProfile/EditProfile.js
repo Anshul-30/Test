@@ -79,6 +79,7 @@ export default function EditProfile({navigation, route}) {
       .editProfile(apiData)
       .then(res => {
         console.log('editProfile api res_+++++', res);
+        alert('profile updated')
         
         navigation.goBack()
       })
@@ -131,12 +132,14 @@ export default function EditProfile({navigation, route}) {
           <View style={{flexDirection: 'row'}}>
             <View style={{flex: 0.5}}>
               <TextInputComp
+              placeholder='First Name'
                 value={firstName}
                 onChangeText={text => updateState({firstName: text})}
               />
             </View>
             <View style={{flex: 0.5}}>
               <TextInputComp
+              placeholder='Last Name'
                 value={lastName}
                 onChangeText={text => updateState({lastName: text})}
               />

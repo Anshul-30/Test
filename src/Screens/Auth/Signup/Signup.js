@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native';
+import React, { useState } from 'react';
+import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 import deviceInfo from 'react-native-device-info';
 import ButtonComponent from '../../../Components/ButtonComponent';
 import CountryCode from '../../../Components/CountryCode';
@@ -15,9 +15,9 @@ import colors from '../../../styles/colors';
 import {
   moderateScaleVertical,
   textScale,
-  width,
+  width
 } from '../../../styles/responsiveSize';
-import {showError} from '../../../utils/helperFunction';
+import { showError } from '../../../utils/helperFunction';
 import validator from '../../../utils/validations';
 
 export default function Signup({navigation, route}) {
@@ -48,6 +48,7 @@ export default function Signup({navigation, route}) {
       email,
       phoneNumber,
       password,
+      confirmPassword
     });
     if (error) {
       // alert(error)
@@ -83,7 +84,7 @@ export default function Signup({navigation, route}) {
         console.log('singnup api res_+++++', res);
 
         navigation.navigate(navigationStrings.OTP, {
-          data: res?.data,
+          data1: res?.data,
         });
       })
       .catch(err => {

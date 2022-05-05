@@ -29,6 +29,7 @@ export default {
   MOBILE: 'Mobile number',
   CREATE_A_NEW_ACCOUNT: 'Create new account',
   FORGET: 'Forget Password ?',
+  FORGET_PASSWORD:'Forgot Password',
   VERIFY: 'VERIFY',
 ENTER_LOCATION_MANUALLY:'Enter location manually',
   CODE: 'Resend code in',
