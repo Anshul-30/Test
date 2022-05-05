@@ -36,7 +36,7 @@ export default styles = StyleSheet.create({
     // fontSize:textScale(13)
     // alignContent:'space-around'
   },
-  textview: {
+  textView: {
     marginHorizontal: moderateScale(24),
     paddingTop:moderateScale(12)
     // marginTop: moderateScaleVertical(8),
@@ -44,5 +44,6 @@ export default styles = StyleSheet.create({
   next:{
     color:colors.white,
     fontSize:textScale(15)
-  }
+  },
+  mainView:{flex: 0.5, justifyContent: 'center'}
 });

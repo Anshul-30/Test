@@ -2,6 +2,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import Password from '../Screens/Auth/Password/Password';
 import { EditProfile } from '../Screens/Main';
+import PostDetail from '../Screens/Main/PostDetail/PostDetail';
 import BottomTab from './BottomTabNavigation';
 import navigationStrings from './navigationStrings';
 
@@ -24,6 +25,11 @@ export default HomeStack = () => {
       <Stack.Screen
         name={navigationStrings.EDIT_PROFILE}
         component={EditProfile}
+        options={{headerShown: false}}
+      />
+       <Stack.Screen
+        name={navigationStrings.POST_DETAIL}
+        component={PostDetail}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

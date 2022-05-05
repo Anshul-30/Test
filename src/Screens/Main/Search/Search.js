@@ -7,9 +7,11 @@ import strings from '../../../constants/lang'
 export default function Search() {
   return (
     <WrapperContainer>
-      <TextInputComp righttxt={true} text={strings.ENTER_LOCATION_MANUALLY}/>
+      <TextInputComp placeholder={strings.ENTER_LOCATION_MANUALLY} />
     </WrapperContainer>
   )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+ 
+})

@@ -56,11 +56,12 @@ export async function apiReq(
       .catch(error => {
         console.log(error);
         console.log(error && error.response, 'the error respne');
+        // alert(error)
         if (error && error.response && error.response.status === 401) {
           clearUserData();
           clearLoginUser();
           // NavigationService.resetNavigation();
-          //NavigationService.navigate('loginUsingEmailScreen');
+          // NavigationService.navigate('loginUsingEmailScreen');
           dispatch({
             type: types.CLEAR_REDUX_STATE,
             payload: {},

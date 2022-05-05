@@ -15,30 +15,27 @@ import colors from '../../../styles/colors';
 import HeaderComponent from '../../../Components/HeaderComponent';
 import Divider from 'react-native-elements/dist/divider/Divider';
 import strings from '../../../constants/lang';
+
+
+
 export default function Notification({navigation, route}) {
+
+
+// ------------------------This is a render section------------------
+
   const _renderItem = ({element, index}) => {
     return (
       <>
         <View
-          style={{
-            // alignItems: 'center',
-            flexDirection: 'row',
-            marginTop: moderateScaleVertical(10),
-            marginHorizontal: moderateScale(15),
-            padding: moderateScale(15),
-          }}>
+          style={styles.mainConatiner}>
           <View style={{flex: 0.2}}>
             <Image
               source={imagePath.profile}
-              style={{
-                height: moderateScale(width / 8),
-                width: moderateScale(width / 8),
-                borderRadius: moderateScale(width / 16),
-              }}
+              style={styles.imgae}
             />
           </View>
 
-          <View style={{flex: 0.8, marginHorizontal: moderateScale(5)}}>
+          <View style={styles.content}>
             <View style={{flexDirection: 'row'}}>
               <Text style={{color: colors.button, fontSize: textScale(13)}}>
                 {strings.USERNAME}
@@ -52,6 +49,9 @@ export default function Notification({navigation, route}) {
       </>
     );
   };
+
+
+
   return (
     <WrapperContainer>
       <HeaderComponent text={true} headerTxt={strings.NOTIFICATION} />
@@ -60,4 +60,21 @@ export default function Notification({navigation, route}) {
   );
 }
 
-const styles = StyleSheet.create({});
+
+
+
+const styles = StyleSheet.create({
+mainConatiner:{
+  // alignItems: 'center',
+  flexDirection: 'row',
+  marginTop: moderateScaleVertical(10),
+  marginHorizontal: moderateScale(15),
+  padding: moderateScale(15),
+},
+imgae:{
+  height: moderateScale(width / 8),
+  width: moderateScale(width / 8),
+  borderRadius: moderateScale(width / 16),
+},
+content:{flex: 0.8, marginHorizontal: moderateScale(5)}
+});

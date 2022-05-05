@@ -1,51 +1,46 @@
 import React, {useState} from 'react';
 import {
-  Text,
-  View,
-  ScrollView,
   KeyboardAvoidingView,
-  TouchableOpacity,
   Platform,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import WrapperContainer from '../../../Components/WrapperContainer';
-
+import DeviceInfo from 'react-native-device-info';
+import ButtonComponent from '../../../Components/ButtonComponent';
+import CountryCode from '../../../Components/CountryCode';
 import HeaderComponent from '../../../Components/HeaderComponent';
+import TextComponent from '../../../Components/TextComponent';
+import TextInputComp from '../../../Components/TextInputComponent';
+import WrapperContainer from '../../../Components/WrapperContainer';
 import images from '../../../constants/imagePath';
 import strings from '../../../constants/lang';
-import colors from '../../../styles/colors';
+import navigationStrings from '../../../navigation/navigationStrings';
+import actions from '../../../redux/actions';
 import {
   height,
   moderateScale,
   moderateScaleVertical,
-  textScale,
-  width,
 } from '../../../styles/responsiveSize';
-import TextInputComp from '../../../Components/TextInputComponent';
-import ButtonComponent from '../../../Components/ButtonComponent';
-import DeviceInfo from 'react-native-device-info'
-import styles from './styles';
-import actions from '../../../redux/actions';
-import navigationStrings from '../../../navigation/navigationStrings';
-import CountryCode from '../../../Components/CountryCode';
-import TextComponent from '../../../Components/TextComponent';
 import validator from '../../../utils/validations';
+import styles from './styles';
 
-export default function LoginWithPhoneNumber({navigation,route}) {
+export default function LoginWithPhoneNumber({navigation, route}) {
   const [state, setState] = useState({
     phoneNumber: '',
     password: '',
   });
   const {phoneNumber, password} = state;
-  
+
   const updateState = data => setState(state => ({...state, ...data}));
   const [isVisible, setIsVisble] = useState(false);
   const [countryCode, setCountryCode] = useState('91');
   const [countryFlag, setCountryFlag] = useState('IN');
-  console.log("device token", DeviceInfo.getUniqueId())
-
+  console.log('device token', DeviceInfo.getUniqueId());
 
   const isValidData = () => {
-    const error = validator({ phoneNumber, password});
+    const error = validator({phoneNumber, password});
     if (error) {
       // alert(error)
       showError(error);
@@ -55,30 +50,30 @@ export default function LoginWithPhoneNumber({navigation,route}) {
   };
 
   const onLogin = () => {
- const checkValid = isValidData();
+    const checkValid = isValidData();
     if (!checkValid) {
       return;
     }
-        let apiData = {
-          phone: phoneNumber,
-          phone_code: countryCode,
-          device_token: DeviceInfo.getUniqueId(),
-          device_type: Platform.OS == 'ios' ? 'IOS' : 'ANDROID',
-          loginType: 'admin',
-          password: password,
-        };
+    let apiData = {
+      phone: phoneNumber,
+      phone_code: countryCode,
+      device_token: DeviceInfo.getUniqueId(),
+      device_type: Platform.OS == 'ios' ? 'IOS' : 'ANDROID',
+      loginType: 'admin',
+      password: password,
+    };
 
-        actions
-          .login(apiData)
-          .then(res => {
-            console.log('singnup api res_+++++', res);
-          })
-          .catch(err => {
-            console.log(err, 'err');
-            alert(err?.message);
-          });
-      } 
-  
+    actions
+      .login(apiData)
+      .then(res => {
+        console.log('login api res_+++++', res);
+      })
+      .catch(err => {
+        console.log(err, 'err');
+        alert(err?.message);
+      });
+  };
+
   return (
     <WrapperContainer>
       <View>
@@ -104,7 +99,7 @@ export default function LoginWithPhoneNumber({navigation,route}) {
               <View
                 style={{
                   flexDirection: 'row',
-                  // flex: 1,
+
                   justifyContent: 'space-around',
                 }}>
                 <View style={{flex: 0.4}}>

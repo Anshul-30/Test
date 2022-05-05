@@ -39,23 +39,17 @@ export default function TutorialScreen({navigation,route}) {
   const _renderItem = ({item}) => {
     return (
       <View style={styles.container}>
-        <View style={{flex: 0.5, justifyContent: 'center'}}>
+        <View style={styles.mainView}>
           <Image source={item.image} style={styles.image} />
         </View>
         <View
-          style={{
-            flex: 0.5,
-            // backgroundColor:'green',
-            justifyContent: 'center',
-
-            // alignContent:'space-around',
-            // paddingTop:moderateScaleVertical(30)
-          }}>
+          style={styles.mainView
+           }>
           <View>
             <Text style={styles.tittle}>{item.title}</Text>
           </View>
 
-          <View style={styles.textview}>
+          <View style={styles.textView}>
             <Text style={styles.text}>{item.text}</Text>
           </View>
         </View>

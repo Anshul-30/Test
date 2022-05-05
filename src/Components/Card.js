@@ -9,6 +9,7 @@ import {
 } from '../styles/responsiveSize';
 import imagePath from '../constants/imagePath';
 import strings from '../constants/lang';
+import navigationStrings from '../navigation/navigationStrings';
 
 export default function Card({
   userName,
@@ -19,6 +20,8 @@ export default function Card({
   postTime,
   comments,
   likes,
+  postNav = '',
+  navigation,
 }) {
   return (
     <View style={styles.mainContainer}>
@@ -33,22 +36,19 @@ export default function Card({
             <Text style={{color: colors.textMediumGray}}>{place}</Text>
           </View>
         </View>
-        <TouchableOpacity
-          style={{
-            justifyContent: 'flex-end',
-            marginHorizontal: moderateScale(8),
-            flex: 0.15,
-          }}>
+        <TouchableOpacity style={styles.dotStyle}>
           <Image source={imagePath.dot} />
         </TouchableOpacity>
       </View>
       {/* Main Container */}
 
-      <Image
-        source={postImage}
-        style={styles.postImage}
-        // resizeMode={'contain'}
-      />
+      <TouchableOpacity onPress={postNav}>
+        <Image
+          source={postImage}
+          style={styles.postImage}
+          // resizeMode={'contain'}
+        />
+      </TouchableOpacity>
       <View>
         <Text style={{color: colors.white}}>{caption}</Text>
         <Text
@@ -58,13 +58,7 @@ export default function Card({
           }}>
           {postTime}
         </Text>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginTop: moderateScaleVertical(8),
-          }}>
+        <View style={styles.bottomView}>
           <View style={{flexDirection: 'row'}}>
             <Text style={{color: colors.white}}>
               {strings.COMMENTS} {comments}
@@ -88,8 +82,8 @@ export default function Card({
 
 const styles = StyleSheet.create({
   mainContainer: {
-    width: moderateScale(width-48),
-    alignSelf:'center',
+    width: moderateScale(width - 48),
+    alignSelf: 'center',
     backgroundColor: colors.bgColor,
     marginBottom: moderateScaleVertical(28),
     paddingHorizontal: moderateScale(8),
@@ -109,8 +103,8 @@ const styles = StyleSheet.create({
     marginHorizontal: moderateScale(8),
   },
   postImage: {
-    width: moderateScale(width-88),
-    height: moderateScale(width-40),
+    width: moderateScale(width - 88),
+    height: moderateScale(width - 40),
     marginVertical: moderateScaleVertical(16),
     alignSelf: 'center',
   },
@@ -119,5 +113,16 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginRight: moderateScale(10),
     height: moderateScale(height / 15),
+  },
+  dotStyle: {
+    justifyContent: 'flex-end',
+    marginHorizontal: moderateScale(8),
+    flex: 0.15,
+  },
+  bottomView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: moderateScaleVertical(8),
   },
 });

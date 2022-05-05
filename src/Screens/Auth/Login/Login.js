@@ -1,56 +1,47 @@
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 import React, {useEffect} from 'react';
-import {Text, SafeAreaView, View, Image} from 'react-native';
+import {Image, Text, View} from 'react-native';
+import {
+  GraphRequest,
+  GraphRequestManager,
+  LoginManager,
+} from 'react-native-fbsdk';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import ButtonComponent from '../../../Components/ButtonComponent';
 import WrapperContainer from '../../../Components/WrapperContainer';
 import images from '../../../constants/imagePath';
 import strings from '../../../constants/lang';
 import navigationStrings from '../../../navigation/navigationStrings';
-import colors from '../../../styles/colors';
-
-import {
-  LoginManager,
-  GraphRequest,
-  GraphRequestManager,
-} from 'react-native-fbsdk';
-
+import actions from '../../../redux/actions';
 import {
   moderateScale,
   moderateScaleVertical,
-  textScale,
 } from '../../../styles/responsiveSize';
-import {
-  GoogleSignin,
-  statusCodes,
-} from '@react-native-google-signin/google-signin';
-
 import styles from './styles';
-import actions from '../../../redux/actions';
 
-export default function Login({navigation,route}) {
-  
-  
+export default function Login({navigation, route}) {
+
   useEffect(() => {
     GoogleSignin.configure();
   }, []);
 
+// ----------------------------Login With Number ------------------------------
 
-
-// -------------------------Google Login ---------------------------
+  const _loginWithNumber = () => {
+    navigation.navigate(navigationStrings.LOGIN_WITH_PHONE);
+  };
+  // -------------------------Google Login ---------------------------
 
   const googleLogin = async () => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo1 = await GoogleSignin.signIn();
       console.log('userInfo', userInfo1);
-      const userInfo = userInfo1?.user
-      // const email = userInfo1?.user?.email;
-      // const userId = userInfo1?.user?.id;
-      // const firstName= userInfo1?.user?.givenName
-      // let userInfo={
-      //   email , userId ,firstName
-      // }
-  
+      const userInfo = userInfo1?.user;
+
       actions.saveUserData(userInfo);
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -69,8 +60,9 @@ export default function Login({navigation,route}) {
     }
   };
 
-// ----------------------Facebook Login-------------------------
 
+
+  // ----------------------Facebook Login-------------------------
 
   const fbLogIn = resCallBack => {
     LoginManager.logOut();
@@ -113,19 +105,22 @@ export default function Login({navigation,route}) {
   const onFBlogIn = async () => {
     try {
       await fbLogIn(_resInfoCallback);
-    
     } catch (error) {
       console.log('error', error);
     }
   };
+// -----------------Sign Up-----------------------------
 
-  
+
+const _signUp=()=>{
+  navigation.navigate(navigationStrings.SIGNUP)
+}
+
 
   return (
     <WrapperContainer>
       <ScrollView bounces={false}>
-        <View
-          style={{flex: 0.8, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={styles.container}>
           <Image source={images.login} style={styles.images} />
           <View
             style={{
@@ -139,15 +134,13 @@ export default function Login({navigation,route}) {
         <View style={{marginTop: moderateScaleVertical(15)}}>
           <ButtonComponent
             title={strings.LOGIN}
-            onpress={() =>
-              navigation.navigate(navigationStrings.LOGIN_WITH_PHONE)
-            }
+            onpress={_loginWithNumber}
           />
         </View>
 
         <View style={{flex: 0.6}}>
           <View>
-            <Text style={styles.ortext}>{strings.OR}</Text>
+            <Text style={styles.orText}>{strings.OR}</Text>
           </View>
           <ButtonComponent
             stylbtn={styles.btn}
@@ -173,20 +166,11 @@ export default function Login({navigation,route}) {
             leftimage={true}
             image={images.apple}
           />
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              margin: moderateScale(10),
-            }}>
-            <Text style={{color: colors.white, fontSize: textScale(14)}}>
-              {strings.NEW_HERE}
-            </Text>
+          <View style={styles.signUpView}>
+            <Text style={styles.newHereText}>{strings.NEW_HERE}</Text>
             <TouchableOpacity
-              onPress={() => navigation.navigate(navigationStrings.SIGNUP)}>
-              <Text style={{color: '#41CCFF', fontSize: textScale(14)}}>
-                {strings.SIGN_UP}
-              </Text>
+              onPress={_signUp}>
+              <Text style={styles.signUpText}>{strings.SIGN_UP}</Text>
             </TouchableOpacity>
           </View>
         </View>

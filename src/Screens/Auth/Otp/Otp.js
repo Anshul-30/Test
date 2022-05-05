@@ -6,6 +6,7 @@ import {
   Text,
   View
 } from 'react-native';
+import CountDown from 'react-native-countdown-component';
 import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
 import ButtonComponent from '../../../Components/ButtonComponent';
 import HeaderComponent from '../../../Components/HeaderComponent';
@@ -17,13 +18,10 @@ import actions from '../../../redux/actions';
 import colors from '../../../styles/colors';
 import {
   moderateScale,
-  moderateScaleVertical,
-  textScale
+  moderateScaleVertical
 } from '../../../styles/responsiveSize';
 import { showError } from '../../../utils/helperFunction';
 import styles from './styles';
-import CountDown from 'react-native-countdown-component'
-
 
 export default function Otp({navigation, route}) {
   const allData = route?.params?.data;
@@ -31,16 +29,14 @@ export default function Otp({navigation, route}) {
   // console.log('your otp ', allData?.otp);
   const [code, setCode] = useState();
   // alert("otp is",allData?.otp)
-const otp = allData?.otp
-  const otpValidation =()=>{
-    if(otp == code){
-      actions.saveUserData(allData)
+  const otp = allData?.otp;
+  const otpValidation = () => {
+    if (otp == code) {
+      actions.saveUserData(allData);
+    } else {
+      showError('Wrong Otp');
     }
-    else{
-      
-      showError("Wrong Otp")
-    }
-  }
+  };
   return (
     <WrapperContainer>
       <HeaderComponent
@@ -54,7 +50,7 @@ const otp = allData?.otp
         </Text>
         {/* <TextComponent text1={strings.HeaderOtp} styletxt={styles.text} /> */}
         <TextComponent text1={strings.EDIT} styletxt={styles.text1} />
-        <Text style={{color:colors.white,margin:moderateScale(15),fontSize:textScale(15)}}>Your otp is :{otp}</Text>
+        <Text style={styles.otpText}>Your otp is :{otp}</Text>
 
         <View
           style={{
@@ -67,27 +63,24 @@ const otp = allData?.otp
             cellStyle={{
               // borderWidth: moderateScaleVertical(1),
               borderRadius: moderateScale(5),
-              marginLeft:moderateScale(15),
-              backgroundColor:colors.bgColor
+              marginLeft: moderateScale(15),
+              backgroundColor: colors.bgColor,
             }}
           />
         </View>
       </ScrollView>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'android' ? 'height' : 'padding'}>
-          <View style={{flexDirection:'row',justifyContent:'flex-start'}}>
-
-        <TextComponent text1={strings.CODE} styletxt={styles.resend} />
-        <CountDown
-          timeToShow={'S'} 
-          digitStyle={{backgroundColor: colors?.them}}
-          until={45}
-          timeLabels={'S'}
-          digitTxtStyle={{color: colors.white,fontSize:13}}
-    
-       
+        <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
+          <TextComponent text1={strings.CODE} styletxt={styles.resend} />
+          <CountDown
+            timeToShow={'S'}
+            digitStyle={{backgroundColor: colors?.them}}
+            until={45}
+            timeLabels={'S'}
+            digitTxtStyle={{color: colors.white, fontSize: 13}}
           />
-          </View>
+        </View>
         <View
           style={{
             paddingBottom:
@@ -95,10 +88,7 @@ const otp = allData?.otp
                 ? moderateScaleVertical(50)
                 : moderateScaleVertical(20),
           }}>
-          <ButtonComponent
-            title={strings.VERIFY}
-            onpress={otpValidation}
-          />
+          <ButtonComponent title={strings.VERIFY} onpress={otpValidation} />
         </View>
       </KeyboardAvoidingView>
     </WrapperContainer>

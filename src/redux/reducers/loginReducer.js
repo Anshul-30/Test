@@ -10,8 +10,9 @@ const initialState = {
     case types.LOGIN: {
       const data = action.payload;
       console.log('Data', data);
-      setItem('login',data)
+      
       return {
+        ...state,
         userData: data,
       };
     }

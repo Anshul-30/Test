@@ -1,11 +1,12 @@
 import types from '../types';
 import store from '../store';
-import {apiPost} from '../../utils/utils';
+import {apiPost, setItem} from '../../utils/utils';
 import {EDIT_PROFILE, LOGIN, SIGNUP} from '../../config/urls';
 
 const {dispatch} = store;
 
 export const saveUserData = data => {
+  setItem('login',data)
   console.log('userdata----', data);
   dispatch({
     type: types.LOGIN,
@@ -51,12 +52,12 @@ export const login = (data, header = {}) => {
 };
 
 ///Edit profile
-export const editProfile = (data, header = {}) => {
+export const editProfile = (data) => {
   console.log(data, 'the given data');
   return new Promise((resolve, reject) => {
-    apiPost(EDIT_PROFILE, data, header)
-      .then(res => {
-        // saveUserData(res.data);
+    apiPost(EDIT_PROFILE, data)
+      .then((res) => {
+        saveUserData(res.data);
         resolve(res);
       })
       .catch(error => {

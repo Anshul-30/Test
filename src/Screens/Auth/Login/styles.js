@@ -25,12 +25,20 @@ const styles = StyleSheet.create({
     // login:{
     //     paddingTop:moderateScaleVertical(0)
     // },
-    ortext:{
+    orText:{
         color:colors.white,
         textAlign:'center',
         padding:moderateScale(7),
         fontSize:textScale(15)
-    }
+    },
+    container:{flex: 0.8, justifyContent: 'center', alignItems: 'center'},
+    signUpText:{color: '#41CCFF', fontSize: textScale(14)},
+    newHereText:{color: colors.white, fontSize: textScale(14)},
+    signUpView:{
+        flexDirection: 'row',
+        justifyContent: 'center',
+        margin: moderateScale(10),
+      }
 
 })
 

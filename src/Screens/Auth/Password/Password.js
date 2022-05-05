@@ -1,21 +1,18 @@
 import React, {useState} from 'react';
-import {ScrollView, KeyboardAvoidingView, Platform, View} from 'react-native';
+import {KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import ButtonComponent from '../../../Components/ButtonComponent';
-
 import HeaderComponent from '../../../Components/HeaderComponent';
-import TextComponent from '../../../Components/TextComponent';
 import TextInputComp from '../../../Components/TextInputComponent';
 import WrapperContainer from '../../../Components/WrapperContainer';
 import {CHANGE_PASSWORD} from '../../../config/urls';
 import images from '../../../constants/imagePath';
 import strings from '../../../constants/lang';
-import {moderateScaleVertical} from '../../../styles/responsiveSize';
 import {apiPost} from '../../../utils/utils';
 import validator from '../../../utils/validations';
 import styles from './styles';
 
-export default function Password({navigation,route}) {
+export default function Password({navigation, route}) {
   const [isVisible, setIsVisible] = useState();
   const [isCVisible, setIsCVisible] = useState();
   const [state, setState] = useState({
@@ -26,40 +23,35 @@ export default function Password({navigation,route}) {
   const updateState = data => setState(state => ({...state, ...data}));
   const data = useSelector(state => state.userLogin?.userData);
   // console.log('data>>>>>>>>', data);
-  
 
   const isValidData = () => {
     const error = validator({password, newPassword});
     if (error) {
-      
-    showError(error);
-    return;
+      showError(error);
+      return;
     }
     return true;
-    };
+  };
 
   const _onChangePassword = () => {
     const checkValid = isValidData();
     if (!checkValid) {
       return;
     }
-        let apiData = {
-          user_id: data.id,
-          password: newPassword,
-          current_password: password,
-        };
-        console.log(apiData);
-        apiPost(CHANGE_PASSWORD, apiData)
-          .then((res) => {
-            
-            console.log(res)
-            navigation.goBack()
-          })
-          .catch((e) => {
-            alert(e)
-          });
-     
-    
+    let apiData = {
+      user_id: data.id,
+      password: newPassword,
+      current_password: password,
+    };
+    console.log(apiData);
+    apiPost(CHANGE_PASSWORD, apiData)
+      .then(res => {
+        console.log(res);
+        navigation.goBack();
+      })
+      .catch(e => {
+        alert(e);
+      });
   };
   return (
     <WrapperContainer>
@@ -95,7 +87,10 @@ export default function Password({navigation,route}) {
       <KeyboardAvoidingView
         behavior={Platform.OS === 'android' ? 'height' : 'padding'}>
         <View>
-          <ButtonComponent title={strings.CHANGE_PASSWORD} onpress={_onChangePassword} />
+          <ButtonComponent
+            title={strings.CHANGE_PASSWORD}
+            onpress={_onChangePassword}
+          />
         </View>
       </KeyboardAvoidingView>
     </WrapperContainer>

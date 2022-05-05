@@ -5,7 +5,7 @@ export default{
     LOGIN_WITH_PHONE:'Login with phone',
     SIGNUP:'signup',
     OTP:'otp',
-  
+  POST_DETAIL:'post detail',
     PROFILE:'Profile',
     SEARCH:'Search',
     POST:'Post',

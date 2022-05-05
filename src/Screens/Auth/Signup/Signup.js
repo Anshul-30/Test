@@ -21,7 +21,7 @@ import {showError} from '../../../utils/helperFunction';
 import validator from '../../../utils/validations';
 
 export default function Signup({navigation, route}) {
-  
+
 
   const [state, setState] = useState({
     firstName: '',
@@ -35,11 +35,20 @@ export default function Signup({navigation, route}) {
   const [isCVisible, setIsCVisible] = useState();
   const [countryCode, setCountryCode] = useState('91');
   const [countryFlag, setCountryFlag] = useState('IN');
-  const {firstName, lastName, email, phoneNumber, password, confirmPassword} = state;
+  const {firstName, lastName, email, phoneNumber, password, confirmPassword} =
+    state;
   const updateState = data => setState(state => ({...state, ...data}));
 
+  // -------------------validation---------------------
+  
   const isValidData = () => {
-    const error = validator({firstName, lastName, email, phoneNumber, password});
+    const error = validator({
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      password,
+    });
     if (error) {
       // alert(error)
       showError(error);
@@ -49,6 +58,8 @@ export default function Signup({navigation, route}) {
   };
 
   const signUp = () => {
+
+
     const checkValid = isValidData();
     if (!checkValid) {
       return;
@@ -70,16 +81,15 @@ export default function Signup({navigation, route}) {
 
       .then(res => {
         console.log('singnup api res_+++++', res);
-        
+
         navigation.navigate(navigationStrings.OTP, {
           data: res?.data,
         });
-     
       })
       .catch(err => {
         console.log(err, 'err');
-       
-        showError(err?.message)
+
+        showError(err?.message);
       });
   };
 
@@ -91,7 +101,7 @@ export default function Signup({navigation, route}) {
           leftimage={true}
           onPress={() => navigation.goBack()}
         />
-      
+
         <TextComponent
           text1={strings.CREATE_A_NEW_ACCOUNT}
           styletxt={{fontSize: textScale(24), color: colors.white}}

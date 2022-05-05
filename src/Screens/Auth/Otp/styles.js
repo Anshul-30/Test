@@ -21,5 +21,6 @@ marginTop:moderateScaleVertical(30)
 resend:{
     paddingBottom:moderateScaleVertical(15),
     marginHorizontal:moderateScale(15)
-}
+},
+otpText:{color:colors.white,margin:moderateScale(15),fontSize:textScale(15)}
 })

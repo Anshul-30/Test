@@ -18,7 +18,8 @@ orText:{
     margin: moderateScale(15),
     color: colors.white,
     fontSize: textScale(13),
-}
+},
+
 })
 
 export default styles
