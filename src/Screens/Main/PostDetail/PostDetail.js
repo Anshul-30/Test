@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, ImageBackground, StyleSheet, View, Text} from 'react-native';
+import {Image, ImageBackground, StyleSheet, View, Text,Platform} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import ButtonComponent from '../../../Components/ButtonComponent';
 import imagePath from '../../../constants/imagePath';
@@ -22,14 +22,14 @@ export default function PostDetail({navigation, route}) {
         <View style={{flex:1}}>
 
       <View style={styles.container}>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row',flex:1}}>
           <Image source={data?.userImg} style={styles.userImage} />
           <View style={{flex:.9 ,marginLeft:moderateScale(10)}}>
-            <Text>{data?.userName}</Text>
-            <Text>{data?.place}</Text>
+            <Text style={{color:colors.white,fontSize:textScale(14)}}>{data?.userName}</Text>
+            <Text style={{color:colors.white,fontSize:textScale(12)}}>{data?.place}</Text>
           </View>
-          <TouchableOpacity onPress={() => navigation.goBack() }style={{flex:.1}}>
-            <Image source={imagePath.close} />
+          <TouchableOpacity onPress={() => navigation.goBack() }style={{flex:.2}}>
+            <Image source={imagePath.close} style={{height:moderateScale(width/14),width:moderateScale(width/14)}} />
           </TouchableOpacity>
         </View>
       </View>
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     // marginTop:moderateScale(30)
   },
   container: {
-    marginVertical: moderateScaleVertical(50),
+    marginVertical:Platform.OS==='ios'? moderateScaleVertical(50):moderateScaleVertical(20),
     marginHorizontal: moderateScale(15),
     alignItems:'center',
     flex:1

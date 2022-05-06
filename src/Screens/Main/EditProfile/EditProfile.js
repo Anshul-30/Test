@@ -49,7 +49,7 @@ export default function EditProfile({navigation, route}) {
         lastName: data?.last_name,
         email: data?.email,
         phoneNumber: data?.phone,
-        profileImage: data?.profile,
+        // profileImage: data?.profile,
       });
       setCountryCode(data.phone_code);
       setCountryFlag(data.country_code);
@@ -147,6 +147,7 @@ export default function EditProfile({navigation, route}) {
             </View>
           </View>
           <TextInputComp
+          placeholder={'Email'}
             value={email}
             onChangeText={text => updateState({email: text})}
           />

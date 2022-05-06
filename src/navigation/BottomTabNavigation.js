@@ -29,7 +29,7 @@ export default BottomTab = () => {
               }}
             />
           ),
-          // tabBarItemStyle: {height: 40},
+          tabBarItemStyle: {height: 40},
         }}
       />
       <Tab.Screen name={navigationStrings.SEARCH} component={Search} 
@@ -46,7 +46,7 @@ export default BottomTab = () => {
             }}
           />
         ),
-        // tabBarItemStyle: {height: 40},
+        tabBarItemStyle: {height: 40},
       }}/>
       <Tab.Screen name={navigationStrings.POST} component={Post}
        options={{
@@ -62,7 +62,7 @@ export default BottomTab = () => {
             }}
           />
         ),
-        // tabBarItemStyle: {height: 40},
+        tabBarItemStyle: {height: 40},
       }} />
       <Tab.Screen
         name={navigationStrings.NOTIFICATION}
@@ -80,7 +80,7 @@ export default BottomTab = () => {
               }}
             />
           ),
-          // tabBarItemStyle: {height: 40},
+          tabBarItemStyle: {height: 40},
         }}
       />
 
@@ -98,7 +98,7 @@ export default BottomTab = () => {
             }}
           />
         ),
-        // tabBarItemStyle: {height: 40},
+        tabBarItemStyle: {height: 40},
       }}/>
     </Tab.Navigator>
   );
