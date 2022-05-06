@@ -6,12 +6,15 @@ import actions from './src/redux/actions'
 import store from './src/redux/store'
 import { getItem } from './src/utils/utils'
 
-
+import SplashScreen from 'react-native-splash-screen'
 
 export default function App() {
 
 
   useEffect(() => {
+    setTimeout(()=>{
+      SplashScreen.hide();
+    },2000)
     getItem('intro').then((res)=>{
       console.log(res,"getItem>>>res");
       if (res != null) {
