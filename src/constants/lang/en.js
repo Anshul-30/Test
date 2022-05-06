@@ -21,6 +21,7 @@ export default {
   SHOW: 'Show',
   HIDE: 'Hide',
   PASSWORD: 'Password',
+  NEW_PASSWORD:'New Password',
   PLEASE_ENTER_VALID_EMAIL: 'Please Enter Valid Email',
   CONFIRM_PASSWORD: 'Confirm Password',
   OTP: 'Use OTP',

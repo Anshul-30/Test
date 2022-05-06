@@ -15,8 +15,8 @@ import validator from '../../../utils/validations';
 import styles from './styles';
 
 export default function Password({navigation, route}) {
-  const [isVisible, setIsVisible] = useState();
-  const [isCVisible, setIsCVisible] = useState();
+  const [isVisible, setIsVisible] = useState(true);
+  const [isCVisible, setIsCVisible] = useState(true);
   const [state, setState] = useState({
     password: '',
     newPassword: '',

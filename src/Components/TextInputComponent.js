@@ -21,6 +21,9 @@ const TextInputComp = ({
   header = false,
   righttxt = false,
   text,
+  retunKey,
+  multiline= false,
+  autoFocus=false,
   secureTextEntry=false,
   onRightPress,
   ...props
@@ -40,13 +43,15 @@ const TextInputComp = ({
           }}>
           <TextInput
           // ref={}
+          multiline={multiline}
             style={{...styles.textStyle, ...textStyle}}
             value={value}
             placeholder={placeholder}
             onChangeText={onChangeText}
             secureTextEntry={secureTextEntry}
             placeholderTextColor={colors.whiteOpacity50}
-            // returnKeyType="done"
+            returnKeyType={retunKey}
+            autoFocus={autoFocus}
             {...props}
             keyboardType={keyboardInputType}
           />

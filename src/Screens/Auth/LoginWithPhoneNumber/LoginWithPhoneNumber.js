@@ -35,7 +35,7 @@ export default function LoginWithPhoneNumber({navigation, route}) {
   const {phoneNumber, password} = state;
 
   const updateState = data => setState(state => ({...state, ...data}));
-  const [isVisible, setIsVisble] = useState(false);
+  const [isVisible, setIsVisble] = useState(true);
   const [countryCode, setCountryCode] = useState('91');
   const [countryFlag, setCountryFlag] = useState('IN');
   console.log('device token', DeviceInfo.getUniqueId());
@@ -113,6 +113,9 @@ const _forgetPassword=()=>{
                     placeholder={strings.MOBILE}
                     onChangeText={text => updateState({phoneNumber: text})}
                     value={phoneNumber}
+                    retunKey={'next'}
+                    autoFocus={true}
+                    
                   />
                 </View>
               </View>
@@ -126,6 +129,8 @@ const _forgetPassword=()=>{
                 text={isVisible ? strings.SHOW : strings.HIDE}
                 onChangeText={text => updateState({password: text})}
                 value={password}
+                retunKey={'done'}
+                
               />
               <View
                 style={styles.otpText}>

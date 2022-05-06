@@ -11,29 +11,30 @@ import strings from '../../../constants/lang';
 import navigationStrings from '../../../navigation/navigationStrings';
 import colors from "../../../styles/colors";
 import { moderateScaleVertical, textScale } from "../../../styles/responsiveSize";
+import { showError } from '../../../utils/helperFunction';
 import { apiPost } from '../../../utils/utils';
 import validator from '../../../utils/validations';
 
 
 export default function SetPassword({navigation, route}) {
-  const [isVisible, setIsVisible] = useState();
-  const [isCVisible, setIsCVisible] = useState();
+  const [isVisible, setIsVisible] = useState(true);
+  const [isCVisible, setIsCVisible] = useState(true);
 
   
   const [state, setState] = useState({
+    confirmPassword: '',
     password: '',
-    newPassword: '',
   });
 
 
-  const {password, newPassword} = state;
+  const {confirmPassword, password} = state;
   const updateState = data => setState(state => ({...state, ...data}));
   const data = useSelector(state => state.userLogin?.userData);
   // console.log('data>>>>>>>>', data);
 const number = route?.params?.numer
 console.log('number',number)
   const isValidData = () => {
-    const error = validator({password, newPassword});
+    const error = validator({ password,confirmPassword});
     if (error) {
       showError(error);
       return;
@@ -48,8 +49,8 @@ console.log('number',number)
     }
     let apiData = {
       user_id: number.user_id,
-      password: newPassword,
-      current_password: password,
+      password: password,
+      // current_password: password,
     };
     console.log(apiData);
     apiPost(CHANGE_PASSWORD, apiData)
@@ -74,7 +75,7 @@ console.log('number',number)
       <ScrollView bounces={false}>
         <View style={styles.main}>
           <TextInputComp
-            placeholder={strings.PASSWORD}
+            placeholder={strings.NEW_PASSWORD}
             righttxt={true}
             secureTextEntry={isVisible}
             value={password}
@@ -85,8 +86,8 @@ console.log('number',number)
           <TextInputComp
             placeholder={strings.CONFIRM_PASSWORD}
             righttxt={true}
-            value={newPassword}
-            onChangeText={text => updateState({newPassword: text})}
+            value={confirmPassword}
+            onChangeText={text => updateState({confirmPassword: text})}
             secureTextEntry={isCVisible}
             onRightPress={() => setIsCVisible(!isCVisible)}
             text={isCVisible ? strings.SHOW : strings.HIDE}
