@@ -29,6 +29,7 @@ const Home = ({navigation, route}) => {
             data={Data}
             // renderItem={_renderCardComponent}
             renderItem={element => {
+             
               return (
                 <Card
                   userName={element.item.userName}
