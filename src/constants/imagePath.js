@@ -22,7 +22,7 @@ export default{
     post1:require('../assets/images/image5.jpg'),
 
 
-
+    camera:require('../assets/images/camera.png'),
     forwardImage:require('../assets/images/ic_direction.png'),
     signOut:require('../assets/images/ic_logout.png'),
     changePassword:require('../assets/images/ic_key.png'),

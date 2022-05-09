@@ -20,6 +20,7 @@ export default {
   HEADERTXT: 'We are happy to see. You can login to continue.',
   SHOW: 'Show',
   HIDE: 'Hide',
+  SELECT_PHOTO:'Select Photo',
   PASSWORD: 'Password',
   NEW_PASSWORD:'New Password',
   PLEASE_ENTER_VALID_EMAIL: 'Please Enter Valid Email',

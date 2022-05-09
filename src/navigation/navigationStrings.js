@@ -13,5 +13,6 @@ export default{
     CHANGE_PASSWORD:'Change Password',
     EDIT_PROFILE:'Edit Profile',
     FORGET_PASSWORD:"froget password",
-    SET_PASSWORD:'set password'
+    SET_PASSWORD:'set password',
+    ADD_INFO:"Add info"
 }
