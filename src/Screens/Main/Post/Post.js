@@ -75,8 +75,11 @@ export default function Post({navigation, route}) {
       cropping: true,
     }).then(res => {
       console.log('response', res);
-      updateState({selectPhoto: res?.path});
-     
+      
+     navigation.navigate(navigationStrings.ADD_INFO,{
+     selectPhoto:res?.path
+     })
+   
     });
   };
   const _selectImage = element => {

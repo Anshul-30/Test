@@ -25,18 +25,19 @@ import {
 } from '../../../styles/responsiveSize';
 export default function AddInfo({navigation, route}) {
   const image = route?.params?.selectPhoto;
-  console.log('hff', image);
+  
   const [state, setState] = useState({
     description: '',
     location: '',
     post: [],
     imageType: null,
+  
   });
+  const [selectedPhoto,setSelectedPhoto]=useState(image)
   const {description, location, post, imageType} = state;
   console.log('post>>>>>>>>>>', post);
 
   const updateState = data => setState(state => ({...state, ...data}));
-  console.log('image>', image);
 
   const _selectImage = () => {
     ImagePicker.openPicker({
@@ -47,7 +48,6 @@ export default function AddInfo({navigation, route}) {
       .then(res => {
         console.log('res', res);
         updateState({post: post.concat(res.path || res.sourceURL)});
-        // console.log('post', post);
       })
       .catch(err => {
         console.log(err);
@@ -89,6 +89,9 @@ export default function AddInfo({navigation, route}) {
       },
     ]);
   };
+  const _removeImage = () => {
+    setSelectedPhoto(null)
+  };
   return (
     <WrapperContainer>
       <HeaderComponent
@@ -106,19 +109,36 @@ export default function AddInfo({navigation, route}) {
             marginVertical: moderateScaleVertical(20),
             marginLeft: moderateScale(15),
           }}>
-          <View>
-            <Image
-              source={{uri: image}}
-              style={{
-                height: moderateScale(width / 6),
-                width: moderateScale(width / 6),
-                borderRadius: moderateScale(10),
-                paddingBottom: moderateScale(7),
-                marginRight: moderateScale(15),
-              }}
-            />
-          </View>
-        
+         { selectedPhoto?(<View style={{flexDirection: 'row'}}>
+         <>
+                <Image
+                  source={{uri: image}}
+                  style={{
+                    height: moderateScale(width / 6),
+                    width: moderateScale(width / 6),
+                    borderRadius: moderateScale(10),
+                    paddingBottom: moderateScale(7),
+                    marginRight: moderateScale(15),
+                  }}
+                />
+                <View style={{position: 'absolute', right: 5, top: -5}}>
+                  <TouchableOpacity onPress={_removeImage}>
+                    <Image
+                      source={imagePath.cancel}
+                      style={{
+                        height: moderateScale(width / 18),
+                        width: moderateScale(width / 18),
+                      }}
+                    />
+                  </TouchableOpacity>
+                </View>
+              </>
+            </View>
+            )
+            :null
+            
+          }
+
           {post && post.length
             ? post.map((element, index) => {
                 return (
@@ -151,40 +171,38 @@ export default function AddInfo({navigation, route}) {
                 );
               })
             : null}
- {
-         post.length<=3 ?
-         
-          <TouchableOpacity onPress={createAlert}>
-            <View
-              style={{
-                height: moderateScale(width / 6),
-                width: moderateScale(width / 6),
-                backgroundColor: colors.bgColor,
-                // marginHorizontal: moderateScale(15),
-                borderRadius: moderateScale(10),
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Image source={imagePath.post} />
-            </View>
-          </TouchableOpacity>
-          :
-          <TouchableOpacity onPress={()=>alert('u can select only upto 5 photos')}>
-
-          <View
-              style={{
-                height: moderateScale(width / 6),
-                width: moderateScale(width / 6),
-                backgroundColor: colors.bgColor,
-                // marginHorizontal: moderateScale(15),
-                borderRadius: moderateScale(10),
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Image source={imagePath.post} />
-            </View>
-          </TouchableOpacity>
-         }
+          {post.length <= 3 ? (
+            <TouchableOpacity onPress={createAlert}>
+              <View
+                style={{
+                  height: moderateScale(width / 6),
+                  width: moderateScale(width / 6),
+                  backgroundColor: colors.bgColor,
+                  // marginHorizontal: moderateScale(15),
+                  borderRadius: moderateScale(10),
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Image source={imagePath.post} />
+              </View>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              onPress={() => alert('u can select only upto 5 photos')}>
+              <View
+                style={{
+                  height: moderateScale(width / 6),
+                  width: moderateScale(width / 6),
+                  backgroundColor: colors.bgColor,
+                  // marginHorizontal: moderateScale(15),
+                  borderRadius: moderateScale(10),
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Image source={imagePath.post} />
+              </View>
+            </TouchableOpacity>
+          )}
         </View>
         <TextInputComp
           multiline={true}
