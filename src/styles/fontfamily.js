@@ -1,6 +1,5 @@
-export default{
-    Bold:'Barlow-Bold.ttf',
-    Medium:'Barlow-Medium.ttf',
-    Regular:'Barlow-Regular.ttf',
-    Semi:'Barlow-SemiBold.ttf'
-}
+export default {
+    CircularStd_Bold:"CircularStd-Bold",
+    SquarePeg_Regular:"SquarePeg-Regular",
+    Mulish_Medium:"Mulish-Medium"
+    };     

@@ -1,6 +1,7 @@
 import Reacr from 'react';
 import {StyleSheet} from 'react-native';
 import colors from '../../../styles/colors';
+
 import {
   height,
   moderateScale,
@@ -15,6 +16,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: colors.black,
+    // fontFamily:fontfamily
   },
   text1: {
     textAlign: 'center',

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, TouchableOpacity, Image, View, StyleSheet} from 'react-native';
 import colors from '../styles/colors';
-import fontfamily from '../styles/fontfamily';
+// import fontfamily from '../styles/fontfamily';
 import {
   height,
   moderateScale,

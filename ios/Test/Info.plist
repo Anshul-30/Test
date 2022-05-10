@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleGetInfoString</key>
-	<string></string>
+	<string/>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -48,7 +48,7 @@
 	<key>FacebookDisplayName</key>
 	<string>FourWard</string>
 	<key>LSApplicationCategoryType</key>
-	<string></string>
+	<string/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -70,11 +70,11 @@
 		</dict>
 	</dict>
 	<key>NSHumanReadableCopyright</key>
-	<string></string>
+	<string/>
 	<key>NSCameraUsageDescription</key>
-  <string>$(PRODUCT_NAME) would like to access your camera to upload photo and set profile picture</string>
+	<string>$(PRODUCT_NAME) would like to access your camera to upload photo and set profile picture</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-  <string>$(PRODUCT_NAME) would like to access your photo gallery to upload photo and set profile picture</string>
+	<string>$(PRODUCT_NAME) would like to access your photo gallery to upload photo and set profile picture</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -89,5 +89,14 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>CircularStd-Bold.ttf</string>
+		<string>Mulish-Bold.otf</string>
+		<string>Mulish-Medium.otf</string>
+		<string>Mulish-Regular.otf</string>
+		<string>Mulish-SemiBold.otf</string>
+		<string>SquarePeg-Regular.ttf</string>
+	</array>
 </dict>
 </plist>

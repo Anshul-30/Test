@@ -6,7 +6,7 @@ export default {
     'Aenean et convallis nulla. Donec in efficitur nisi, et vestibulum quam aenean.',
   GET_STARTED: 'GET STARTED',
   OR: 'or',
-  GOOGLE: 'Log in with Google',
+  GOOGLE: "Log in with Google",
   LOGIN_WITH_PHONE: 'LOGIN',
   LOGIN: 'Log in with Phone Number',
   APPLE: 'Log in with Apple',
