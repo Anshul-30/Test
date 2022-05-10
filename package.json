@@ -21,6 +21,7 @@
     "axios": "^0.26.1",
     "fbjs": "^3.0.4",
     "is_js": "^0.9.0",
+    "lodash": "^4.17.21",
     "react": "17.0.2",
     "react-native": "0.68.1",
     "react-native-app-intro-slider": "^4.0.4",

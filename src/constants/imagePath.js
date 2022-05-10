@@ -18,10 +18,11 @@ export default{
     dot:require('../assets/images/ic_dots.png'),
     close:require('../assets/images/ic_crss.png'),
 
+    check:require('../assets/images/check.png'),
     post2:require('../assets/images/download.jpeg'),
     post1:require('../assets/images/image5.jpg'),
 
-
+    cancel:require('../assets/images/remove.png'),
     camera:require('../assets/images/camera.png'),
     forwardImage:require('../assets/images/ic_direction.png'),
     signOut:require('../assets/images/ic_logout.png'),

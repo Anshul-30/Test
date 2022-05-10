@@ -15,6 +15,7 @@ export default function HeaderComponent({
   leftimage = false,
   stylebtn = {},
   onPress = {},
+  onpress={},
   rightimage = false,
   rigthImage,
   stylebtnl,
@@ -49,7 +50,7 @@ export default function HeaderComponent({
           style={{
             flex: 0.2,
           }}>
-          <TouchableOpacity onPress={onPress}>
+          <TouchableOpacity onPress={onpress}>
             <Image source={rigthImage} style={{...style.image, ...stylebtnl}} />
           </TouchableOpacity>
         </View>

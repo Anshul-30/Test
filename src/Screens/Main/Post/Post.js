@@ -7,7 +7,7 @@ import {
   PermissionsAndroid,
   FlatList,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 import WrapperContainer from '../../../Components/WrapperContainer';
 import CameraRoll from '@react-native-community/cameraroll';
@@ -23,14 +23,17 @@ import {
 } from '../../../styles/responsiveSize';
 import imagePath from '../../../constants/imagePath';
 import navigationStrings from '../../../navigation/navigationStrings';
+import HeaderComponent from '../../../Components/HeaderComponent';
 
-
-export default function Post({navigation,route}) {
+export default function Post({navigation, route}) {
   const [state, setState] = useState({
     photos: [],
+    selectPhoto:'',
   });
 
-  const {photos} = state;
+  const {photos,selectPhoto} = state;
+  const updateState =(data) =>setState(state=>({...state,...data}))
+console.log("show Photo",selectPhoto)
   useEffect(() => {
     _hasGalleryPermission();
   }, []);
@@ -57,34 +60,46 @@ export default function Post({navigation,route}) {
       .then(r => {
         setState({photos: r.edges});
         console.log('image>>>>', r);
+        updateState({
+       
+        })
       })
       .catch(err => {
         console.log('erre', err);
         //Error Loading Images
       });
   };
-const openCamera =()=>{
-ImagePicker.openCamera({
-  width: 300,
-  height: 400,
-  cropping: true,
-}).then(res => {
-  console.log('response', res);
- 
-  });
+  const openCamera = () => {
+    ImagePicker.openCamera({
+      width: 300,
+      height: 400,
+      cropping: true,
+    }).then(res => {
+      console.log('response', res);
+    });
+  };
+const _selectImage=(element)=>{
+  console.log("index",element.index)
+
 
 }
+
   return (
     <WrapperContainer>
-      <View
-        style={{
-          marginVertical: moderateScaleVertical(20),
-          marginHorizontal: moderateScale(15),
-        }}>
-        <Text style={{color: colors.white, fontSize: textScale(22)}}>
-          {strings.SELECT_PHOTO}
-        </Text>
-      </View>
+     
+        <HeaderComponent
+          leftimage={true}
+          images={imagePath.arrow}
+          text={true}
+          headerTxt={strings.SELECT_PHOTO}
+         rightimage={true}
+         rigthImage={imagePath.check}
+          onpress={()=>navigation.navigate(navigationStrings.ADD_INFO)}
+        />
+       
+     {
+       selectPhoto?<Image source={{uri:showPhoto}}/>:null
+     }
       <View
         style={{
           backgroundColor: colors.bgColor,
@@ -92,6 +107,7 @@ ImagePicker.openCamera({
           borderTopRightRadius: 15,
           height: 50,
           width: width,
+          
         }}>
         <View
           style={{
@@ -99,8 +115,13 @@ ImagePicker.openCamera({
             justifyContent: 'space-between',
             marginRight: moderateScale(45),
           }}>
-          <Text style={{color:colors.white,fontSize:textScale(15),padding:moderateScale(10)}}>
-           Gallery
+          <Text
+            style={{
+              color: colors.white,
+              fontSize: textScale(15),
+              padding: moderateScale(10),
+            }}>
+            Gallery
           </Text>
         </View>
       </View>
@@ -109,20 +130,37 @@ ImagePicker.openCamera({
         renderItem={(element, index) => {
           console.log('element', element);
           return (
-            <TouchableOpacity onPress={()=>navigation.navigate(navigationStrings.ADD_INFO,{image:element.item.node.image})}>
-
-            <Image
-              source={{uri: element.item.node.image.uri}}
-              style={{height: width/5,width:width/3,resizeMode:'cover'}}
-            />
+            <TouchableOpacity
+              onPress={() =>
+                // navigation.navigate(navigationStrings.ADD_INFO, {
+                //   image: element.item.node.image,
+                // })
+                _selectImage(element)
+              }>
+              <Image
+                source={{uri: element.item.node.image.uri}}
+                style={{
+                  height: width / 5,
+                  width: width / 3,
+                  resizeMode: 'cover',
+                }}
+              />
             </TouchableOpacity>
           );
         }}
         numColumns={3}
       />
       <TouchableOpacity onPress={openCamera}>
-
-      <Image source={imagePath.camera} style={{height:width/8,width:width/8,position:'absolute',right:10,bottom:15}}/>
+        <Image
+          source={imagePath.camera}
+          style={{
+            height: width / 8,
+            width: width / 8,
+            position: 'absolute',
+            right: 10,
+            bottom: 15,
+          }}
+        />
       </TouchableOpacity>
       {/* <ScrollView> 
       {state.photos.map((p, i) => {
