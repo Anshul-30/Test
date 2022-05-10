@@ -1,6 +1,7 @@
 import {cloneDeep} from 'lodash';
 import React, {useState} from 'react';
 import {
+  Alert,
   Image,
   KeyboardAvoidingView,
   Platform,
@@ -23,7 +24,8 @@ import {
   width,
 } from '../../../styles/responsiveSize';
 export default function AddInfo({navigation, route}) {
-  const image = route?.params?.image;
+  const image = route?.params?.selectPhoto;
+  console.log('hff', image);
   const [state, setState] = useState({
     description: '',
     location: '',
@@ -57,12 +59,36 @@ export default function AddInfo({navigation, route}) {
     console.log('post for update', post);
     // let newArray=[...post]
     let newArray = cloneDeep(post);
-    newArray.splice(index,1)
+    newArray.splice(index, 1);
     updateState({
       post: newArray,
     });
   };
-
+  const openCamera = () => {
+    ImagePicker.openCamera({
+      width: 300,
+      height: 400,
+      cropping: true,
+    }).then(res => {
+      console.log('response', res);
+      updateState({post: post.concat(res?.path)});
+    });
+  };
+  const createAlert = () => {
+    Alert.alert('album', 'select a photo', [
+      {
+        text: 'cancel',
+      },
+      {
+        text: 'gallery',
+        onPress: _selectImage,
+      },
+      {
+        text: 'Camera',
+        onPress: openCamera,
+      },
+    ]);
+  };
   return (
     <WrapperContainer>
       <HeaderComponent
@@ -82,7 +108,7 @@ export default function AddInfo({navigation, route}) {
           }}>
           <View>
             <Image
-              source={{uri: image?.uri}}
+              source={{uri: image}}
               style={{
                 height: moderateScale(width / 6),
                 width: moderateScale(width / 6),
@@ -92,8 +118,8 @@ export default function AddInfo({navigation, route}) {
               }}
             />
           </View>
-
-          {post
+        
+          {post && post.length
             ? post.map((element, index) => {
                 return (
                   <View
@@ -125,8 +151,10 @@ export default function AddInfo({navigation, route}) {
                 );
               })
             : null}
-
-          <TouchableOpacity onPress={_selectImage}>
+ {
+         post.length<=3 ?
+         
+          <TouchableOpacity onPress={createAlert}>
             <View
               style={{
                 height: moderateScale(width / 6),
@@ -140,6 +168,23 @@ export default function AddInfo({navigation, route}) {
               <Image source={imagePath.post} />
             </View>
           </TouchableOpacity>
+          :
+          <TouchableOpacity onPress={()=>alert('u can select only upto 5 photos')}>
+
+          <View
+              style={{
+                height: moderateScale(width / 6),
+                width: moderateScale(width / 6),
+                backgroundColor: colors.bgColor,
+                // marginHorizontal: moderateScale(15),
+                borderRadius: moderateScale(10),
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Image source={imagePath.post} />
+            </View>
+          </TouchableOpacity>
+         }
         </View>
         <TextInputComp
           multiline={true}

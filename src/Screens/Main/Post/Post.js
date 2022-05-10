@@ -28,12 +28,13 @@ import HeaderComponent from '../../../Components/HeaderComponent';
 export default function Post({navigation, route}) {
   const [state, setState] = useState({
     photos: [],
-    selectPhoto:'',
+    selectPhoto: '',
   });
 
-  const {photos,selectPhoto} = state;
-  const updateState =(data) =>setState(state=>({...state,...data}))
-console.log("show Photo",selectPhoto)
+  const {photos, selectPhoto} = state;
+  const updateState = data => setState(state => ({...state, ...data}));
+  // const [selectPhoto, setSelectPhoto] = useState()
+  console.log('show Photo', selectPhoto);
   useEffect(() => {
     _hasGalleryPermission();
   }, []);
@@ -58,11 +59,9 @@ console.log("show Photo",selectPhoto)
       assetType: 'Photos',
     })
       .then(r => {
-        setState({photos: r.edges});
+        updateState({photos: r.edges});
         console.log('image>>>>', r);
-        updateState({
-       
-        })
+        updateState({selectPhoto: r.edges[0].node.image.uri});
       })
       .catch(err => {
         console.log('erre', err);
@@ -76,30 +75,34 @@ console.log("show Photo",selectPhoto)
       cropping: true,
     }).then(res => {
       console.log('response', res);
+      updateState({selectPhoto: res?.path});
+     
     });
   };
-const _selectImage=(element)=>{
-  console.log("index",element.index)
-
-
-}
-
+  const _selectImage = element => {
+    // console.log("index",element.item.node.image)
+    updateState({selectPhoto: element.item.node.image.uri});
+  };
+  const _goToAddInfoPage = () => {
+    navigation.navigate(navigationStrings.ADD_INFO, {selectPhoto: selectPhoto});
+  };
   return (
     <WrapperContainer>
-     
-        <HeaderComponent
-          leftimage={true}
-          images={imagePath.arrow}
-          text={true}
-          headerTxt={strings.SELECT_PHOTO}
-         rightimage={true}
-         rigthImage={imagePath.check}
-          onpress={()=>navigation.navigate(navigationStrings.ADD_INFO)}
-        />
-       
-     {
-       selectPhoto?<Image source={{uri:showPhoto}}/>:null
-     }
+      <HeaderComponent
+        leftimage={true}
+        images={imagePath.arrow}
+        text={true}
+        headerTxt={strings.SELECT_PHOTO}
+        rightimage={true}
+        onPress={()=>navigation.goBack()}
+        rigthImage={imagePath.check}
+        onpress={_goToAddInfoPage}
+      />
+
+      <Image
+        source={{uri: selectPhoto}}
+        style={{height: moderateScale(height / 4)}}
+      />
       <View
         style={{
           backgroundColor: colors.bgColor,
@@ -107,7 +110,6 @@ const _selectImage=(element)=>{
           borderTopRightRadius: 15,
           height: 50,
           width: width,
-          
         }}>
         <View
           style={{
@@ -130,13 +132,7 @@ const _selectImage=(element)=>{
         renderItem={(element, index) => {
           console.log('element', element);
           return (
-            <TouchableOpacity
-              onPress={() =>
-                // navigation.navigate(navigationStrings.ADD_INFO, {
-                //   image: element.item.node.image,
-                // })
-                _selectImage(element)
-              }>
+            <TouchableOpacity onPress={() => _selectImage(element)}>
               <Image
                 source={{uri: element.item.node.image.uri}}
                 style={{
