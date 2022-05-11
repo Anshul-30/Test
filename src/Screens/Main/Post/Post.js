@@ -58,6 +58,7 @@ export default function Post({navigation, route}) {
     CameraRoll.getPhotos({
       first: 200,
       assetType: 'Photos',
+     
     })
       .then(r => {
         updateState({photos: r.edges});

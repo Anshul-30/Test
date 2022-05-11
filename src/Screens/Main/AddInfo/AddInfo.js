@@ -29,7 +29,7 @@ import {
 import {apiPost} from '../../../utils/utils';
 export default function AddInfo({navigation, route}) {
   const image = route?.params?.selectPhoto;
-  console.log('image>>>>', image);
+  console.log('image>>>>-----------', image);
   const [state, setState] = useState({
     description: '',
     location: '',
@@ -81,7 +81,7 @@ export default function AddInfo({navigation, route}) {
         let data={
           uri: res?.path,
           name: `${(Math.random() + 1).toString(36).substring(7)}.jpg`,
-          type: `image/jpeg`,
+          type: res?.mime,
         }
      _imageUpload(data)
       })
@@ -151,6 +151,7 @@ export default function AddInfo({navigation, route}) {
       .then(res => {
         console.log('data', res);
         alert('post succesfully');
+        navigation.goBack()
       })
       .catch(err => {
         console.log(err);
