@@ -5,7 +5,8 @@ import {
   ScrollView,
   Text,
   TouchableOpacity,
-  View
+  View,
+  ActivityIndicator
 } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import ButtonComponent from '../../../Components/ButtonComponent';
@@ -39,7 +40,7 @@ export default function LoginWithPhoneNumber({navigation, route}) {
   const [countryCode, setCountryCode] = useState('91');
   const [countryFlag, setCountryFlag] = useState('IN');
   console.log('device token', DeviceInfo.getUniqueId());
-
+  const [isLoading, setIsLoading] = useState(false)
   const isValidData = () => {
     const error = validator({phoneNumber, password});
     if (error) {
@@ -68,6 +69,7 @@ export default function LoginWithPhoneNumber({navigation, route}) {
       .login(apiData)
       .then(res => {
         console.log('login api res_+++++', res);
+       setIsLoading(!isLoading)
       })
       .catch(err => {
         console.log(err, 'err');
@@ -89,6 +91,7 @@ const _forgetPassword=()=>{
           onPress={() => navigation.goBack()}
         />
       </View>
+      {isLoading ?<ActivityIndicator/>:null}
       <ScrollView bounces={false}>
         <View style={{height: height}}>
           <View>
@@ -147,7 +150,7 @@ const _forgetPassword=()=>{
           </View>
         </View>
       </ScrollView>
-
+    {/* <ActivityIndicator/> */}
       <KeyboardAvoidingView
         enabled={true}
         behavior={Platform.OS === 'android' ? 'height' : 'padding'}>

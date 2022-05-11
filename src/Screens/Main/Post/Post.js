@@ -29,9 +29,10 @@ export default function Post({navigation, route}) {
   const [state, setState] = useState({
     photos: [],
     selectPhoto: '',
+    filename: '',
   });
 
-  const {photos, selectPhoto} = state;
+  const {photos, selectPhoto, filename} = state;
   const updateState = data => setState(state => ({...state, ...data}));
   // const [selectPhoto, setSelectPhoto] = useState()
   console.log('show Photo', selectPhoto);
@@ -75,19 +76,27 @@ export default function Post({navigation, route}) {
       cropping: true,
     }).then(res => {
       console.log('response', res);
-      
-     navigation.navigate(navigationStrings.ADD_INFO,{
-     selectPhoto:res?.path
-     })
-   
+
+      navigation.navigate(navigationStrings.ADD_INFO, {
+        selectPhoto: res?.path,
+      });
     });
   };
   const _selectImage = element => {
-    // console.log("index",element.item.node.image)
-    updateState({selectPhoto: element.item.node.image.uri});
+    console.log('index', element.item);
+    updateState({
+      selectPhoto: element.item.node.image.uri,
+      filename: element.item.node.image.filename,
+    });
   };
   const _goToAddInfoPage = () => {
-    navigation.navigate(navigationStrings.ADD_INFO, {selectPhoto: selectPhoto});
+    navigation.navigate(navigationStrings.ADD_INFO, {
+      selectPhoto: {
+        uri: selectPhoto,
+        name: `${(Math.random() + 1).toString(36).substring(7)}.${(filename.substring(filename.indexOf('.') + 1).toLowerCase())}`,
+        type: `image/${(filename.substring(filename.indexOf('.') + 1).toLowerCase())}`,
+      },
+    });
   };
   return (
     <WrapperContainer>
@@ -97,7 +106,7 @@ export default function Post({navigation, route}) {
         text={true}
         headerTxt={strings.SELECT_PHOTO}
         rightimage={true}
-        onPress={()=>navigation.goBack()}
+        onPress={() => navigation.goBack()}
         rigthImage={imagePath.check}
         onpress={_goToAddInfoPage}
       />
