@@ -27,7 +27,7 @@ export default function Otp({navigation, route}) {
   const allData = route?.params?.data1;
   const number = route?.params?.data;
 
-  console.log(number.otp, 'number');
+  // console.log(number.otp, 'number');
   console.log('data', allData);
 
   const [code, setCode] = useState();

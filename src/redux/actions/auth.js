@@ -1,12 +1,13 @@
 import types from '../types';
 import store from '../store';
-import {apiPost, setItem} from '../../utils/utils';
+import {apiGet, apiPost, setItem} from '../../utils/utils';
 import {
   CHANGE_PASSWORD,
   EDIT_PROFILE,
   FORGOT_PASSWORD,
   IMAGE_UPLOAD,
   LOGIN,
+  POST,
   POST_SEND,
   SIGNUP,
 } from '../../config/urls';
@@ -60,10 +61,10 @@ export const login = (data, header = {}) => {
 };
 
 ///Edit profile
-export const editProfile = data => {
+export const editProfile = (data,header={}) => {
   console.log(data, 'the given data');
   return new Promise((resolve, reject) => {
-    apiPost(EDIT_PROFILE, data)
+    apiPost(EDIT_PROFILE, data,header)
       .then(res => {
         saveUserData(res.data);
         resolve(res);
@@ -105,3 +106,10 @@ export const postSend = (data = {}, header = {}) => {
 export const imageUpload = (data, header = {}) => {
   return apiPost(IMAGE_UPLOAD, data, header);
 };
+
+
+// post upload 
+
+export const postUpload =()=>{
+  return apiGet(POST)
+}

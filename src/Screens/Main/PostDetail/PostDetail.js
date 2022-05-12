@@ -17,16 +17,16 @@ export default function PostDetail({navigation, route}) {
   console.log('ufhd', data);
   return (
     <ImageBackground
-      source={data?.postImage}
+      source={data?.item?.images.file}
       style={{height: height, width: width}}>
         <View style={{flex:1}}>
 
       <View style={styles.container}>
         <View style={{flexDirection: 'row',flex:1}}>
-          <Image source={data?.userImg} style={styles.userImage} />
+          <Image source={{uri:data?.item?.user?.profile}} style={styles.userImage} />
           <View style={{flex:.9 ,marginLeft:moderateScale(10)}}>
-            <Text style={{color:colors.white,fontSize:textScale(14)}}>{data?.userName}</Text>
-            <Text style={{color:colors.white,fontSize:textScale(12)}}>{data?.place}</Text>
+            <Text style={{color:colors.black,fontSize:textScale(14)}}>{data?.item?.user?.first_name}</Text>
+            <Text style={{color:colors.black,fontSize:textScale(12)}}>{data?.item?.location_name}</Text>
           </View>
           <TouchableOpacity onPress={() => navigation.goBack() }style={{flex:.2}}>
             <Image source={imagePath.close} style={{height:moderateScale(width/14),width:moderateScale(width/14)}} />

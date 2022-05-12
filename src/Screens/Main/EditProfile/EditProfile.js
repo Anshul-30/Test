@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
+  ActivityIndicator,
   Image,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import ButtonComponent from '../../../Components/ButtonComponent';
 import CountryCode from '../../../Components/CountryCode';
 import HeaderComponent from '../../../Components/HeaderComponent';
@@ -21,15 +22,14 @@ import actions from '../../../redux/actions';
 import {
   moderateScale,
   moderateScaleVertical,
-  width
+  width,
 } from '../../../styles/responsiveSize';
-import { showSuccess } from '../../../utils/helperFunction';
+import {showSuccess} from '../../../utils/helperFunction';
 
 export default function EditProfile({navigation, route}) {
-
-
   const data = useSelector(state => state.userLogin.userData);
   console.log('userdata', data);
+  console.log("profile Image",profileImage)
   const [countryCode, setCountryCode] = useState('91');
   const [countryFlag, setCountryFlag] = useState('IN');
 
@@ -49,7 +49,7 @@ export default function EditProfile({navigation, route}) {
         lastName: data?.last_name,
         email: data?.email,
         phoneNumber: data?.phone,
-        // profileImage: data?.profile,
+        profileImage: data?.profile,
       });
       setCountryCode(data.phone_code);
       setCountryFlag(data.country_code);
@@ -58,31 +58,37 @@ export default function EditProfile({navigation, route}) {
 
   const {profileImage, firstName, lastName, email, phoneNumber, imgeType} =
     state;
-
+  const [isLoading, setIsLoading] = useState(false);
   const updateState = data => setState(state => ({...state, ...data}));
-  
+
   // --------------------------------FormData  ----------------------
 
-
-
   const _submitEditProfileData = () => {
-    
-    let apiData = {
-      first_name: firstName,
-      last_name: lastName,
-      email: email,
-      phone:phoneNumber
-    
-    }
-    
+    console.log(profileImage, "submitEditProfileData")
+    let form = new FormData();
+    form.append('first_name', firstName);
+    form.append('last_name', lastName);
+    form.append('email', email);
+    form.append('image', {
+      uri: profileImage,
+      name: `${(Math.random() + 1).toString(36).substring(7)}.jpg`,
+      type: imgeType,
+    });
+    // let apiData = {
+    //   first_name: firstName,
+    //   last_name: lastName,
+    //   email: email,
+    //   phone:phoneNumber
+
+    // }
 
     actions
-      .editProfile(apiData)
+      .editProfile(form, {'Content-Type': 'multipart/form-data'})
       .then(res => {
         console.log('editProfile api res_+++++', res);
-        alert('profile updated')
-        
-        navigation.goBack()
+        alert('profile updated');
+
+        navigation.goBack();
       })
       .catch(err => {
         console.log(err, 'err');
@@ -90,8 +96,7 @@ export default function EditProfile({navigation, route}) {
       });
   };
 
-// ------------------------Image picker-------------------------
-
+  // ------------------------Image picker-------------------------
 
   const _imagePicker = () => {
     ImagePicker.openPicker({
@@ -99,17 +104,38 @@ export default function EditProfile({navigation, route}) {
       height: 400,
       cropping: true,
     }).then(res => {
-      console.log('response', res);
-      updateState({
-        profileImage: res?.sourceURL || res?.path,
-        imgeType: res?.mime,
-      });
+      console.log('response', res.path);
+      _imageUpload(res?.path);
+      // updateState({
+      //   profileImage: res?.sourceURL || res?.path,
+      //   imgeType: res?.mime,
+      // });
     });
   };
 
+  const _imageUpload = data => {
+    console.log(data, 'data>>>');
+    setIsLoading(true);
+    const form = new FormData();
+    form.append('image', {
+      uri: data,
+      name: `${(Math.random() + 1).toString(36).substring(7)}.jpg`,
+      type: imgeType,
+    });
+    actions
+      .imageUpload(form, {'Content-Type': 'multipart/form-data'})
+      .then(res => {
+        console.log(res?.data, 'imageUpload>>res');
+        updateState({profileImage: res?.data});
+        console.log('profile image --------------',profileImage)
+        setIsLoading(false);
+        alert(res?.message);
+      })
+      .catch(err => {
+        alert(err?.message);
+      });
+  };
 
-
-  
   return (
     <WrapperContainer>
       <HeaderComponent
@@ -133,21 +159,21 @@ export default function EditProfile({navigation, route}) {
           <View style={{flexDirection: 'row'}}>
             <View style={{flex: 0.5}}>
               <TextInputComp
-              placeholder='First Name'
+                placeholder="First Name"
                 value={firstName}
                 onChangeText={text => updateState({firstName: text})}
               />
             </View>
             <View style={{flex: 0.5}}>
               <TextInputComp
-              placeholder='Last Name'
+                placeholder="Last Name"
                 value={lastName}
                 onChangeText={text => updateState({lastName: text})}
               />
             </View>
           </View>
           <TextInputComp
-          placeholder={'Email'}
+            placeholder={'Email'}
             value={email}
             onChangeText={text => updateState({email: text})}
           />
@@ -167,6 +193,7 @@ export default function EditProfile({navigation, route}) {
               />
             </View>
           </View> */}
+          {isLoading ? <ActivityIndicator /> : null}
         </View>
       </ScrollView>
       <KeyboardAvoidingView

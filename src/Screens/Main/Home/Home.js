@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {FlatList, Image, StyleSheet, View} from 'react-native';
 import Card from '../../../Components/Card';
 import WrapperContainer from '../../../Components/WrapperContainer';
@@ -6,6 +6,7 @@ import Data from '../../../constants/data/post';
 import imagePath from '../../../constants/imagePath';
 import strings from '../../../constants/lang';
 import navigationStrings from '../../../navigation/navigationStrings';
+import actions from '../../../redux/actions';
 import {
   moderateScale,
   moderateScaleVertical,
@@ -13,10 +14,19 @@ import {
 
 const Home = ({navigation, route}) => {
   const onPostDetail = element => {
+    console.log('Element -----------',element)
     navigation.navigate(navigationStrings.POST_DETAIL, {
       item: element,
     });
   };
+const [post,setPost] = useState()
+  useEffect(()=>{
+    actions.postUpload().then((res)=>
+    {console.log(res?.data,'post upload'),
+    setPost(res?.data)}
+    )
+  },[])
+
   return (
     <WrapperContainer>
       <View>
@@ -26,21 +36,21 @@ const Home = ({navigation, route}) => {
         </View>
         <View style={{paddingBottom: moderateScaleVertical(140)}}>
           <FlatList
-            data={Data}
+            data={post}
             // renderItem={_renderCardComponent}
             renderItem={element => {
-             
+             console.log(element,'element')
               return (
                 <Card
-                  userName={element.item.userName}
-                  userImg={element.item.userImg}
-                  place={element.item.place}
-                  likes={element.item.likes}
-                  comments={element.item.comments}
+                  userName={element.item.user.first_name}
+                  userImg={element.item.user.profile}
+                  place={element.item.location_name}
+                  likes={element.item.like_count}
+                  comments={element.item.comment_count}
                   caption={element.item.caption}
-                  postImage={element.item.postImage}
-                  postTime={element.item.postTime}
-                  postNav={() => onPostDetail(element?.item)}
+                  postImage={element.item.images.file}
+                  postTime={element.item.time_ago}
+                  postNav={() => onPostDetail(element)}
                 />
               );
             }}

@@ -30,7 +30,7 @@ export default function Card({
       <View style={[styles.header, {flexWrap: 'wrap'}]}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <View style={{flex: 0.25}}>
-            <Image source={userImg} style={styles.userImage} />
+            <Image source={{uri:userImg}} style={styles.userImage} />
           </View>
           <View style={{flex: 0.6}}>
             <Text style={{color: colors.white,fontSize:textScale(14)}}>{userName}</Text>

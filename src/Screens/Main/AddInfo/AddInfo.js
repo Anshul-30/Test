@@ -1,3 +1,4 @@
+import {useFocusEffect} from '@react-navigation/native';
 import {cloneDeep} from 'lodash';
 import React, {useState, useEffect} from 'react';
 import {
@@ -12,6 +13,7 @@ import {
   View,
 } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
+import {set} from 'react-native-reanimated';
 import ButtonComponent from '../../../Components/ButtonComponent';
 import HeaderComponent from '../../../Components/HeaderComponent';
 import TextInputComp from '../../../Components/TextInputComponent';
@@ -27,33 +29,58 @@ import {
   width,
 } from '../../../styles/responsiveSize';
 import {apiPost} from '../../../utils/utils';
+
 export default function AddInfo({navigation, route}) {
+  // -------------------- States and params ------------------------
+
   const image = route?.params?.selectPhoto;
   console.log('image>>>>-----------', image);
   const [state, setState] = useState({
     description: '',
     location: '',
-    selectedPhoto: [],
-    // photoToUpload: [],
+    selectedPhoto: [image],
+    // photoToUpload: '',
     imageType: null,
   });
   const [isLoading, setIsLoading] = useState(false);
-  const {description, location, selectedPhoto, imageType} = state;
+  const {description, location, selectedPhoto, imageType, photoToUpload} =
+    state;
+  console.log('post>>>>>>>>>>', selectedPhoto);
+  const updateState = data => setState(state => ({...state, ...data}));
 
-  useEffect(() => {
-    if (image) {
-      _imageUpload(image);
-    }
-  }, []);
+
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     updateState({
+  //       selectedPhoto: [
+  //         ...selectedPhoto,
+  //         'http://192.168.100.101:8002/uploads/1652348639658.png',
+  //       ],
+  //     });
+  //   }, [])
+  // );
+
+  // useEffect(() => {
+  //   if (image) {
+  //     // _imageUpload(image);
+  //     updateState({
+  //       selectedPhoto: [...selectedPhoto,'http://192.168.100.101:8002/uploads/1652348639658.png'],
+  //     });
+  //   }
+  // }, []);
+
+  // -------------------------api hit ---------------------------
 
   const _imageUpload = data => {
     console.log(data, 'data>>>');
+    setIsLoading(true);
     const form = new FormData();
     form.append('image', data);
     actions
       .imageUpload(form, {'Content-Type': 'multipart/form-data'})
       .then(res => {
         console.log(res, 'imageUpload>>res');
+        setIsLoading(false);
         updateState({
           selectedPhoto: [...selectedPhoto, res?.data],
         });
@@ -63,8 +90,8 @@ export default function AddInfo({navigation, route}) {
         alert(err?.message);
       });
   };
-  console.log('post>>>>>>>>>>', selectedPhoto);
-  const updateState = data => setState(state => ({...state, ...data}));
+
+  // -----------------------------Open Gallery-----------------------------
 
   const _selectImage = () => {
     ImagePicker.openPicker({
@@ -74,21 +101,23 @@ export default function AddInfo({navigation, route}) {
     })
       .then(res => {
         console.log('res', res);
-        updateState({
-          // selectedPhoto: selectedPhoto.concat(res.path || res.sourceURL),
-          imageType: res?.mime,
-        });
-        let data={
+        // updateState({
+        //   // selectedPhoto: selectedPhoto.concat(res.path || res.sourceURL),
+        //   imageType: res?.mime,
+        // });
+        let data = {
           uri: res?.path,
           name: `${(Math.random() + 1).toString(36).substring(7)}.jpg`,
           type: res?.mime,
-        }
-     _imageUpload(data)
+        };
+        _imageUpload(data);
       })
       .catch(err => {
         console.log(err);
       });
   };
+
+  // ----------------------------remove image ---------------------
 
   const _cancelImage = index => {
     console.log('index', index);
@@ -100,6 +129,8 @@ export default function AddInfo({navigation, route}) {
       selectedPhoto: newArray,
     });
   };
+
+  // --------------------------Open Camera -----------------------------
   const openCamera = () => {
     ImagePicker.openCamera({
       width: 300,
@@ -111,6 +142,8 @@ export default function AddInfo({navigation, route}) {
       updateState({selectedPhoto: selectedPhoto.concat(res?.path)});
     });
   };
+
+  // ------------------------------alert-------------------------
   const createAlert = () => {
     Alert.alert('album', 'select a photo', [
       {
@@ -127,23 +160,20 @@ export default function AddInfo({navigation, route}) {
     ]);
   };
 
+  // --------------------------function of post --------------------------
   const _onSubmitPostAdd = () => {
+    setIsLoading(true);
     let data = new FormData();
-    console.log(selectedPhoto, 'selectedPhoto');
-    selectedPhoto.map((item, index) => {
-      console.log('item', item);
-      data.append('images[]', {
-        uri: item,
-        name: `${(Math.random() + 1).toString(36).substring(7)}.jpg`,
-        type: imageType,
-      });
-    });
-
-    data.append('description', description);
+    data.append('description', 'Anshul Modi');
     data.append('latitude', '30.73333');
     data.append('longitude', '76.7994');
-    data.append('location_name', location);
+    data.append('location_name', 'Ambala');
     data.append('type', 1);
+    selectedPhoto.map((item, index) => {
+      data.append('images[]', item);
+    });
+    // data.append('images[0]',image)
+    // data.append('images[1]',)
 
     console.log('Post', data);
     actions
@@ -151,13 +181,15 @@ export default function AddInfo({navigation, route}) {
       .then(res => {
         console.log('data', res);
         alert('post succesfully');
-        navigation.goBack()
+        setIsLoading(false);
+        navigation.goBack();
       })
       .catch(err => {
         console.log(err);
         alert(err?.message);
       });
   };
+
   return (
     <WrapperContainer>
       <HeaderComponent
@@ -251,6 +283,7 @@ export default function AddInfo({navigation, route}) {
           placeholder={'Add Location'}
           onChangeText={text => updateState({location: text})}
         />
+        {isLoading ? <ActivityIndicator accessibilityViewIsModal={true} text/> : null}
       </ScrollView>
       <KeyboardAvoidingView>
         <View
