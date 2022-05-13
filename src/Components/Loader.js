@@ -1,9 +1,9 @@
 import React from 'react';
-import {Modal, View} from 'react-native';
-import {BarIndicator} from 'react-native-indicators';
-import {useSelector} from 'react-redux';
+import { Modal, View } from 'react-native';
+import { BarIndicator } from 'react-native-indicators';
 import colors from '../styles/colors';
-import commonStylesFunc from '../styles/commonStyles';
+import { height, width } from '../styles/responsiveSize';
+
 
 const LoadingComponent = () => {
 
@@ -12,10 +12,12 @@ const LoadingComponent = () => {
     <View
       style={{
         // ...commonStyles.loader,
-        backgroundColor: colors.whiteOpacity5,
+        backgroundColor: colors.whiteOpacity22,
         elevation: 5,
+        height:height,
+        width:width
       }}>
-      <BarIndicator size={25} color={themeColors.primary_color} />
+      <BarIndicator size={25} color={colors.redD} />
     </View>
   );
 };
@@ -33,4 +35,4 @@ const Loader = ({isLoading = false, withModal}) => {
   return null;
 };
 
-export default React.memo(Loader);
+export default Loader;

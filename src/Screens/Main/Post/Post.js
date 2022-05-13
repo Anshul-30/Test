@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import HeaderComponent from '../../../Components/HeaderComponent';
+import Loader from '../../../Components/Loader';
 import WrapperContainer from '../../../Components/WrapperContainer';
 import imagePath from '../../../constants/imagePath';
 import strings from '../../../constants/lang';
@@ -146,7 +147,7 @@ export default function Post({navigation, route}) {
       });
   };
   return (
-    <WrapperContainer>
+    <WrapperContainer isLoading={isLoading} withModal={isLoading}>
       <HeaderComponent
         leftimage={true}
         images={imagePath.arrow}
@@ -205,7 +206,7 @@ export default function Post({navigation, route}) {
         }}
         numColumns={3}
       />
-      {isLoading ?<ActivityIndicator/>:null}
+      
       <TouchableOpacity onPress={openCamera}>
         <Image
           source={imagePath.camera}

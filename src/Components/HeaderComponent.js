@@ -35,7 +35,7 @@ export default function HeaderComponent({
           style={{
             flex: 0.1,
           }}>
-          <TouchableOpacity onPress={onPress}>
+          <TouchableOpacity onPress={()=> {onPress(24)} }>
             <Image source={images} style={{...style.image, ...stylebtn}} />
           </TouchableOpacity>
         </View>

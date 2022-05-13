@@ -124,6 +124,7 @@ export default function AddInfo({navigation, route}) {
     console.log('post for update', selectedPhoto);
     // let newArray=[...selectedPhoto]
     let newArray = cloneDeep(selectedPhoto);
+  
     newArray.splice(index, 1);
     updateState({
       selectedPhoto: newArray,
@@ -145,29 +146,35 @@ export default function AddInfo({navigation, route}) {
 
   // ------------------------------alert-------------------------
   const createAlert = () => {
-    Alert.alert('album', 'select a photo', [
-      {
-        text: 'cancel',
-      },
-      {
-        text: 'Open gallery',
-        onPress: _selectImage,
-      },
-      {
-        text: ' Open Camera',
-        onPress: openCamera,
-      },
-    ]);
+    if(selectedPhoto.length<=4){
+
+      Alert.alert('album', 'select a photo', [
+        {
+          text: 'cancel',
+        },
+        {
+          text: 'Open gallery',
+          onPress: _selectImage,
+        },
+        {
+          text: ' Open Camera',
+          onPress: openCamera,
+        },
+      ]);
+    }
+    else{
+      alert('u can not upload more than 5 photos')
+    }
   };
 
   // --------------------------function of post --------------------------
   const _onSubmitPostAdd = () => {
     setIsLoading(true);
     let data = new FormData();
-    data.append('description', 'Anshul Modi');
+    data.append('description', description);
     data.append('latitude', '30.73333');
     data.append('longitude', '76.7994');
-    data.append('location_name', 'Ambala');
+    data.append('location_name', location);
     data.append('type', 1);
     selectedPhoto.map((item, index) => {
       data.append('images[]', item);
@@ -177,7 +184,7 @@ export default function AddInfo({navigation, route}) {
 
     console.log('Post', data);
     actions
-      .postSend(data, {'Content-Type': 'multipart/form-data'})
+      .postUpload(data, {'Content-Type': 'multipart/form-data'})
       .then(res => {
         console.log('data', res);
         alert('post succesfully');
@@ -186,14 +193,22 @@ export default function AddInfo({navigation, route}) {
       })
       .catch(err => {
         console.log(err);
+        setIsLoading(false)
         alert(err?.message);
       });
   };
 
+  // const onPress = (data) => {
+  //   return(
+  //     alert(data)
+  //   )
+  // }
+
   return (
-    <WrapperContainer>
+    <WrapperContainer isLoading={isLoading} withModal={isLoading}>
       <HeaderComponent
         onPress={() => navigation.goBack()}
+        // onPress={onPress}
         leftimage={true}
         images={imagePath.arrow}
         text={true}
@@ -240,7 +255,7 @@ export default function AddInfo({navigation, route}) {
                 );
               })
             : null}
-          {selectedPhoto.length <= 4 ? (
+          
             <TouchableOpacity onPress={createAlert}>
               <View
                 style={{
@@ -255,23 +270,7 @@ export default function AddInfo({navigation, route}) {
                 <Image source={imagePath.post} />
               </View>
             </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              onPress={() => alert('u can select only upto 5 photos')}>
-              <View
-                style={{
-                  height: moderateScale(width / 6),
-                  width: moderateScale(width / 6),
-                  backgroundColor: colors.bgColor,
-                  // marginHorizontal: moderateScale(15),
-                  borderRadius: moderateScale(10),
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <Image source={imagePath.post} />
-              </View>
-            </TouchableOpacity>
-          )}
+        
         </View>
         <TextInputComp
           multiline={true}
@@ -283,7 +282,7 @@ export default function AddInfo({navigation, route}) {
           placeholder={'Add Location'}
           onChangeText={text => updateState({location: text})}
         />
-        {isLoading ? <ActivityIndicator accessibilityViewIsModal={true} text/> : null}
+       
       </ScrollView>
       <KeyboardAvoidingView>
         <View

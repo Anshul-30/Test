@@ -1,12 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import {FlatList, Image, StyleSheet, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  StyleSheet,
+  View,
+} from 'react-native';
+import {DotIndicator} from 'react-native-indicators';
 import Card from '../../../Components/Card';
+import Loader from '../../../Components/Loader';
 import WrapperContainer from '../../../Components/WrapperContainer';
-import Data from '../../../constants/data/post';
 import imagePath from '../../../constants/imagePath';
-import strings from '../../../constants/lang';
 import navigationStrings from '../../../navigation/navigationStrings';
 import actions from '../../../redux/actions';
+
 import {
   moderateScale,
   moderateScaleVertical,
@@ -14,48 +21,64 @@ import {
 
 const Home = ({navigation, route}) => {
   const onPostDetail = element => {
-    console.log('Element -----------',element)
     navigation.navigate(navigationStrings.POST_DETAIL, {
       item: element,
     });
   };
-const [post,setPost] = useState()
-  useEffect(()=>{
-    actions.postUpload().then((res)=>
-    {console.log(res?.data,'post upload'),
-    setPost(res?.data)}
-    )
-  },[])
+  const [isLoading, setIsLoading] = useState(true);
+  const [post, setPost] = useState();
+  const [count, setCount] = useState(0)
+
+
+  useEffect(() => {
+    let apiData = `?skip=${count}`;
+    setIsLoading(true)
+    actions
+      .getPost(apiData)
+      .then(res => {
+        console.log(res, 'post upload'),
+         setIsLoading(false);
+        setPost(res?.data);
+      })
+      .catch(err => {
+        console.log(err, 'error');
+      });
+  }, [count]);
+
+  // const onLoad=()=>{
+  //   let currentPageInfo = post.lenghth
+  //   console.log('current page info',currentPageInfo)
+  // }
 
   return (
-    <WrapperContainer>
+    <WrapperContainer isLoading={isLoading} withModal={isLoading}>
       <View>
         <View style={styles.headerStyle}>
           <Image source={imagePath.logo} />
           <Image source={imagePath.loc} />
         </View>
         <View style={{paddingBottom: moderateScaleVertical(140)}}>
+          
+         
           <FlatList
             data={post}
             // renderItem={_renderCardComponent}
             renderItem={element => {
-             console.log(element,'element')
               return (
-                <Card
-                  userName={element.item.user.first_name}
-                  userImg={element.item.user.profile}
-                  place={element.item.location_name}
-                  likes={element.item.like_count}
-                  comments={element.item.comment_count}
-                  caption={element.item.caption}
-                  postImage={element.item.images.file}
-                  postTime={element.item.time_ago}
-                  postNav={() => onPostDetail(element)}
-                />
+                <Card data={element} postNav={() => onPostDetail(element)} />
               );
             }}
             showsVerticalScrollIndicator={false}
             keyExtractor={item => item.key}
+            onEndReached={()=>{
+             
+
+               console.log('count>>>>>>>',count)
+               setCount(count+1)
+             
+             
+            }}
+            // onRefresh={}
           />
         </View>
       </View>

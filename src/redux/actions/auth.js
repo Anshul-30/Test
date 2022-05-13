@@ -97,7 +97,7 @@ export const changePassword = data => {
 };
 // post send
 
-export const postSend = (data = {}, header = {}) => {
+export const postUpload = (data = {}, header = {}) => {
   console.log('the given data', data);
   return apiPost(POST_SEND, data, header);
 };
@@ -110,6 +110,6 @@ export const imageUpload = (data, header = {}) => {
 
 // post upload 
 
-export const postUpload =()=>{
-  return apiGet(POST)
+export const getPost =(query='')=>{
+  return apiGet(POST+query)
 }

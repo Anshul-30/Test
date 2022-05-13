@@ -22,7 +22,7 @@ export default function Card({
   comments,
   likes,
   postNav = '',
-  navigation,
+  data={}
 }) {
   return (
     <View style={styles.mainContainer}>
@@ -30,11 +30,11 @@ export default function Card({
       <View style={[styles.header, {flexWrap: 'wrap'}]}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <View style={{flex: 0.25}}>
-            <Image source={{uri:userImg}} style={styles.userImage} />
+            <Image source={{uri:data.item.user.profile}} style={styles.userImage} />
           </View>
           <View style={{flex: 0.6}}>
-            <Text style={{color: colors.white,fontSize:textScale(14)}}>{userName}</Text>
-            <Text style={{color: colors.textMediumGray, fontSize:textScale(13)}}>{place}</Text>
+            <Text style={{color: colors.white,fontSize:textScale(14)}}>{data.item.user.first_name}</Text>
+            <Text style={{color: colors.textMediumGray, fontSize:textScale(13)}}>{data.item.location_name}</Text>
           </View>
         </View>
         <TouchableOpacity style={styles.dotStyle}>
@@ -45,7 +45,7 @@ export default function Card({
 
       <TouchableOpacity onPress={postNav}>
         <Image
-          source={postImage}
+          source={data.item.images.file}
           style={styles.postImage}
           // resizeMode={'contain'}
         />
@@ -58,14 +58,14 @@ export default function Card({
             marginVertical: moderateScaleVertical(8),
             fontSize:textScale(13)
           }}>
-          {postTime}
+          {data.item.time_ago}
         </Text>
         <View style={styles.bottomView}>
           <View style={{flexDirection: 'row'}}>
             <View style={{flex:.4}}>
 
             <Text style={{color: colors.white,fontSize:textScale(13)}}>
-              {strings.COMMENTS} {comments}
+              {strings.COMMENTS} {data.item.comment_count}
             </Text>
             </View>
             <View style={{flex:.5}}>
@@ -76,7 +76,7 @@ export default function Card({
                 marginHorizontal: moderateScale(24),
                 fontSize:textScale(13)
               }}>
-              {strings.LIKES} {likes}
+              {strings.LIKES} {data.item.like_count}
             </Text>
             </View>
             <View style={{flex:.1}}>
