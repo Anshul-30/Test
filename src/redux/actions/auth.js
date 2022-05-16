@@ -6,6 +6,7 @@ import {
   EDIT_PROFILE,
   FORGOT_PASSWORD,
   IMAGE_UPLOAD,
+  LIKES,
   LOGIN,
   POST,
   POST_SEND,
@@ -112,4 +113,11 @@ export const imageUpload = (data, header = {}) => {
 
 export const getPost =(query='')=>{
   return apiGet(POST+query)
+}
+
+// get Likes 
+
+
+export const getLikes =(query="")=>{
+return apiPost(LIKES+query)
 }

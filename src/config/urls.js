@@ -11,7 +11,9 @@ export const EDIT_PROFILE = getApiUrl('/edit_profile');
 export const FORGOT_PASSWORD = getApiUrl('/forgot_password');
 export const POST_SEND = getApiUrl('/post_send');
 export const IMAGE_UPLOAD = getApiUrl('/img_upload');
-export const POST= getApiUrl('/posts')
+export const POST= getApiUrl('/posts');
+export const LIKES= getApiUrl('/like-post')
+
 
 
 

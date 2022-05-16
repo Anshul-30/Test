@@ -123,8 +123,8 @@ export default function Post({navigation, route}) {
     form.append('image', {
       
         uri: selectPhoto,
-        name: `${(Math.random() + 1).toString(36).substring(7)}.${(filename.substring(filename.indexOf('.') + 1).toLowerCase())}`,
-        type: `image/${(filename.substring(filename.indexOf('.') + 1).toLowerCase())}`,
+        name: `${(Math.random() + 1).toString(36).substring(7)}.jpg`,
+        type: `image/jpeg`,
       },
     );
     actions

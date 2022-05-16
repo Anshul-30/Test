@@ -17,7 +17,7 @@ export default function PostDetail({navigation, route}) {
   console.log('ufhd', data);
   return (
     <ImageBackground
-      source={data?.item?.images.file}
+      source={{uri:data?.item?.images.file[0]}}
       style={{height: height, width: width}}>
         <View style={{flex:1}}>
 

@@ -11,6 +11,8 @@ import {
 import imagePath from '../constants/imagePath';
 import strings from '../constants/lang';
 import navigationStrings from '../navigation/navigationStrings';
+import {apiPost} from '../utils/utils';
+import {isArray, isEmpty} from 'lodash';
 
 export default function Card({
   userName,
@@ -22,7 +24,8 @@ export default function Card({
   comments,
   likes,
   postNav = '',
-  data={}
+  data = {},
+  getLikes,
 }) {
   return (
     <View style={styles.mainContainer}>
@@ -30,11 +33,19 @@ export default function Card({
       <View style={[styles.header, {flexWrap: 'wrap'}]}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <View style={{flex: 0.25}}>
-            <Image source={{uri:data.item.user.profile}} style={styles.userImage} />
+            <Image
+              source={{uri: data.item.user.profile}}
+              style={styles.userImage}
+            />
           </View>
           <View style={{flex: 0.6}}>
-            <Text style={{color: colors.white,fontSize:textScale(14)}}>{data.item.user.first_name}</Text>
-            <Text style={{color: colors.textMediumGray, fontSize:textScale(13)}}>{data.item.location_name}</Text>
+            <Text style={{color: colors.white, fontSize: textScale(14)}}>
+              {data.item.user.first_name}
+            </Text>
+            <Text
+              style={{color: colors.textMediumGray, fontSize: textScale(13)}}>
+              {data.item.location_name}
+            </Text>
           </View>
         </View>
         <TouchableOpacity style={styles.dotStyle}>
@@ -43,47 +54,61 @@ export default function Card({
       </View>
       {/* Main Container */}
 
-      <TouchableOpacity onPress={postNav}>
-        <Image
-          source={data.item.images.file}
-          style={styles.postImage}
-          // resizeMode={'contain'}
-        />
+      <TouchableOpacity onPress={postNav} style={{flexWrap:'wrap'}}>
+        {data?.item?.images?.file &&
+        isArray(data?.item?.images?.file) &&
+        data?.item?.images?.file.length
+          ? data?.item?.images?.file.map((i, inx) => {
+              if (i != '' && i != null && i!=isEmpty({})) {
+                return (
+                  <Image
+                    source={{uri: i}}
+                    style={styles.postImage}
+                    resizeMode={'contain'}
+                  />
+                );
+              } else {
+                return null;
+              }
+            })
+          : null}
       </TouchableOpacity>
       <View>
-        <Text style={{color: colors.white,fontSize:textScale(12)}}>{caption}</Text>
+        <Text style={{color: colors.white, fontSize: textScale(12)}}>
+          {data.item.description}
+        </Text>
         <Text
           style={{
             color: colors.time,
             marginVertical: moderateScaleVertical(8),
-            fontSize:textScale(13)
+            fontSize: textScale(13),
           }}>
           {data.item.time_ago}
         </Text>
         <View style={styles.bottomView}>
           <View style={{flexDirection: 'row'}}>
-            <View style={{flex:.4}}>
-
-            <Text style={{color: colors.white,fontSize:textScale(13)}}>
-              {strings.COMMENTS} {data.item.comment_count}
-            </Text>
+            <View style={{flex: 0.4}}>
+              <Text style={{color: colors.white, fontSize: textScale(13)}}>
+                {strings.COMMENTS} {data.item.comment_count}
+              </Text>
             </View>
-            <View style={{flex:.5}}>
-
-            <Text
-              style={{
-                color: colors.white,
-                marginHorizontal: moderateScale(24),
-                fontSize:textScale(13)
-              }}>
-              {strings.LIKES} {data.item.like_count}
-            </Text>
-            </View>
-            <View style={{flex:.1}}>
-
-          <TouchableOpacity>
-            <Image source={imagePath.forwardImage} style={styles.shareIcon} />
-          </TouchableOpacity>
+            <TouchableOpacity style={{flex: 0.5}} onPress={getLikes}>
+              <Text
+                style={{
+                  color: colors.white,
+                  marginHorizontal: moderateScale(24),
+                  fontSize: textScale(13),
+                }}>
+                {strings.LIKES} {data.item.like_count}
+              </Text>
+            </TouchableOpacity>
+            <View style={{flex: 0.1}}>
+              <TouchableOpacity>
+                <Image
+                  source={imagePath.forwardImage}
+                  style={styles.shareIcon}
+                />
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -101,6 +126,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: moderateScale(8),
     paddingVertical: moderateScaleVertical(16),
     borderRadius: moderateScale(8),
+    // flexWrap:'wrap'
   },
   header: {
     alignItems: 'center',

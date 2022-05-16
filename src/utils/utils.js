@@ -25,7 +25,7 @@ export async function apiReq(
   requestOptions = {},
 ) {
   console.log('api hit', endPoint);
-  console.log('data', data);
+ 
 
   return new Promise(async (res, rej) => {
     const getTokenHeader = await getHeaders();

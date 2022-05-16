@@ -65,11 +65,12 @@ export default function LoginWithPhoneNumber({navigation, route}) {
       password: password,
     };
 
+    setIsLoading(true)
     actions
       .login(apiData)
       .then(res => {
         console.log('login api res_+++++', res);
-       setIsLoading(!isLoading)
+       setIsLoading(false)
       })
       .catch(err => {
         console.log(err, 'err');
