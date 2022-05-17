@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import colors from '../styles/colors';
 import {
   height,
@@ -29,8 +29,7 @@ export default function Card({
   data = {},
   getLikes,
 }) {
-
-  const [snapState, setSnapState] = useState(0)
+  const [snapState, setSnapState] = useState(0);
   // console.log(data,"dataaaa");
   return (
     <View style={styles.mainContainer}>
@@ -69,6 +68,7 @@ export default function Card({
               itemWidth={moderateScale(width - 80)}
               scrollEnabled={true}
               horizontal
+              onSnapToItem={index => setSnapState(index)}
               // hasParallaxImages={true}
               renderItem={i => {
                 return (
@@ -82,7 +82,6 @@ export default function Card({
                 );
               }}
             />
-          
           </>
         ) : null}
 
@@ -91,30 +90,18 @@ export default function Card({
           dotsLength={
             data?.item?.images?.file &&
             isArray(data?.item?.images?.file) &&
-            data?.item?.images?.file.length>1
-              ? data?.item?.images?.file
+            data?.item?.images?.file.length > 1
+              ? data?.item?.images?.file.length
               : []
           }
           activeDotIndex={snapState}
-          containerStyle={{backgroundColor: 'transparent'}}
-          dotStyle={{
-            width: 10,
-            height: 10,
-            borderRadius: 5,
-            marginHorizontal: 8,
-            backgroundColor: 'rgba(255, 255, 255, 0.92)',
-          }}
-          inactiveDotStyle={{
-            width: 10,
-            height: 10,
-            borderRadius: 5,
-            // marginHorizontal: 10,
-            backgroundColor: 'red',
-          }}
-          
-          inactiveDotOpacity={.4}
-          inactiveDotScale={0.6}
-          
+          containerStyle={{paddingVertical: 10}}
+          dotColor={'grey'}
+          dotStyle={{width: 12, height: 12, borderRadius: 12 / 2}}
+          inactiveDotStyle={{width: 24, height: 24, borderRadius: 24 / 2}}
+          inactiveDotColor={'black'}
+          inactiveDotOpacity={0.4}
+          activeOpacity={0.8}
         />
       </View>
       <View>
