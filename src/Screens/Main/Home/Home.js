@@ -23,11 +23,11 @@ import {
 import {apiPost} from '../../../utils/utils';
 
 const Home = ({navigation, route}) => {
-  const onPostDetail = element => {
-    navigation.navigate(navigationStrings.POST_DETAIL, {
-      item: element,
-    });
-  };
+
+
+
+
+  
 
   // -----------------------States----------------------------
 
@@ -40,22 +40,28 @@ const Home = ({navigation, route}) => {
 console.log('updated post',post)
 
   useEffect(() => {
-    if (isLoading) {
+    if (isLoading || refresh) {
       let apiData = `?skip=${count}`;
       console.log('apidata', apiData);
-      setIsLoading(true);
+      // setIsLoading(true);
       actions
         .getPost(apiData)
         .then(res => {
           console.log(res, 'post upload');
           setIsLoading(false);
-          setPost([...post, ...res?.data]);
+          setRefresh(false);
+          if(refresh){
+            setPost(res?.data)
+          }else{
+            setPost([...post, ...res?.data]);
+
+          }
         })
         .catch(err => {
           console.log(err, 'error');
         });
     }
-  }, [isLoading]);
+  }, [isLoading,refresh]);
 
   // useEffect(() => {
   //   let newArray = post.map((i, inx) => {
@@ -68,12 +74,9 @@ console.log('updated post',post)
   // --------------------------Refresh------------------------
 
   const onRefresh = () => {
+    // setPost([]);
+    setCount(0);
     setRefresh(true);
-    fetchData();
-  };
-  const fetchData = () => {
-    setCount(count-8);
-    setRefresh(false);
   };
 
   //---------------------------Likes Count---------------------
@@ -101,6 +104,13 @@ console.log('updated post',post)
       });
   };
 
+  const onPostDetail = (element,image) => {
+    navigation.navigate(navigationStrings.POST_DETAIL, {
+      item: element,
+      image :image
+    });
+  };
+
   return (
     <WrapperContainer isLoading={isLoading} withModal={isLoading}>
       <View>
@@ -120,7 +130,7 @@ console.log('updated post',post)
               return (
                 <Card
                   data={element}
-                  postNav={() => onPostDetail(element)}
+                  postNav={(image) => onPostDetail(element,image)}
                   getLikes={() => getLikes(element)}
                 />
               );
@@ -133,7 +143,7 @@ console.log('updated post',post)
               setIsLoading(true);
             }}
             onEndReachedThreshold={0.1}
-            refreshing={isLoading}
+            refreshing={refresh}
             onRefresh={onRefresh}
           />
         </View>

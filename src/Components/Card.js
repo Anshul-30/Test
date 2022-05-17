@@ -57,29 +57,34 @@ export default function Card({
         </TouchableOpacity>
       </View>
       {/* Main Container */}
-      <View>
-        {data?.item?.images?.file &&
-        isArray(data?.item?.images?.file) &&
-        data?.item?.images?.file.length ? (
+      <View >
+        {!!(
+          data?.item?.images?.file &&
+          isArray(data?.item?.images?.file) &&
+          data?.item?.images?.file.length
+        ) ? (
           <>
             <Carousel
               data={data?.item?.images?.file}
-              sliderWidth={moderateScale(width - 80)}
-              itemWidth={moderateScale(width - 80)}
-              scrollEnabled={true}
+              sliderWidth={moderateScale(width - 65)}
+              itemWidth={moderateScale(width - 20)}
+              scrollEnabled={data?.item?.images?.file.length > 1 ? true : false}
               horizontal
               onSnapToItem={index => setSnapState(index)}
               // hasParallaxImages={true}
               renderItem={i => {
-                return (
-                  <TouchableOpacity onPress={postNav}>
-                    <Image
-                      source={{uri: i.item}}
-                      style={styles.postImage}
-                      // resizeMode={'c'}
-                    />
-                  </TouchableOpacity>
-                );
+                // console.log(i,'item>>>>>>>>>')
+                if (i.item != null && typeof i.item != 'object') {
+                  return (
+                    <TouchableOpacity activeOpacity={1} onPress={()=>postNav(i.item)}>
+                      <Image
+                        source={{uri: i.item}}
+                        style={styles.postImage}
+                        // resizeMode={'contain'}
+                      />
+                    </TouchableOpacity>
+                  );
+                }
               }}
             />
           </>
@@ -88,20 +93,23 @@ export default function Card({
         {/* Pagination dots */}
         <Pagination
           dotsLength={
-            data?.item?.images?.file &&
-            isArray(data?.item?.images?.file) &&
-            data?.item?.images?.file.length > 1
+            !!(
+              data?.item?.images?.file &&
+              isArray(data?.item?.images?.file) &&
+              data?.item?.images?.file.length > 1 
+            )
               ? data?.item?.images?.file.length
               : []
           }
           activeDotIndex={snapState}
-          containerStyle={{paddingVertical: 10}}
-          dotColor={'grey'}
+          containerStyle={{paddingVertical: 0,marginTop:0}}
+          dotColor={'red'}
           dotStyle={{width: 12, height: 12, borderRadius: 12 / 2}}
-          inactiveDotStyle={{width: 24, height: 24, borderRadius: 24 / 2}}
+          inactiveDotStyle={{width: 20, height: 20, borderRadius: 20 / 2}}
           inactiveDotColor={'black'}
           inactiveDotOpacity={0.4}
           activeOpacity={0.8}
+          dotContainerStyle={{marginHorizontal: 2}}
         />
       </View>
       <View>
@@ -155,7 +163,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.bgColor,
     marginBottom: moderateScaleVertical(28),
     paddingHorizontal: moderateScale(8),
-    paddingVertical: moderateScaleVertical(16),
+    paddingVertical: moderateScaleVertical(10),
     borderRadius: moderateScale(8),
     // flexWrap:'wrap'
   },
@@ -172,9 +180,9 @@ const styles = StyleSheet.create({
     marginHorizontal: moderateScale(8),
   },
   postImage: {
-    width: moderateScale(width - 88),
+    width: moderateScale(width-20),
     height: moderateScale(width - 40),
-    marginVertical: moderateScaleVertical(16),
+    marginVertical: moderateScaleVertical(10),
     alignSelf: 'center',
   },
   shareIcon: {
