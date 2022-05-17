@@ -1,44 +1,28 @@
+import {cloneDeep} from 'lodash';
 import React, {useEffect, useState} from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  Image,
-  StyleSheet,
-  View,
-} from 'react-native';
+import {FlatList, Image, StyleSheet, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {DotIndicator} from 'react-native-indicators';
 import Card from '../../../Components/Card';
-import Loader from '../../../Components/Loader';
 import WrapperContainer from '../../../Components/WrapperContainer';
-import {LIKES} from '../../../config/urls';
 import imagePath from '../../../constants/imagePath';
 import navigationStrings from '../../../navigation/navigationStrings';
 import actions from '../../../redux/actions';
-
 import {
   moderateScale,
   moderateScaleVertical,
 } from '../../../styles/responsiveSize';
-import {apiPost} from '../../../utils/utils';
 
 const Home = ({navigation, route}) => {
-
-
-
-
-  
-
   // -----------------------States----------------------------
 
   const [isLoading, setIsLoading] = useState(true);
   const [post, setPost] = useState([]);
   const [count, setCount] = useState(0);
   const [refresh, setRefresh] = useState(false);
-  const [likes, setLikes] = useState(0);
+  const [likes, setLikes] = useState(1);
 
-console.log('updated post',post)
-
+  // console.log('updated post',post)
+  // console.log('likes',likes)
   useEffect(() => {
     if (isLoading || refresh) {
       let apiData = `?skip=${count}`;
@@ -48,33 +32,24 @@ console.log('updated post',post)
         .getPost(apiData)
         .then(res => {
           console.log(res, 'post upload');
+
           setIsLoading(false);
           setRefresh(false);
-          if(refresh){
-            setPost(res?.data)
-          }else{
+          if (refresh) {
+            setPost(res?.data);
+          } else {
             setPost([...post, ...res?.data]);
-
           }
         })
         .catch(err => {
           console.log(err, 'error');
         });
     }
-  }, [isLoading,refresh]);
-
-  // useEffect(() => {
-  //   let newArray = post.map((i, inx) => {
-  //     console.log(i?.user?.profile);
-  //     return i?.user?.profile;
-  //   });
-  //   console.log(newArray, 'user image');
-  // });
+  }, [isLoading, refresh, likes]);
 
   // --------------------------Refresh------------------------
 
   const onRefresh = () => {
-    // setPost([]);
     setCount(0);
     setRefresh(true);
   };
@@ -83,31 +58,43 @@ console.log('updated post',post)
 
   const getLikes = element => {
     let id = element.item.id;
-    console.log('id', id);
-    if (element.item.like_status == 0) {
-      setLikes(likes + 1);
-    } else {
-      setLikes(likes - 1);
-    }
-
-    let apiData = `?post_id=${id}&status=${likes}`;
+    console.log('previous status', element.item.like_status);
+    let updateLikeStatus = Number(element.item.like_status) ? 0 : 1;
+    console.log('like status', updateLikeStatus);
+    let apiData = `?post_id=${id}&status=${updateLikeStatus}`;
 
     actions
       .getLikes(apiData)
       .then(res => {
-        // console.log('likes>>>>>>>>>>>>>>>', res);
-        // alert(res?.message)
-        // setPost(res?.)
+        console.log('getLikes response', res);
+
+        let newArray = cloneDeep(post);
+        newArray = newArray.map((i, inx) => {
+          if (i?.id == id) {
+            i.like_count = updateLikeStatus
+              ? Number(i.like_count) + 1
+              : Number(i.like_count) - 1;
+            i.like_status = updateLikeStatus;
+            console.log(i, 'after update');
+            return i;
+          } else {
+            return i;
+          }
+        });
+        console.log(newArray, 'newArray');
+        setPost(newArray);
       })
       .catch(err => {
         alert(err?.message);
       });
   };
 
-  const onPostDetail = (element,image) => {
+  // ------------------navigation----------------------
+
+  const onPostDetail = (element, image) => {
     navigation.navigate(navigationStrings.POST_DETAIL, {
       item: element,
-      image :image
+      image: image,
     });
   };
 
@@ -120,23 +107,23 @@ console.log('updated post',post)
           </TouchableOpacity>
           <Image source={imagePath.loc} />
         </View>
+
         <View style={{paddingBottom: moderateScaleVertical(140)}}>
           <FlatList
             data={post}
             // renderItem={_renderCardComponent}
-
+            extraData={post}
             renderItem={(element, index) => {
-              // console.log('element>>>>>>>>>>>>>>>', element);
+              console.log('element>>>>>>>>>>>>>>>', element);
               return (
                 <Card
                   data={element}
-                  postNav={(image) => onPostDetail(element,image)}
+                  postNav={image => onPostDetail(element, image)}
                   getLikes={() => getLikes(element)}
                 />
               );
             }}
             showsVerticalScrollIndicator={false}
-           
             onEndReached={() => {
               console.log('count>>>>>>>', count);
               setCount(count + 8);

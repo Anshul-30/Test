@@ -99,7 +99,7 @@ export default function Card({
               data?.item?.images?.file.length > 1 
             )
               ? data?.item?.images?.file.length
-              : []
+              : 0
           }
           activeDotIndex={snapState}
           containerStyle={{paddingVertical: 0,marginTop:0}}
