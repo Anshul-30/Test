@@ -143,7 +143,7 @@ export default function Post({navigation, route}) {
         // alert('upload image');
       })
       .catch(err => {
-        alert(err?.message);
+        // alert(err?.message);
       });
   };
   return (
@@ -190,7 +190,7 @@ export default function Post({navigation, route}) {
       <FlatList
         data={photos}
         renderItem={(element, index) => {
-          console.log('element', element);
+          // console.log('element', element);
           return (
             <TouchableOpacity onPress={() => _selectImage(element)}>
               <Image

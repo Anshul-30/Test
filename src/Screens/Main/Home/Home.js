@@ -72,7 +72,7 @@ console.log('updated post',post)
     fetchData();
   };
   const fetchData = () => {
-    setCount(count - 8);
+    setCount(count-8);
     setRefresh(false);
   };
 
@@ -126,14 +126,14 @@ console.log('updated post',post)
               );
             }}
             showsVerticalScrollIndicator={false}
-            // keyExtractor={}
+           
             onEndReached={() => {
               console.log('count>>>>>>>', count);
-              setIsLoading(true);
               setCount(count + 8);
+              setIsLoading(true);
             }}
-            onEndReachedThreshold={0.2}
-            refreshing={refresh}
+            onEndReachedThreshold={0.1}
+            refreshing={isLoading}
             onRefresh={onRefresh}
           />
         </View>

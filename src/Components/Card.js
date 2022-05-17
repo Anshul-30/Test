@@ -1,10 +1,12 @@
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import colors from '../styles/colors';
 import {
   height,
+  itemWidth,
   moderateScale,
   moderateScaleVertical,
+  sliderWidth,
   textScale,
   width,
 } from '../styles/responsiveSize';
@@ -13,7 +15,7 @@ import strings from '../constants/lang';
 import navigationStrings from '../navigation/navigationStrings';
 import {apiPost} from '../utils/utils';
 import {isArray, isEmpty} from 'lodash';
-
+import Carousel, {Pagination} from 'react-native-snap-carousel';
 export default function Card({
   userName,
   userImg,
@@ -27,6 +29,9 @@ export default function Card({
   data = {},
   getLikes,
 }) {
+
+  const [snapState, setSnapState] = useState(0)
+  // console.log(data,"dataaaa");
   return (
     <View style={styles.mainContainer}>
       {/* Header */}
@@ -53,26 +58,65 @@ export default function Card({
         </TouchableOpacity>
       </View>
       {/* Main Container */}
-
-      <TouchableOpacity onPress={postNav} style={{flexWrap:'wrap'}}>
+      <View>
         {data?.item?.images?.file &&
         isArray(data?.item?.images?.file) &&
-        data?.item?.images?.file.length
-          ? data?.item?.images?.file.map((i, inx) => {
-              if (i != '' && i != null && i!=isEmpty({})) {
+        data?.item?.images?.file.length ? (
+          <>
+            <Carousel
+              data={data?.item?.images?.file}
+              sliderWidth={moderateScale(width - 80)}
+              itemWidth={moderateScale(width - 80)}
+              scrollEnabled={true}
+              horizontal
+              // hasParallaxImages={true}
+              renderItem={i => {
                 return (
-                  <Image
-                    source={{uri: i}}
-                    style={styles.postImage}
-                    resizeMode={'contain'}
-                  />
+                  <TouchableOpacity onPress={postNav}>
+                    <Image
+                      source={{uri: i.item}}
+                      style={styles.postImage}
+                      // resizeMode={'c'}
+                    />
+                  </TouchableOpacity>
                 );
-              } else {
-                return null;
-              }
-            })
-          : null}
-      </TouchableOpacity>
+              }}
+            />
+          
+          </>
+        ) : null}
+
+        {/* Pagination dots */}
+        <Pagination
+          dotsLength={
+            data?.item?.images?.file &&
+            isArray(data?.item?.images?.file) &&
+            data?.item?.images?.file.length>1
+              ? data?.item?.images?.file
+              : []
+          }
+          activeDotIndex={snapState}
+          containerStyle={{backgroundColor: 'transparent'}}
+          dotStyle={{
+            width: 10,
+            height: 10,
+            borderRadius: 5,
+            marginHorizontal: 8,
+            backgroundColor: 'rgba(255, 255, 255, 0.92)',
+          }}
+          inactiveDotStyle={{
+            width: 10,
+            height: 10,
+            borderRadius: 5,
+            // marginHorizontal: 10,
+            backgroundColor: 'red',
+          }}
+          
+          inactiveDotOpacity={.4}
+          inactiveDotScale={0.6}
+          
+        />
+      </View>
       <View>
         <Text style={{color: colors.white, fontSize: textScale(12)}}>
           {data.item.description}

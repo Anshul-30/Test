@@ -74,6 +74,7 @@ export default function LoginWithPhoneNumber({navigation, route}) {
       })
       .catch(err => {
         console.log(err, 'err');
+        setIsLoading(false)
         // showError(err?.meassage)
         alert(err?.message);
       });
