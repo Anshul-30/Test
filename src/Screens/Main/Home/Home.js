@@ -1,6 +1,6 @@
 import {cloneDeep} from 'lodash';
 import React, {useEffect, useState} from 'react';
-import {FlatList, Image, StyleSheet, View} from 'react-native';
+import {FlatList, Image, StyleSheet, View, Text} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Card from '../../../Components/Card';
 import WrapperContainer from '../../../Components/WrapperContainer';
@@ -11,7 +11,8 @@ import {
   moderateScale,
   moderateScaleVertical,
 } from '../../../styles/responsiveSize';
-
+import ActionSheet, {SheetManager} from 'react-native-actions-sheet';
+import ActionSheetComponent from '../../../Components/ActionSheetComponent';
 const Home = ({navigation, route}) => {
   // -----------------------States----------------------------
 
@@ -19,7 +20,6 @@ const Home = ({navigation, route}) => {
   const [post, setPost] = useState([]);
   const [count, setCount] = useState(0);
   const [refresh, setRefresh] = useState(false);
- 
 
   // console.log('updated post',post)
   // console.log('likes',likes)
@@ -97,44 +97,57 @@ const Home = ({navigation, route}) => {
     });
   };
 
-  return (
-    <WrapperContainer isLoading={isLoading} withModal={isLoading}>
-      <View>
-        <View style={styles.headerStyle}>
-          <TouchableOpacity onPress={() => setCount(0)}>
-            <Image source={imagePath.logo} />
-          </TouchableOpacity>
-          <Image source={imagePath.loc} />
-        </View>
+  // ----------------add Comments------------------------
 
-        <View style={{paddingBottom: moderateScaleVertical(140)}}>
-          <FlatList
-            data={post}
-            // renderItem={_renderCardComponent}
-            extraData={post}
-            renderItem={(element, index) => {
-              console.log('element>>>>>>>>>>>>>>>', element);
-              return (
-                <Card
-                  data={element}
-                  postNav={image => onPostDetail(element, image)}
-                  getLikes={() => updateLikes(element)}
-                />
-              );
-            }}
-            showsVerticalScrollIndicator={false}
-            onEndReached={() => {
-              console.log('count>>>>>>>', count);
-              setCount(count + 8);
-              setIsLoading(true);
-            }}
-            onEndReachedThreshold={0.1}
-            refreshing={refresh}
-            onRefresh={onRefresh}
-          />
+  const _addComments = element => {
+    let id = element.item.id;
+    console.log('id++++++++++++++++', id);
+      SheetManager.show('title',{value:id})
+    
+  };
+
+  return (
+    <>
+      <WrapperContainer isLoading={isLoading} withModal={isLoading}>
+        <View>
+          <View style={styles.headerStyle}>
+            <TouchableOpacity onPress={onRefresh}>
+              <Image source={imagePath.logo} />
+            </TouchableOpacity>
+            <Image source={imagePath.loc} />
+          </View>
+
+          <View style={{paddingBottom: moderateScaleVertical(140)}}>
+            <FlatList
+              data={post}
+              extraData={post}
+              renderItem={(element, index) => {
+                // console.log('element>>>>>>>>>>>>>>>', element);
+                return (
+                  <Card
+                    data={element}
+                    postNav={image => onPostDetail(element, image)}
+                    getLikes={() => updateLikes(element)}
+                    addComments={() => _addComments(element)}
+                  />
+                );
+              }}
+              showsVerticalScrollIndicator={false}
+              onEndReached={() => {
+                console.log('count>>>>>>>', count);
+                setCount(count + 8);
+                setIsLoading(true);
+              }}
+              onEndReachedThreshold={0.1}
+              refreshing={refresh}
+              onRefresh={onRefresh}
+            />
+          </View>
         </View>
-      </View>
-    </WrapperContainer>
+      </WrapperContainer>
+      <ActionSheetComponent />
+      
+    </>
   );
 };
 

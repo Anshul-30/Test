@@ -34,6 +34,7 @@ export default function Card({
   postNav = '',
   data = {},
   getLikes,
+  addComments
 }) {
   const [snapState, setSnapState] = useState(0);
   // console.log(data,"dataaaa");
@@ -59,15 +60,23 @@ export default function Card({
           </View>
         </View>
         <Menu style={styles.dotStyle}>
-          <MenuTrigger >
-              <Image source={imagePath.dot} />
+          <MenuTrigger>
+            <Image source={imagePath.dot} />
           </MenuTrigger>
-          <MenuOptions optionsContainerStyle={{backgroundColor:colors.whiteOpacity4}}>
-           
-            <MenuOption onSelect={() => alert(`Delete`)}>
-              <Text style={{color: 'red'}}>Delete</Text>
+          <MenuOptions
+            optionsContainerStyle={{
+              backgroundColor: colors.whiteSmokeColor,
+              width: moderateScale(100),
+              alignItems: 'center',
+              marginTop: moderateScaleVertical(10),
+              borderRadius:moderateScale(10)
+            }}>
+            <MenuOption onSelect={() => alert(`Save`)}>
+              <Text style={{fontSize: textScale(14),color:colors.black}}>Save</Text>
             </MenuOption>
-            
+            <MenuOption onSelect={() => alert(`Delete`)}>
+              <Text style={{fontSize: textScale(14),color:colors.black}}>Delete</Text>
+            </MenuOption>
           </MenuOptions>
         </Menu>
       </View>
@@ -143,12 +152,10 @@ export default function Card({
         </Text>
         <View style={styles.bottomView}>
           <View style={{flexDirection: 'row'}}>
-            <TouchableOpacity>
-              <View style={{flex: 0.4}}>
-                <Text style={{color: colors.white, fontSize: textScale(13)}}>
-                  {strings.COMMENTS} {data.item.comment_count}
-                </Text>
-              </View>
+            <TouchableOpacity style={{flex: 0.4}} onPress={addComments}>
+              <Text style={{color: colors.white, fontSize: textScale(13)}}>
+                {strings.COMMENTS} {data.item.comment_count}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity style={{flex: 0.5}} onPress={getLikes}>
               <Text
