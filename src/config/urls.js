@@ -13,6 +13,10 @@ export const POST_SEND = getApiUrl('/post_send');
 export const IMAGE_UPLOAD = getApiUrl('/img_upload');
 export const POST= getApiUrl('/posts');
 export const LIKES= getApiUrl('/like-post')
+export const COMMENTS= getApiUrl('/comment-post')
+export const GETCOMMENTS= getApiUrl('/comment-get')
+
+
 
 
 

@@ -3,8 +3,10 @@ import store from '../store';
 import {apiGet, apiPost, setItem} from '../../utils/utils';
 import {
   CHANGE_PASSWORD,
+  COMMENTS,
   EDIT_PROFILE,
   FORGOT_PASSWORD,
+  GETCOMMENTS,
   IMAGE_UPLOAD,
   LIKES,
   LOGIN,
@@ -120,4 +122,19 @@ export const getPost =(query='')=>{
 
 export const getLikes =(query="")=>{
 return apiPost(LIKES+query)
+}
+
+
+// add comments
+
+
+export const addComments =(query="")=>{
+return apiPost(COMMENTS+query)
+}
+
+// get all comments 
+
+
+export const getComment =(query='')=>{
+  return apiGet(GETCOMMENTS+query)
 }

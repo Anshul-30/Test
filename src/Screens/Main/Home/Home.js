@@ -97,14 +97,30 @@ const Home = ({navigation, route}) => {
     });
   };
 
-  // ----------------add Comments------------------------
+  // ----------------open Action Sheet------------------------
 
-  const _addComments = element => {
-    let id = element.item.id;
-    console.log('id++++++++++++++++', id);
-      SheetManager.show('title',{value:id})
-    
+  const _openActionSheet = element => {
+  
+    SheetManager.show('title', {value: element});
   };
+  //---------------- add comments---------------------------------
+
+  const _addComment = data => {
+    console.log('data-----------', data);
+    let apiData = `?post_id=${data.data.value.item.id}&comment=${data.comment}`;
+    console.log('apidata', apiData);
+    actions
+      .addComments(apiData)
+      .then(res => {
+        console.log('add comments', res);
+        alert('add');
+      })
+      .catch(err => {
+        alert(err?.message);
+      });
+  };
+
+
 
   return (
     <>
@@ -128,7 +144,7 @@ const Home = ({navigation, route}) => {
                     data={element}
                     postNav={image => onPostDetail(element, image)}
                     getLikes={() => updateLikes(element)}
-                    addComments={() => _addComments(element)}
+                    addComments={() => _openActionSheet(element)}
                   />
                 );
               }}
@@ -145,8 +161,7 @@ const Home = ({navigation, route}) => {
           </View>
         </View>
       </WrapperContainer>
-      <ActionSheetComponent />
-      
+      <ActionSheetComponent addComment={data => _addComment(data)} />
     </>
   );
 };
