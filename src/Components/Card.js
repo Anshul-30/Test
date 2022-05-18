@@ -16,6 +16,12 @@ import navigationStrings from '../navigation/navigationStrings';
 import {apiPost} from '../utils/utils';
 import {isArray, isEmpty} from 'lodash';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
+import {
+  MenuOption,
+  MenuOptions,
+  Menu,
+  MenuTrigger,
+} from 'react-native-popup-menu';
 export default function Card({
   userName,
   userImg,
@@ -52,12 +58,21 @@ export default function Card({
             </Text>
           </View>
         </View>
-        <TouchableOpacity style={styles.dotStyle}>
-          <Image source={imagePath.dot} />
-        </TouchableOpacity>
+        <Menu style={styles.dotStyle}>
+          <MenuTrigger >
+              <Image source={imagePath.dot} />
+          </MenuTrigger>
+          <MenuOptions optionsContainerStyle={{backgroundColor:colors.whiteOpacity4}}>
+           
+            <MenuOption onSelect={() => alert(`Delete`)}>
+              <Text style={{color: 'red'}}>Delete</Text>
+            </MenuOption>
+            
+          </MenuOptions>
+        </Menu>
       </View>
       {/* Main Container */}
-      <View >
+      <View>
         {!!(
           data?.item?.images?.file &&
           isArray(data?.item?.images?.file) &&
@@ -76,7 +91,9 @@ export default function Card({
                 // console.log(i,'item>>>>>>>>>')
                 if (i.item != null && typeof i.item != 'object') {
                   return (
-                    <TouchableOpacity activeOpacity={1} onPress={()=>postNav(i.item)}>
+                    <TouchableOpacity
+                      activeOpacity={1}
+                      onPress={() => postNav(i.item)}>
                       <Image
                         source={{uri: i.item}}
                         style={styles.postImage}
@@ -96,13 +113,13 @@ export default function Card({
             !!(
               data?.item?.images?.file &&
               isArray(data?.item?.images?.file) &&
-              data?.item?.images?.file.length > 1 
+              data?.item?.images?.file.length > 1
             )
               ? data?.item?.images?.file.length
               : 0
           }
           activeDotIndex={snapState}
-          containerStyle={{paddingVertical: 0,marginTop:0}}
+          containerStyle={{paddingVertical: 0, marginTop: 0}}
           dotColor={'red'}
           dotStyle={{width: 12, height: 12, borderRadius: 12 / 2}}
           inactiveDotStyle={{width: 20, height: 20, borderRadius: 20 / 2}}
@@ -126,11 +143,13 @@ export default function Card({
         </Text>
         <View style={styles.bottomView}>
           <View style={{flexDirection: 'row'}}>
-            <View style={{flex: 0.4}}>
-              <Text style={{color: colors.white, fontSize: textScale(13)}}>
-                {strings.COMMENTS} {data.item.comment_count}
-              </Text>
-            </View>
+            <TouchableOpacity>
+              <View style={{flex: 0.4}}>
+                <Text style={{color: colors.white, fontSize: textScale(13)}}>
+                  {strings.COMMENTS} {data.item.comment_count}
+                </Text>
+              </View>
+            </TouchableOpacity>
             <TouchableOpacity style={{flex: 0.5}} onPress={getLikes}>
               <Text
                 style={{
@@ -180,7 +199,7 @@ const styles = StyleSheet.create({
     marginHorizontal: moderateScale(8),
   },
   postImage: {
-    width: moderateScale(width-20),
+    width: moderateScale(width - 20),
     height: moderateScale(width - 40),
     marginVertical: moderateScaleVertical(10),
     alignSelf: 'center',

@@ -5,7 +5,7 @@ import Routes from './src/navigation/Routes';
 import actions from './src/redux/actions';
 import store from './src/redux/store';
 import {getItem} from './src/utils/utils';
-
+import { MenuProvider } from 'react-native-popup-menu';
 import SplashScreen from 'react-native-splash-screen';
 
 export default function App() {
@@ -30,10 +30,13 @@ export default function App() {
 
   return (
     <>
-      <FlashMessage position="top" />
       <Provider store={store}>
+        <MenuProvider>
+
         <Routes />
+        </MenuProvider>
       </Provider>
+      <FlashMessage position="top" />
     </>
   );
 }

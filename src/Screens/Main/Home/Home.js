@@ -19,7 +19,7 @@ const Home = ({navigation, route}) => {
   const [post, setPost] = useState([]);
   const [count, setCount] = useState(0);
   const [refresh, setRefresh] = useState(false);
-  const [likes, setLikes] = useState(1);
+ 
 
   // console.log('updated post',post)
   // console.log('likes',likes)
@@ -32,7 +32,6 @@ const Home = ({navigation, route}) => {
         .getPost(apiData)
         .then(res => {
           console.log(res, 'post upload');
-
           setIsLoading(false);
           setRefresh(false);
           if (refresh) {
@@ -45,7 +44,7 @@ const Home = ({navigation, route}) => {
           console.log(err, 'error');
         });
     }
-  }, [isLoading, refresh, likes]);
+  }, [isLoading, refresh]);
 
   // --------------------------Refresh------------------------
 
@@ -56,7 +55,7 @@ const Home = ({navigation, route}) => {
 
   //---------------------------Likes Count---------------------
 
-  const getLikes = element => {
+  const updateLikes = element => {
     let id = element.item.id;
     console.log('previous status', element.item.like_status);
     let updateLikeStatus = Number(element.item.like_status) ? 0 : 1;
@@ -119,7 +118,7 @@ const Home = ({navigation, route}) => {
                 <Card
                   data={element}
                   postNav={image => onPostDetail(element, image)}
-                  getLikes={() => getLikes(element)}
+                  getLikes={() => updateLikes(element)}
                 />
               );
             }}
