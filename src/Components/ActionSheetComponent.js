@@ -40,6 +40,7 @@ function ActionSheetComponent({
 
   const getAllComment = () => {
     console.log(data.value.item.id, 'udgfvuhiu');
+    console.log('count-----------', count);
     let apiData = `?post_id=${data.value.item.id}&skip=${count}`;
     console.log(apiData, 'apiData');
     actions
@@ -47,6 +48,7 @@ function ActionSheetComponent({
       .then(res => {
         console.log(res, 'get comment response--------------');
         setAllComment([...allComment, ...res?.data]);
+        setIsLoading(false);
       })
       .catch(err => {
         console.log(err);
@@ -62,12 +64,6 @@ function ActionSheetComponent({
     }
   };
 
-  const closeButton = () => {
-    console.log('close button');
-    SheetManager.hide('title');
-    setAllComment([]);
-    setCount(0);
-  };
   return (
     <ActionSheet
       closeOnPressBack={false}
@@ -75,7 +71,7 @@ function ActionSheetComponent({
       // onClose={() => updateComments(false)}
       id="title"
       onBeforeShow={data => setData(data)}>
-      <TouchableOpacity onPress={()=>updateComments(false)}>
+      <TouchableOpacity onPress={() => updateComments(false)}>
         <Image source={imagePath.cancel} style={{alignSelf: 'center'}} />
       </TouchableOpacity>
       {data ? (
@@ -96,7 +92,6 @@ function ActionSheetComponent({
             </View>
           </View>
 
-        
           <View
             style={{height: height, paddingBottom: moderateScaleVertical(350)}}>
             <FlatList
@@ -104,11 +99,11 @@ function ActionSheetComponent({
               data={allComment}
               extraData={allComment}
               onEndReached={() => {
-                console.log('count', count);
                 setCount(count + 15);
+                console.log('count', count);
                 setIsLoading(true);
               }}
-              // onEndReachedThreshold={.5}
+              onEndReachedThreshold={0.1}
               renderItem={element => {
                 // console.log(element)
                 return (
@@ -119,6 +114,7 @@ function ActionSheetComponent({
                         justifyContent: 'space-between',
                         margin: 10,
                       }}>
+                      <Text>{element.index}</Text>
                       <Text>{element.item.comment}</Text>
                       <Text>
                         {'commented by '}

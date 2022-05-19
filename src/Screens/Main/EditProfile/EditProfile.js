@@ -87,7 +87,7 @@ export default function EditProfile({navigation, route}) {
       .then(res => {
         console.log('editProfile api res_+++++', res);
         alert('profile updated');
-
+        // showSuccess()
         navigation.goBack();
       })
       .catch(err => {

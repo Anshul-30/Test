@@ -52,7 +52,7 @@ export default function Password({navigation, route}) {
         navigation.goBack();
       })
       .catch(e => {
-        alert(e);
+        alert(e?.message);
       });
   };
   return (

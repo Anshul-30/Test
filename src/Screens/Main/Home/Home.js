@@ -113,6 +113,12 @@ const Home = ({navigation, route}) => {
       .addComments(apiData)
       .then(res => {
         console.log('add comments', res);
+        let newArray = cloneDeep(post)
+        newArray=newArray.map((i)=>{
+          // console.log("newArray---------",newArray)
+          i.comment_count= i.comment_count+1
+          return i
+        })
        
       })
       .catch(err => {
@@ -138,7 +144,7 @@ const Home = ({navigation, route}) => {
               data={post}
               extraData={post}
               renderItem={(element, index) => {
-                // console.log('element>>>>>>>>>>>>>>>', element);
+                console.log('element>>>>>>>>>>>>>>>', element);
                 return (
                   <Card
                     data={element}
