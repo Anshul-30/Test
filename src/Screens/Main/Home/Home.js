@@ -113,7 +113,7 @@ const Home = ({navigation, route}) => {
       .addComments(apiData)
       .then(res => {
         console.log('add comments', res);
-        alert('add');
+       
       })
       .catch(err => {
         alert(err?.message);
@@ -161,7 +161,7 @@ const Home = ({navigation, route}) => {
           </View>
         </View>
       </WrapperContainer>
-      <ActionSheetComponent addComment={data => _addComment(data)} />
+      <ActionSheetComponent addComment={data => _addComment(data)} countData={0} allCommentData={[]} />
     </>
   );
 };

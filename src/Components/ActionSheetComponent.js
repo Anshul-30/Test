@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import ActionSheet, {SheetManager} from 'react-native-actions-sheet';
-import {Text, View, Image} from 'react-native';
+import {Text, View, Image, TouchableOpacity} from 'react-native';
 import TextInputComp from './TextInputComponent';
 import ButtonComponent from './ButtonComponent';
 import {
@@ -15,40 +15,69 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native-gesture-handler';
 import {cloneDeep} from 'lodash';
+import imagePath from '../constants/imagePath';
 
-function ActionSheetComponent({addComment}) {
+function ActionSheetComponent({
+  addComment,
+  countData = 0,
+  allCommentData = [],
+}) {
   const [data, setData] = useState();
   const [comment, setComment] = useState();
-  const [allComment, setAllComment] = useState([]);
-  const [count , setCount] = useState(0)
-  const[isLoading,setIsLoading] =useState(false)
+  const [allComment, setAllComment] = useState(allCommentData);
+  const [count, setCount] = useState(countData);
+  const [isLoading, setIsLoading] = useState(false);
   const state = {data, comment};
-  
 
- 
+  // console.log('count ----------', count);
+  // console.log('Comment------------', allComment);
 
   useEffect(() => {
-    if (data ||isLoading ) {
+    if (data || isLoading) {
       getAllComment();
     }
-  }, [data,isLoading]);
+  }, [data, isLoading]);
 
   const getAllComment = () => {
+    console.log(data.value.item.id, 'udgfvuhiu');
     let apiData = `?post_id=${data.value.item.id}&skip=${count}`;
+    console.log(apiData, 'apiData');
     actions
       .getComment(apiData)
       .then(res => {
         console.log(res, 'get comment response--------------');
-
-        setAllComment(res?.data);
+        setAllComment([...allComment, ...res?.data]);
       })
       .catch(err => {
         console.log(err);
       });
   };
+  const updateComments = status => {
+    console.log(status, 'status>>>>>NEW');
+    SheetManager.hide('title');
+    setAllComment([]);
+    setCount(0);
+    if (status) {
+      addComment(state);
+    }
+  };
 
+  const closeButton = () => {
+    console.log('close button');
+    SheetManager.hide('title');
+    setAllComment([]);
+    setCount(0);
+  };
   return (
-    <ActionSheet id="title" onBeforeShow={data => setData(data)}>
+    <ActionSheet
+      closeOnPressBack={false}
+      closeOnTouchBackdrop={false}
+      // onClose={() => updateComments(false)}
+      id="title"
+      onBeforeShow={data => setData(data)}>
+      <TouchableOpacity onPress={()=>updateComments(false)}>
+        <Image source={imagePath.cancel} style={{alignSelf: 'center'}} />
+      </TouchableOpacity>
       {data ? (
         <View style={{height: '70%'}}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -60,52 +89,26 @@ function ActionSheetComponent({addComment}) {
               />
             </View>
             <View style={{flex: 0.3}}>
-              <ButtonComponent title="Send" onpress={() => addComment(state)} />
+              <ButtonComponent
+                title="Send"
+                onpress={() => updateComments(true)}
+              />
             </View>
           </View>
 
-          {/* <View style={{height:height,paddingBottom:moderateScaleVertical(370)}}>
-<ScrollView >
-
-    {allComment.map(i => {
-                console.log(i.comment);
-                return (
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      flexWrap: 'wrap',
-                      paddingTop: moderateScale(10),
-                    }}>
-                    <View style={{flex: 0.2, alignItems: 'center'}}>
-                      <Image
-                        source={{uri: i.user.profile}}
-                        style={{height:50,width:50,borderRadius:25}}
-                      />
-                    </View>
-                    <View style={{flex: 0.6, justifyContent: 'center'}}>
-                      <View style={{flexDirection: 'row'}}>
-                        <Text>{i.user.first_name}</Text>
-                        <Text>{i.user.last_name}</Text>
-                      </View>
-
-                      <TextInputComp
-                      value={i.comment}
-                        // styling={styles.textStyle}
-                      />
-                    </View>
-                  </View>
-                );
-              })}
-</ScrollView>
-    </View> */}
-          <View style={{height: height}}>
+        
+          <View
+            style={{height: height, paddingBottom: moderateScaleVertical(350)}}>
             <FlatList
+              contentContainerStyle={{paddingVertical: 50}}
               data={allComment}
-              onEndReached={()=>{
-                console.log('count',count)
-                setCount(count+15)
-              setIsLoading(true)
+              extraData={allComment}
+              onEndReached={() => {
+                console.log('count', count);
+                setCount(count + 15);
+                setIsLoading(true);
               }}
+              // onEndReachedThreshold={.5}
               renderItem={element => {
                 // console.log(element)
                 return (
@@ -118,7 +121,7 @@ function ActionSheetComponent({addComment}) {
                       }}>
                       <Text>{element.item.comment}</Text>
                       <Text>
-                        {'commented by'}
+                        {'commented by '}
                         {element.item.user.first_name}
                       </Text>
                     </View>
